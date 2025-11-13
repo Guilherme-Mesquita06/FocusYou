@@ -3,10 +3,8 @@
 body {
     background-color: rgba(0, 0, 0, 0.5);
     background-image: url("../assets/imgs/backgroundImage.png");
-    font-family: "Nunito", sans-serif;
 
-margin: 0;
-  padding: 0;
+
 }
 
 main {
@@ -17,7 +15,7 @@ main {
 }
 
 .cadastroSection {
-    height: 58%;
+    height: 65%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -49,14 +47,17 @@ main {
 .campos {
     height: 90%;
     width: 50%;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .titulo {
     width: 100%;
     height: 20%;
     display: flex;
-    justify-content: center;
+    margin-left: 15%;
+    justify-content: start;
     align-items: center;
 }
 
@@ -72,16 +73,21 @@ main {
     width: 90%;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     padding-left: 4%;
+}
+.login{
+    display: flex;
+    justify-content: end;
+    padding-top: 10%;
 }
 
 .formCad form {
     display: flex;
     flex-direction: column;
+    align-items: start;
     width: 100%;
-    height: 90%;
+    height: 85%;
 }
 
 .formCad input {
@@ -98,12 +104,16 @@ main {
     font-size: large;
 
 }
+input:hover{
+        border-color: #eeebdda9;
+
+}
 
 label {
     font-weight: 600;
     font-size: larger;
     color: #eeebdd;
-    margin-left: 3%;
+    margin-left: 2%;
 }
 
 .btn {
@@ -113,14 +123,18 @@ label {
     border-radius: 15px;
     align-items: center;
     display: flex;
+    margin-top: 5;
     justify-content: center;
 }
 
-.btn a {
+.btn button {
     font-size: large;
     font-weight: 700;
     color: #090909;
-
+    width: 100%;
+    background-color: #ffffff00;
+    border: none;
+    text-decoration: none;
 }
 
 .btn:hover {
@@ -128,7 +142,30 @@ label {
     background-color: #646b64;
 }
 
-.btn a:hover {
+.btn button:hover {
     color: #fff;
 
+}
+.banner {
+  height: var(--tamanho-banner);
+  color: white;
+  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  background-size: cover;
+}
+
+.banner .container {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.banner .container p {
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  font-size: 36px;
+}
+
+.banner .container span {
+  font-weight: 800;
 }
