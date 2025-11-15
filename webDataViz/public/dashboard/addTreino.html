@@ -29,10 +29,10 @@
                         <a href="">Simulador</a>
                     </div>
                     <div>
-                        <a href="./login1.html">Login</a>
+                        <a href="./login1.html">Dashboard</a>
                     </div>
                     <div>
-                        <a href="">Cadastro</a>
+                        <a href="">Historico</a>
                     </div>
                 </div>
             </nav>
@@ -44,51 +44,56 @@
         <section class="lateral">
             <div class="lateralContainer">
                 <div class="card">
-                    <div class="titulo">
+                    <div class="headerCard">
                         <p class="cardTitulo">Treino - 1</p>
-                        <p style="margin-left: 8%; color:#5f6f7A;">Peito costas e triceps</p>
+                        <p><span>Peito costas e triceps</span></p>
                         <div>
                         </div>
                     </div>
 
                 </div>
 
-                 <div class="card">
-                    <div class="titulo">
+
+
+
+                <div class="card">
+                    <div class="headerCard">
                         <p class="cardTitulo">Treino - 1</p>
-                        <p style="margin-left: 8%; color:#5f6f7A;">Peito costas e triceps</p>
+                        <p><span>Peito costas e triceps</span></p>
                         <div>
                         </div>
                     </div>
 
                 </div>
 
-                 <div class="card">
-                    <div class="titulo">
+                <div class="card">
+                    <div class="headerCard">
                         <p class="cardTitulo">Treino - 1</p>
-                        <p style="margin-left: 8%; color:#5f6f7A;">Peito costas e triceps</p>
+                        <p><span>Peito costas e triceps</span></p>
                         <div>
                         </div>
                     </div>
 
                 </div>
 
-                 <div class="card">
-                    <div class="titulo">
+                <div class="card">
+                    <div class="headerCard">
                         <p class="cardTitulo">Treino - 1</p>
-                        <p style="margin-left: 8%; color:#5f6f7A;">Peito costas e triceps</p>
+                        <p><span>Peito costas e triceps</span></p>
                         <div>
                         </div>
                     </div>
 
+
+
                 </div>
-       
+
             </div>
         </section>
         <section class="content">
             <div class="secCadastrarTreino">
                 <div class="titulo">
-                    <p>Cadastre informações da sua Ficha</p>
+                    <p class="secTitulo">Cadastre informações da sua Ficha</p>
                 </div>
                 <div class="form">
                     <div class="campos">
@@ -98,46 +103,57 @@
                         </div>
 
                         <div class="campo">
-                            <label>Numero de repetições</label>
-                            <input type="text">
+                            <label>Data inicio</label>
+                            <input type="date">
                         </div>
-                        <div class="campo">
 
-                            <label>Observações</label>
-                            <input type="text">
+                        <div class="campo">
+                            <label>Data final</label>
+                            <input type="date">
                         </div>
                     </div>
+
+
                     <div class="campos">
-
                         <div class="campo">
-                            <label>Titulo</label>
+                            <label>Frequencia Semanal</label>
                             <input type="text">
                         </div>
 
                         <div class="campo">
-                            <label>Numero de repetições</label>
-                            <input type="text">
-                        </div>
-                        <div class="campo">
+                            <label>Objetivo</label>
+                            <form>
+                                <p>
+                                    <select id="objSelect">
+                                        <button>
+                                            <selectedcontent></selectedcontent>
+                                        </button>
 
-                            <label>Observações</label>
-                            <input type="text">
-                        </div>
+                                        <option value="">Selecione seu objetivo</option>
+                                        <option value="forca">
+                                            <span class="icon" aria-hidden="true">💪🏼</span><span
+                                                class="option-label">Força</span>
+                                        </option>
+                                        <option value="hipertrofia">
+                                            <span class="icon" aria-hidden="true">🏋🏼‍♂️​</span><span
+                                                class="option-label">Hipertrofia</span>
+                                        </option>
+                                        <option value="reabilitacao">
+                                            <span class="icon" aria-hidden="true">🚑​</span><span
+                                                class="option-label">Reabilitação</span>
+                                        </option>
 
+                                    </select>
+                                </p>
+                            </form>
+                        </div>
+                        <br>
                     </div>
-
-
-
-                    <br>
                     <div class="observacao">
-
+                        <label>Observações</label>
                         <textarea name="" id=""></textarea>
                     </div>
                 </div>
-
-            </div>
-
-
         </section>
 
 
