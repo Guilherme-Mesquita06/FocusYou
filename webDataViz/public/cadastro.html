@@ -94,6 +94,7 @@
 <script>
 
 
+let emailsCadastrados = []
 
   function cadastrar() {
     // aguardar();
@@ -117,12 +118,12 @@
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "(Mensagem de erro para todos os campos em branco)";
-
-      // finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
     }
+    //   //  finalizarAguardar();
+    //   return false;
+    // } else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
 
 
     // Enviando o valor da nova input
@@ -162,11 +163,13 @@
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
+        
         // finalizarAguardar();
       });
 
     return false;
-  }
+    }
+  
 
 </script>
 

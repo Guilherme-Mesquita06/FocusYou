@@ -201,3 +201,6 @@ label {
   font-weight: 500;
   font-size: 20px;
 }
+#div_erros_login {
+  display: none
+}
