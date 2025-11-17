@@ -20,7 +20,10 @@ var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
-var empresasRouter = require("./src/routes/empresas");
+var fichaRouter = require("./src/routes/fichas");
+var treinoRouter = require ("./src/routes/treinos")
+var exercicioRouter = require ("./src/routes/exercicios")
+var serieRouter = require ("./src/routes/series")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,7 +36,11 @@ app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 app.use("/aquarios", aquariosRouter);
-app.use("/empresas", empresasRouter);
+// app.use("/empresas", empresasRouter);
+app.use("/fichas", fichaRouter);
+app.use("/treinos", treinoRouter)
+app.use("/exercicio", exercicioRouter)
+app.use("/series", serieRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

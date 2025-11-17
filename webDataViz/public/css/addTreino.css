@@ -23,6 +23,8 @@ body {
     font-family: "Poppins", sans-serif;
     background-color: var(--preto);
     width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
 }
 
@@ -31,7 +33,7 @@ main {
     flex: 1;
     /* ocupa TODO o espaço restante */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 /* HEADER LATERAL : onde os treinos vão ficar */
@@ -76,16 +78,19 @@ main {
 /* ______________________________________________ */
 
 .content {
+    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
     flex: 1;
+    /* ocupa TODO o espaço restante */
     display: flex;
-    justify-content: center;
+    flex-direction: row;
 }
 
 .secCadastrarTreino {
-    width: 80%;
+    width: 70%;
     height: 90%;
     display: flex;
     margin-top: 2%;
+    margin-left: 5%;
     flex-direction: column;
     background-color: var(--contraste);
 }
@@ -126,7 +131,7 @@ main {
 .secTitulo {
     color: #fff;
     font-weight: 700;
-        font-size: xx-large;
+    font-size: xx-large;
 
 
 }
@@ -143,7 +148,7 @@ main {
     flex-direction: row;
     justify-content: start;
     width: 100%;
-    height: 20%;
+    height: 30%;
 }
 
 
@@ -183,7 +188,6 @@ input:hover {
 
 .observacao {
     flex: 1;
-    margin-top: 8%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -203,7 +207,7 @@ input:hover {
     width: 95%;
     background-color: var(--contraste1);
     border-radius: 15px;
-      font-weight: 500;
+    font-weight: 500;
     color: #fff;
     align-self: start;
     font-size: x-large;
@@ -335,4 +339,31 @@ option::checkmark {
     ::picker(select):popover-open {
         opacity: 0;
     }
+}
+
+
+.addTreino {
+
+    margin-top: 5%;
+    display: flex;
+    width: 70%;
+    height: 15%;
+    background-color: var(--contraste);
+    align-self: center;
+    border: var(--border);
+    border-radius: 10px;
+
+}
+.tituloTreino{
+    width: 100%;
+    height: 30%;
+    justify-content: start;
+    display: flex;
+}
+.tituloTreino p{
+    font-size: x-large;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 3%;
+    padding-top: 1%;
 }
