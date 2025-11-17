@@ -8,4 +8,12 @@ router.post("/cadastrar", function (req, res) {
     fichaController.cadastrarFicha(req, res);
 })
 
+router.get("/buscar/:idUsuario", function (req, res) {
+    fichaController.buscarPorId(req, res);
+})
+
+router.put("/buscar/:idFicha", function (req, res) {
+    fichaController.buscarPorId(req, res);
+})
+
 module.exports = router;
