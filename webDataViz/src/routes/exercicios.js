@@ -7,11 +7,15 @@ var exercicioController = require("../controllers/exercicioController");
 router.post("/cadastrar", function (req, res) {
     exercicioController.cadastrar(req, res);
 })
-
-router.get("/buscar/:idTreino", function (req, res){
-    exercicioController.buscarPorId(req, res);
+// Lista de todos os exercicios cadastratados pelo usuario
+router.get("/lista/:idUsuario", function (req, res){
+    exercicioController.lista(req, res);
 })
-
+// Lista de todos os exercicios do treino selecionado
+router.get("/buscar/:idTreino", function (req, res){
+    exercicioController.buscarPorTreino(req, res);
+})
+// deletar exercicio
 router.delete("/delete/:idExercicio", function (req, res ){
     exercicioController.deletar(req,res);
 })

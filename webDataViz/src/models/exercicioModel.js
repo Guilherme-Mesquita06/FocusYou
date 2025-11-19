@@ -9,7 +9,28 @@ function cadastrar(nome, descricao, dificuldade,agrupamentoMuscular,numSeries, i
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarPorId(idTreino) {
+
+
+function lista(idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
+    var instrucaoSql = `
+  SELECT 
+        e.*
+        FROM exercicio AS e 
+          JOIN treino AS t
+           ON e.fkTreino = t.id
+          JOIN ficha AS f
+           ON t.fkFicha = f.id
+          JOIN usuario AS u
+           ON f.fkUsuario = u.id
+		WHERE u.id = ${idUsuario};
+
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarPorTreino(idTreino) {
   var instrucaoSql = `
   	SELECT 
 		e.*
@@ -22,25 +43,6 @@ function buscarPorId(idTreino) {
   return database.executar(instrucaoSql);
 }
 
-
-function lista(idUsuario, idFicha) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
-    var instrucaoSql = `
-  SELECT 
-        f.titulo AS 'Nome Ficha',
-        t.titulo,
-        t.observacao
-        FROM ficha AS f
-        JOIN treino AS t
-        ON t.fkFicha = f.id
-        JOIN usuario AS u
-        ON f.fkUsuario = u.id
-        WHERE u.id = ${idUsuario} AND f.id = ${idFicha};
-
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
 
 function deletar(idTreino) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idTreino);
@@ -67,6 +69,8 @@ function deletar(idTreino) {
 //    `;
 module.exports = {
 
-    cadastrar,
-buscarPorId    
+cadastrar,
+buscarPorTreino ,
+deletar,
+lista
 }
