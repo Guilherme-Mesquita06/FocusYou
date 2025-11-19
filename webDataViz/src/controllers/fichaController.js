@@ -44,20 +44,21 @@ if (dataFinal == undefined) {
 }
 
 
-function buscarPorId(req, res) {
+function lista(req, res) {
   var idUsuario = req.params.idUsuario;
 
-  fichaModel.buscarPorId(idUsuario).then((resultado) => {
+  fichaModel.lista(idUsuario).then((resultado) => {
     res.status(200).json(resultado);
   });
 }
 
 
-function editar(req, res) {
-    var status = req.body.status;
+function editarStatus(req, res) {
+    // Passar com params 
+    var status = req.params.status; 
     var idFicha = req.params.idFicha;
 
-    fichaModel.editar(status, idFicha)
+    fichaModel.editarStatus(status, idFicha)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -75,6 +76,7 @@ function editar(req, res) {
 
 module.exports = {
     cadastrarFicha,
-    buscarPorId,
-    editar
+    lista,
+    editarStatus
+
 }

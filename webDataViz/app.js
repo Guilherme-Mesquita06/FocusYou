@@ -20,6 +20,8 @@ var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
+
+
 var fichaRouter = require("./src/routes/fichas");
 var treinoRouter = require ("./src/routes/treinos")
 var exercicioRouter = require ("./src/routes/exercicios")
@@ -39,7 +41,7 @@ app.use("/aquarios", aquariosRouter);
 // app.use("/empresas", empresasRouter);
 app.use("/fichas", fichaRouter);
 app.use("/treinos", treinoRouter)
-app.use("/exercicio", exercicioRouter)
+app.use("/exercicios", exercicioRouter)
 app.use("/series", serieRouter)
 
 app.listen(PORTA_APP, function () {

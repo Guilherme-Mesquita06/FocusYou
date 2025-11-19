@@ -55,6 +55,15 @@ function cadastrar(req, res) {
     }
 }
 
+function buscarPorId(req, res) {
+  var idTreino = req.params.idTreino;
+
+  exercicioModel.buscarPorId(idTreino).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    buscarPorId
 }

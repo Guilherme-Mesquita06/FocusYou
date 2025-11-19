@@ -33,6 +33,53 @@ function cadastrar(req, res) {
     }
 }
 
+
+function lista(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var idFicha = req.params.idFicha;
+
+    treinoModel.lista(idUsuario, idFicha)
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!");
+                }
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "Houve um erro ao buscar os avisos: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+function deletar(req, res) {
+    var idTreino = req.params.idTreino;
+
+    treinoModel.deletar(idTreino)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    lista,
+    deletar
 }

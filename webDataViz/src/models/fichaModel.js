@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 
 // Listar fichas
-function buscarPorId(idUsuario) {
+function lista(idUsuario) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `
      SELECT u.nome AS nome,
@@ -32,14 +32,23 @@ function cadastrarFicha(dataFinal, dataInicio, frequencia, idUsuario, titulo, de
 }
 
 
-function editar(status, idFicha) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, idAviso);
+function editarStatus(status, idFicha) {
+
+
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ",status, idFicha);
     var instrucaoSql = `
         UPDATE ficha SET status = '${status}' WHERE id = ${idFicha};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+
+
+
+
+
 
 // // Listar ficha ativa
 // function listarPorUsuario(idUsuario) {
@@ -75,9 +84,9 @@ function editar(status, idFicha) {
 // }
 
 module.exports = {
-    buscarPorId,
+    lista,
     cadastrarFicha,
-    editar
+    editarStatus
 
 }
 // dataFinal, dataInicio, idUsuario, titulo, descricao, status

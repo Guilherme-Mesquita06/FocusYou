@@ -324,7 +324,7 @@ option::checkmark {
     margin-left: auto;
     content: "☑️";
 }
-
+/* https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select */
 /* ANIMAÇÃO DA VOLTA do option */
 ::picker(select) {
     opacity: 0;

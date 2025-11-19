@@ -7,13 +7,13 @@ var fichaController = require("../controllers/fichaController");
 router.post("/cadastrar", function (req, res) {
     fichaController.cadastrarFicha(req, res);
 })
+// QUANDO FOR CADASTRAR FAZER COM QUE O ID DA FICHA FIQUE N SESSEION STORAGE
 
 router.get("/buscar/:idUsuario", function (req, res) {
-    fichaController.buscarPorId(req, res);
+    fichaController.lista(req, res);
 })
 
-router.put("/buscar/:idFicha", function (req, res) {
-    fichaController.buscarPorId(req, res);
+router.put("/editar/:idFicha/:status", function (req, res) {
+    fichaController.editarStatus(req, res);
 })
-
 module.exports = router;
