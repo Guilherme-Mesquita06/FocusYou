@@ -44,14 +44,15 @@
 
 <div class="containerTreino">
 
-    <section class="treinos">
-        <h2>Treinos</h2>
-        <div id="listaTreinos">
+    <section class="treinos secDiv">
+        <h2>Treinos da ficha ativa</h2>
+        <div id="linhaTreinos">
+            
             
         </div>
     </section>
-<!-- 
-    <section class="exercicios">
+
+    <!-- <section class="exercicios">
         <h2>Exercícios</h2>
         <div id="listaExerciciosTreino">
 
@@ -73,11 +74,11 @@
             <input id="iptDescanso" type="number" placeholder="Descanso (s)">
 
             <button onclick="cadastrarSerie()">Adicionar</button>
+        </section> -->
         </div>
-    </section>
 
 </div>
- -->
+ 
 
         </section>
 
@@ -86,7 +87,38 @@
 </body>
 
 <script>
- 
+ var treinos = [
+    { id: 1, titulo: "Treino A" },
+    { id: 2, titulo: "Treino B" },
+    { id: 3, titulo: "Treino C" },
+    { id: 4, titulo: "Treino D" }
+];
+
+var exercicios = {
+    1: [
+        { id: 11, nome: "Supino inclinado" },
+        { id: 12, nome: "Puxada aberta" }
+    ],
+    2: [],
+    3: [],
+    4: []
+};
+
+var series = {
+    11: [
+        { rep: 12, carga: 40, descanso: 60 },
+        { rep: 10, carga: 45, descanso: 60 }
+    ],
+    12: []
+};
+
+
+            for(var i = 0; i < treinos.length; i++){
+                console.log(`Treino: ${treinos.id[i]} \n Titulo: ${treinos.titulo[i]}`)
+
+
+            }
+
 
 </script>
 

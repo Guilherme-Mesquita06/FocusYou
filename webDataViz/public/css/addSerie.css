@@ -1,26 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+    --preto: #1E201E;
+    --contraste: #2C2C2C;
+    --border: 1px solid #a90820;
+    --contraste1: #3C3D37;
+    --vermelho: #a90820;
+}
+
+
 body {
-    background: #1f1f1f;
-    font-family: Poppins, sans-serif;
-    color: #fff;
-}
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--preto);
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
+}
+main {
+    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
+    flex: 1;
+    /* ocupa TODO o espaço restante */
+    display: flex;
+    flex-direction: column;
+}
+.content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top:3%;
+}
 .containerTreino {
-
+    
     width: 95%;
-    height: 70%;
-    margin: auto;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+
 }
 
-section {
+
+.secDiv {
     background: #2c2c2c;
     padding: 15px;
     border-radius: 15px;
     overflow-y: auto;
-    height: 100%;
     border: 2px solid #a90820;
 }
 
-/* Botões de treinos e exercícios */
+.treinos{
+    height: 100%;
+    color: #FFF;
+    flex-direction: column;
+    display: flex;
+    width: 90%;
+}
+.linhaTreinos{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    background-color: #a90820;
+}
+/* 
 .itemTreino,
 .itemExercicio,
 .itemSerie {
@@ -37,7 +83,6 @@ section {
     background: #a90820;
 }
 
-/* Formulário de séries */
 .formSerie {
     margin-top: 20px;
     display: flex;
@@ -66,3 +111,13 @@ section {
 .formSerie button:hover {
     background: #d30d27;
 }
+section .treinos{
+    height: 80%;
+}
+
+.linhaTreinos{
+display: flex;
+width: 25%;
+height: 30%;
+background-color:var(--vermelho);
+} */
