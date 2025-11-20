@@ -94,9 +94,9 @@ function buscarPorTreino(req, res) {
 
 
 function deletar(req, res) {
-    var idTreino = req.params.idTreino;
+    var idExercicio = req.params.idExercicio;
 
-    exercicioModel.deletar(idTreino)
+    exercicioModel.deletar(idExercicio)
         .then(
             function (resultado) {
                 res.json(resultado);

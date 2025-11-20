@@ -11,13 +11,10 @@
 
 <body>
 
-
     <div class="header">
         <div class="container">
             <div class="logoTitulo">
-                <!-- <h1 class="tituloNav">FocusYou</h1> -->
                 <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="">
-
             </div>
 
             <nav class="navbar">
@@ -26,7 +23,7 @@
                         <a href="">Inicial</a>
                     </div>
                     <div>
-                        <a href="">Simulador</a>
+                        <a href="">Ficha</a>
                     </div>
                     <div>
                         <a href="./login1.html">Dashboard</a>
@@ -41,79 +38,62 @@
     </div>
 
     <main>
+
         <section class="content">
 
             <section class="lateral">
                 <div class="lateralContainer">
+
                     <div class="card">
                         <div class="headerCard">
                             <p class="cardTitulo">Treino A</p>
                             <p><span>Peito costas e triceps</span></p>
-                            <div>
-                            </div>
                         </div>
-
                     </div>
-
-
-
 
                     <div class="card">
                         <div class="headerCard">
                             <p class="cardTitulo">Treino B</p>
                             <p><span>Peito costas e triceps</span></p>
-                            <div>
-                            </div>
                         </div>
-
                     </div>
 
                     <div class="card">
                         <div class="headerCard">
                             <p class="cardTitulo">Treino C</p>
                             <p><span>Peito costas e triceps</span></p>
-                            <div>
-                            </div>
                         </div>
-
                     </div>
 
                     <div class="card">
                         <div class="headerCard">
                             <p class="cardTitulo">Treino D</p>
                             <p><span>Peito costas e triceps</span></p>
-                            <div>
-                            </div>
                         </div>
-
-
-
                     </div>
 
                 </div>
             </section>
-            <div class="secCadastrarTreino">
+
+            <!-- FORMULÁRIO QUE SOME -->
+            <div id="secCadastrarTreino" style="display: none;">
                 <div class="titulo">
                     <p class="secTitulo">Cadastre informações da sua Ficha</p>
                 </div>
+
                 <div class="form">
+
                     <div class="campos">
                         <div class="campo">
                             <label>Titulo</label>
-                            <input type="text">
+                            <input type="text" placeholder="Foco em ombros">
                         </div>
 
                         <div class="campo">
                             <label>Data inicio</label>
                             <input type="date">
                         </div>
-
-                        <div class="campo">
-                            <label>Data final</label>
-                            <input type="date">
-                        </div>
                     </div>
-
 
                     <div class="campos">
                         <div class="campo">
@@ -126,54 +106,154 @@
                             <form>
                                 <p>
                                     <select id="objSelect">
-                                        <button>
-                                            <selectedcontent></selectedcontent>
-                                        </button>
-
                                         <option value="">Selecione seu objetivo</option>
-                                        <option value="forca">
-                                            <span class="icon" aria-hidden="true">💪🏼</span><span
-                                                class="option-label">Força</span>
-                                        </option>
-                                        <option value="hipertrofia">
-                                            <span class="icon" aria-hidden="true">🏋🏼‍♂️​</span><span
-                                                class="option-label">Hipertrofia</span>
-                                        </option>
-                                        <option value="reabilitacao">
-                                            <span class="icon" aria-hidden="true">🚑​</span><span
-                                                class="option-label">Reabilitação</span>
-                                        </option>
-
+                                        <option value="forca">💪🏼 Força</option>
+                                        <option value="hipertrofia">🏋🏼‍♂️ Hipertrofia</option>
+                                        <option value="reabilitacao">🚑 Reabilitação</option>
                                     </select>
                                 </p>
                             </form>
                         </div>
-                        <br>
                     </div>
+
                     <div class="observacao">
                         <label>Observações</label>
-                        <textarea name="" id=""></textarea>
+                        <textarea></textarea>
+                    </div>
+
+                    <div class="btn">
+                        <button onclick="addFicha()">Cadastrar ficha</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ADD TREINO NO MESMO LUGAR E ESCONDIDO -->
+            <section id="addTreino">
+                <div class="contentAddTreino">
+                    <div class="tituloTreino">
+                        <p>Cadastrar treinos</p>
+                    </div>
+                    <div class="campos camposTreino">
+                        <div class="campo campoTreino">
+                            <label>Titulo do treino</label>
+                            <input type="text" placeholder="Costas e biecps">
+
+                        </div>
+
+
+                        <div class="observacao">
+                            <label>Observações</label>
+                            <textarea class="textAreaTreino"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="btn btnTreino">
+                        <button onclick="abrirAddExercicio()">Cadastrar Treino</button>
+
                     </div>
                 </div>
+            </section>
+
+
+            <!-- SECTION PARA ADICIONAR EXERCÍCIO (INICIALMENTE OCULTA) -->
+            <section id="addExercicio" style="display: none;">
+                <div class="contentAddExercicio">
+
+                    <div class="tituloExercicio">
+                        <p>Adicionar Exercício</p>
+                    </div>
+
+                    <div class="camposExercicio">
+
+                        <div class="campoEx">
+                            <label>Nome</label>
+                            <input id="iptNomeEx" type="text" placeholder="Supino inclinado">
+                        </div>
+
+                        <div class="campoEx">
+                            <label>Descrição</label>
+                            <input id="iptDescEx" type="text" placeholder="Máquina / Halteres...">
+                        </div>
+
+                    </div>
+
+                    <div class="camposExercicio">
+
+                        <div class="campoEx">
+                            <label>Agrupamento muscular</label>
+                            <input id="iptGrupoEx" type="text" placeholder="Peitoral / Costas / Bíceps...">
+                        </div>
+
+                        <div class="campoEx">
+                            <label>Equipamento</label>
+                            <input id="iptEquipEx" type="text" placeholder="Máquina / Halteres / Barra">
+                        </div>
+
+                    </div>
+
+                    <div class="btnAddEx">
+                        <button onclick="adicionarExercicio()">Adicionar exercício</button>
+                    </div>
+
+                    <!-- LISTA DOS EXERCÍCIOS ADICIONADOS -->
+                    <div id="listaExercicios"></div>
+
+                </div>
+            </section>
+
+
         </section>
-        <section class="addTreino">
-            <div class="tituloTreino">
-
-                <p>TREINO A </p>
-
-            </div>
-
-
-            <div class="btnAdicionar">
-
-            </div>
-        </section>
-
-
-
 
     </main>
 
 </body>
+
+<script>
+    function addFicha() {
+        secCadastrarTreino.style.display = 'none';
+        addTreino.style.display = 'flex';
+    }
+    function addFicha() {
+    document.getElementById("secCadastrarTreino").style.display = 'none';
+    document.getElementById("addTreino").style.display = 'flex';
+}
+
+// Renomeei a função para evitar conflito com o elemento
+function abrirAddExercicio() {
+    document.getElementById("addTreino").style.display = 'none';
+    document.getElementById("addExercicio").style.display = 'flex';
+}
+
+function adicionarExercicio() {
+
+    // IDs CORRETOS
+    var nomeEx = document.getElementById("iptNomeEx").value;
+    var descricaoEx = document.getElementById("iptDescEx").value;
+    var grupoEx = document.getElementById("iptGrupoEx").value;
+    var equipEx = document.getElementById("iptEquipEx").value;
+
+    if (!nomeEx || !descricaoEx || !grupoEx || !equipEx) {
+        alert("Preencha todos os campos!");
+        return;
+    }
+
+    let lista = document.getElementById("listaExercicios");
+
+    let div = document.createElement("div");
+    div.className = "itemExercicio";
+    div.innerHTML = `${grupoEx} | ${nomeEx} | ${descricaoEx} | ${equipEx}`;
+
+    lista.appendChild(div);
+
+    // Limpar campos
+    document.getElementById("iptNomeEx").value = "";
+    document.getElementById("iptDescEx").value = "";
+    document.getElementById("iptGrupoEx").value = "";
+    document.getElementById("iptEquipEx").value = "";
+}
+
+</script>
 
 </html>

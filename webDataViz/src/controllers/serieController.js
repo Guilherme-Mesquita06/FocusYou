@@ -40,6 +40,17 @@ function cadastrar(req, res) {
     }
 }
 
+
+function listarPorExercicio(req, res) {
+  var idExercicio = req.params.idExercicio;
+
+  serieModel.listarPorExercicio(idExercicio).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listarPorExercicio,
 }

@@ -16,4 +16,9 @@ router.get("/buscar/:idUsuario", function (req, res) {
 router.put("/editar/:idFicha/:status", function (req, res) {
     fichaController.editarStatus(req, res);
 })
+
+router.get("/buscar/:idFicha" , function (req, res){
+fichaController.buscarAtiva(req,res);
+
+})
 module.exports = router;

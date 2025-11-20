@@ -1,4 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
+var fichaModel = require("../models/fichaModel")
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -17,6 +18,8 @@ function autenticar(req, res) {
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
       
                     if(resultadoAutenticar.length == 1){
+                    fichaModel.lista(resultadoAutenticar[0].empresaId)
+
                         console.log(resultadoAutenticar);
                         res.json(resultadoAutenticar[0])
                     }

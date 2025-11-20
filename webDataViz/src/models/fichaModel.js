@@ -1,6 +1,26 @@
 var database = require("../database/config");
 
 
+
+
+
+
+
+// cadastrar
+function cadastrarFicha( dataInicio, frequencia,objetivo, idUsuario, titulo, descricao, status) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ",  dataInicio, frequencia, objetivo,idUsuario, titulo, descricao, status);
+    var instrucaoSql = `
+        INSERT INTO ficha ( dataInicio, frequencia ,objetivo,fkUsuario, titulo, descricao, status) VALUES ( '${dataInicio}', ${frequencia},'${objetivo}',${idUsuario}, '${titulo}', '${descricao}', ${status});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+
+
+
 // Listar fichas
 function lista(idUsuario) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
@@ -16,16 +36,6 @@ function lista(idUsuario) {
         JOIN ficha AS f
         ON f.fkUsuario = u.id
         WHERE u.id = ${idUsuario};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-// cadastrar
-function cadastrarFicha(dataFinal, dataInicio, frequencia, idUsuario, titulo, descricao, status) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", dataFinal, dataInicio, frequencia, idUsuario, titulo, descricao, status);
-    var instrucaoSql = `
-        INSERT INTO ficha (dataFinal, dataInicio, frequencia ,fkUsuario, titulo, descricao, status) VALUES ('${dataFinal}', '${dataInicio}', '${frequencia}',${idUsuario}, '${titulo}', '${descricao}', ${status});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

@@ -8,4 +8,8 @@ router.post("/cadastrar", function (req, res) {
     serieController.cadastrar(req, res);
 })
 
+router.get("/lista/:idExercicio", function (req, res) {
+    serieController.listarPorExercicio(req,res)
+})
+
 module.exports = router;

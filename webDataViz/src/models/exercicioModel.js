@@ -44,20 +44,21 @@ function buscarPorTreino(idTreino) {
 }
 
 
-function deletar(idTreino) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idTreino);
+function deletar(idExercicio) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idExercicio);
     var instrucaoSql = `
-   DELETE FROM serie WHERE fkExercicio IN (SELECT id FROM exercicio WHERE fkTreino = ${idExercicio});
+   DELETE FROM serie WHERE fkExercicio =  ${idExercicio};
    `;
     var instrucaoSql2 = `
-   DELETE FROM exercicio WHERE fkTreino = ${idExercicio};
+   DELETE FROM exercicio WHERE id = ${idExercicio};
    
    `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     console.log("Executando a instrução SQL: \n" + instrucaoSql2);
 
-    return database.executar(instrucaoSql, instrucaoSql2);
+    database.executar(instrucaoSql)
+    return database.executar(instrucaoSql2);
 }
 
 //     var instrucaoSql = `

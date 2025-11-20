@@ -1,0 +1,68 @@
+body {
+    background: #1f1f1f;
+    font-family: Poppins, sans-serif;
+    color: #fff;
+}
+
+.containerTreino {
+
+    width: 95%;
+    height: 70%;
+    margin: auto;
+}
+
+section {
+    background: #2c2c2c;
+    padding: 15px;
+    border-radius: 15px;
+    overflow-y: auto;
+    height: 100%;
+    border: 2px solid #a90820;
+}
+
+/* Botões de treinos e exercícios */
+.itemTreino,
+.itemExercicio,
+.itemSerie {
+    background: #3a3a3a;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #a90820;
+    cursor: pointer;
+    font-weight: 600;
+}
+.itemTreino:hover,
+.itemExercicio:hover {
+    background: #a90820;
+}
+
+/* Formulário de séries */
+.formSerie {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formSerie input {
+    background: #3c3c3c;
+    border: 1px solid #a90820;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.formSerie button {
+    background: #a90820;
+    border: none;
+    padding: 12px;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.formSerie button:hover {
+    background: #d30d27;
+}
