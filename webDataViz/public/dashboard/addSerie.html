@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body onload="buscarTreinos()">
 
     <div class="header">
         <div class="container">
@@ -42,17 +42,32 @@
         <section class="content">
 
 
-<div class="containerTreino">
+            <div class="containerTreino">
 
-    <section class="treinos secDiv">
-        <h2>Treinos da ficha ativa</h2>
-        <div id="linhaTreinos">
-            
-            
-        </div>
-    </section>
+                <section class="treinos secDiv">
+                    <h2>Treinos da ficha ativa</h2>
+                    <div class="linhaTreinos">
+                        <button id="getTreino" style="margin-left: 5%;">
+                            <div >treino 1</div>
+                        </button>
 
-    <!-- <section class="exercicios">
+                        <div></div>
+                        <button id="getTreino">
+                            <div></div>
+                        </button>
+
+                        <button id="getTreino">
+                            <div></div>
+                        </button>
+
+
+                        <button id="getTreino" >
+                            <div></div>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- <section class="exercicios">
         <h2>Exercícios</h2>
         <div id="listaExerciciosTreino">
 
@@ -75,49 +90,61 @@
 
             <button onclick="cadastrarSerie()">Adicionar</button>
         </section> -->
-        </div>
+            </div>
 
-</div>
- 
+
 
         </section>
 
-    </main>
+        </main>
 
 </body>
 
 <script>
- var treinos = [
-    { id: 1, titulo: "Treino A" },
-    { id: 2, titulo: "Treino B" },
-    { id: 3, titulo: "Treino C" },
-    { id: 4, titulo: "Treino D" }
-];
 
-var exercicios = {
-    1: [
-        { id: 11, nome: "Supino inclinado" },
-        { id: 12, nome: "Puxada aberta" }
-    ],
-    2: [],
-    3: [],
-    4: []
-};
+    var treinos = [
+        { id: 1, titulo: "Treino A" },
+        { id: 2, titulo: "Treino B" },
+        { id: 3, titulo: "Treino C" },
+        { id: 4, titulo: "Treino D" }
+    ];
 
-var series = {
-    11: [
-        { rep: 12, carga: 40, descanso: 60 },
-        { rep: 10, carga: 45, descanso: 60 }
-    ],
-    12: []
-};
+    var exercicios = {
+        1: [
+            { id: 11, nome: "Supino inclinado" },
+            { id: 12, nome: "Puxada aberta" }
+        ],
+        2: [],
+        3: [],
+        4: []
+    };
+
+    var series = {
+        11: [
+            { rep: 12, carga: 40, descanso: 60 },
+            { rep: 10, carga: 45, descanso: 60 }
+        ],
+        12: []
+    };
+
+    function buscarTreinos (){
+        for(var i = 0; i < treinos.length; i++){
+            console.log(`TESTE :${treinos.id[i]}`) 
+        }
+    }
+function buscarExercicios(){
+
+    for(var i = 0; i < exercicios.length; i++){
+
+    }
+
+}
+
+    // for(var i = 0; i < treinos.length; i++){
+    //     console.log(`Treino: ${treinos.id[i]} \n Titulo: ${treinos.titulo[i]}`)
 
 
-            for(var i = 0; i < treinos.length; i++){
-                console.log(`Treino: ${treinos.id[i]} \n Titulo: ${treinos.titulo[i]}`)
-
-
-            }
+    // }
 
 
 </script>

@@ -11,20 +11,21 @@ function cadastrar(titulo, observacao, idFicha) {
     return database.executar(instrucaoSql);
 }
 
-function lista(idUsuario, idFicha) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
-    var instrucaoSql = `
-  SELECT 
-		f.titulo AS 'Nome Ficha',
-        t.titulo,
-        t.observacao
-        FROM ficha AS f
-        JOIN treino AS t
-        ON t.fkFicha = f.id
-        JOIN usuario AS u
-        ON f.fkUsuario = u.id
-        WHERE u.id = ${idUsuario} AND f.id = ${idFicha};
 
+
+
+
+function buscarTreinoPorFicha(idFicha, statusFicha) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n buscarTreinoPorFicha ()", idFicha, statusFicha);
+    var instrucaoSql = `
+       SELECT 
+	   f.id AS idFicha,
+       t.id AS idTreino,
+		e.*
+        FROM ficha AS f
+        JOIN treino    AS t    ON t.fkFicha = f.id
+        JOIN exercicio AS e    ON e.fkTreino = t.id
+        WHERE f.id = ${idFicha} AND f.status  = ${statusFicha};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -44,10 +45,10 @@ function deletar(idTreino) {
          DELETE FROM treino WHERE id = ${idTreino});
    
    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
-    console.log("Executando a instrução SQL: \n" + instrucaoSql3);
-
+   console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+   console.log("Executando a instrução SQL: \n" + instrucaoSql3);
+   
+   console.log("Executando a instrução SQL: \n" + instrucaoSql);
     database.executar(instrucaoSql)
     database.executar(instrucaoSql2)
     return database.executar(instrucaoSql3);
@@ -61,6 +62,6 @@ function deletar(idTreino) {
 module.exports = {
 
     cadastrar,
-    lista,
+    buscarTreinoPorFicha,
     deletar
 }

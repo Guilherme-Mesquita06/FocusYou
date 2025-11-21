@@ -34,11 +34,11 @@ function cadastrar(req, res) {
 }
 
 
-function lista(req, res) {
+function buscarTreinoPorFicha(req, res) {
     var idUsuario = req.params.idUsuario;
-    var idFicha = req.params.idFicha;
+    var statusFicha = req.params.statusFicha
 
-    treinoModel.lista(idUsuario, idFicha)
+    treinoModel.buscarTreinoPorFicha(idUsuario, statusFicha)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -80,6 +80,6 @@ function deletar(req, res) {
 
 module.exports = {
     cadastrar,
-    lista,
+    buscarTreinoPorFicha,
     deletar
 }

@@ -62,9 +62,28 @@ main {
 }
 .linhaTreinos{
     height: 60%;
-    width: 100%;
+    width: 95%;
     display: flex;
-    background-color: #a90820;
+    align-items: center;
+    justify-content: space-around;
+}
+#getTreino{
+    width: 20%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    border:none;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    color: #F5F5F5;
+    font-weight: 900;
+    background-color: var(--vermelho);
+}
+#getTreino:hover{
+background-color: #F5F5F5;
+transition: 0.7s;
+color: var(--preto);
 }
 /* 
 .itemTreino,

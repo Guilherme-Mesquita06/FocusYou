@@ -9,6 +9,11 @@ router.post("/cadastrar", function (req, res) {
 })
 // QUANDO FOR CADASTRAR FAZER COM QUE O ID DA FICHA FIQUE N SESSEION STORAGE
 
+router.get("buscar/temFicha/:idUsuario" ,function(req, res){
+    fichaController.temFicha(req, res);
+})
+
+
 router.get("/buscar/:idUsuario", function (req, res) {
     fichaController.lista(req, res);
 })

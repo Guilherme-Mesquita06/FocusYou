@@ -1,14 +1,18 @@
 var usuarioModel = require("../models/usuarioModel");
-var fichaModel = require("../models/fichaModel")
+var treinoModel = require("../models/treinoModel");
+var fichaModel = require("../models/fichaModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
+
+
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
+
     } else {
 
         usuarioModel.autenticar(email, senha)
@@ -16,14 +20,57 @@ function autenticar(req, res) {
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
-      
-                    if(resultadoAutenticar.length == 1){
-                    fichaModel.lista(resultadoAutenticar[0].empresaId)
 
+                    if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        res.json(resultadoAutenticar[0])
+
+                        fichaModel.temFicha(resultadoAutenticar[0].idUsuario)
+                            .then((resultadoFicha) => {
+                                if (resultadoFicha.length > 0) {
+
+                                    if(resultadoFicha[0]['temFicha'] > 0){
+
+                         var idFicha = resultadoFicha[0]['idFicha'];  
+
+                        treinoModel.buscarTreinoPorFicha(idFicha, 1)
+                            .then((resultadoTreinos) => {
+                                if (resultadoTreinos.length > 0) {
+                                    res.json({
+                                        id: resultadoAutenticar[0].id,
+                                        nome: resultadoAutenticar[0].nome,
+                                        email: resultadoAutenticar[0].email,
+                                        senha: resultadoAutenticar[0].senha,
+                                        usuario: resultadoAutenticar,
+                                        possuiFicha: true,
+
+                                    });
+
+                                    res.json({
+                                        id: resultadoAutenticar[0].id,
+                                        equipamento: resultadoAutenticar[0].equipamento,
+                                        nome: resultadoAutenticar[0].nomeExercicio,
+                                        agrupamentoMuscular: resultadoAutenticar[0].agrupamentoMuscular,
+                                        treino: resultadoAutenticar,
+                                        possuiFicha: true,
+                                    });
+
+                                    
+                                } else {
+                                    res.status(204).json({ treino: [] }, {
+                                        possuiFicha: false,
+                                    });
+                                }
+                            });
+
+
+                            }
+                        }
+                    });
+
+        
+
                     }
-      
+
                     else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -58,7 +105,7 @@ function cadastrar(req, res) {
     } else if (peso == undefined) {
         res.status(400).send("Sua empresa a vincular está undefined!");
     }
-         else if (dataTreino == undefined) {
+    else if (dataTreino == undefined) {
         res.status(400).send("Sua empresa a vincular está undefined!");
     } else {
 

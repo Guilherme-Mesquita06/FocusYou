@@ -18,7 +18,25 @@ function cadastrarFicha( dataInicio, frequencia,objetivo, idUsuario, titulo, des
 
 
 
+function temFicha (idUsuario){
+        console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function temLista()",idUsuario );
 
+ 
+        var instrucaoSql = `
+        SELECT 
+        COUNT(f.id) AS temFicha ,
+        f.id AS idFicha
+        FROM usuario AS u
+		JOIN ficha AS f
+        ON f.fkUsuario = u.id
+      WHERE u.id =${idUsuario}
+      GROUP BY f.id;`
+
+          console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+          return database.executar(instrucaoSql);
+
+}
 
 
 // Listar fichas
@@ -96,7 +114,8 @@ function editarStatus(status, idFicha) {
 module.exports = {
     lista,
     cadastrarFicha,
-    editarStatus
+    editarStatus,
+    temFicha
 
 }
 // dataFinal, dataInicio, idUsuario, titulo, descricao, status
