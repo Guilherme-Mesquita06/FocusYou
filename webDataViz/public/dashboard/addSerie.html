@@ -2,19 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/addSerie.css">
-    <link rel="stylesheet" href="../css/nav.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/addSerie.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
     <title>Document</title>
 </head>
 
-<body onload="buscarTreinos()">
-
+<body onload="exibirTreinos()">
     <div class="header">
         <div class="container">
             <div class="logoTitulo">
-                <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="">
+                <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="" />
             </div>
 
             <nav class="navbar">
@@ -23,7 +22,7 @@
                         <a href="">Inicial</a>
                     </div>
                     <div>
-                        <a href="">Ficha</a>
+                        <a href="./addTreino.html">Ficha</a>
                     </div>
                     <div>
                         <a href="./login1.html">Dashboard</a>
@@ -33,47 +32,32 @@
                     </div>
                 </div>
             </nav>
-
         </div>
     </div>
 
     <main>
-
         <section class="content">
-
-
             <div class="containerTreino">
-
                 <section class="treinos secDiv">
                     <h2>Treinos da ficha ativa</h2>
-                    <div class="linhaTreinos">
-                        <button id="getTreino" style="margin-left: 5%;">
-                            <div >treino 1</div>
-                        </button>
-
-                        <div></div>
-                        <button id="getTreino">
-                            <div></div>
-                        </button>
-
-                        <button id="getTreino">
-                            <div></div>
-                        </button>
+                    <div id="linhaTreinos">
 
 
-                        <button id="getTreino" >
-                            <div></div>
-                        </button>
-                    </div>
+
                 </section>
+            </div>
 
-                <!-- <section class="exercicios">
-        <h2>Exercícios</h2>
-        <div id="listaExerciciosTreino">
 
-        </div>
-    </section>
+            <section id="exercicios" style="display: none;">
+                <h2>Exercícios</h2>
+                <div id="listaExerciciosTreino" ></div>
+            </section>
+        </section>
 
+    </main>
+</body>
+
+<!-- 
     <section class="series">
         <h2>Séries</h2>
 
@@ -90,61 +74,195 @@
 
             <button onclick="cadastrarSerie()">Adicionar</button>
         </section> -->
-            </div>
-
-
-
-        </section>
-
-        </main>
-
-</body>
-
 <script>
+    var treino = 0
+    const treinos = [
+        {
+            id: 1,
+            titulo: "Treino A",
+            exercicio: [
+                {
+                    idExercicio: 1,
+                    agrupamento: "Peito",
+                    nomeExercicio: "Supino reto",
+                    equipamento: "Máquina",
+                },
+                {
+                    idExercicio: 2,
+                    agrupamento: "Peito",
+                    nomeExercicio: "Supino inclinado",
+                    equipamento: "Halteres",
+                },
+                {
+                    idExercicio: 3,
+                    agrupamento: "Peito",
+                    nomeExercicio: "Crossover",
+                    equipamento: "Polia",
+                },
+                {
+                    idExercicio: 4,
+                    agrupamento: "Ombro",
+                    nomeExercicio: "Elevação lateral",
+                    equipamento: "Halteres",
+                }
+            ],
+        },
 
-    var treinos = [
-        { id: 1, titulo: "Treino A" },
-        { id: 2, titulo: "Treino B" },
-        { id: 3, titulo: "Treino C" },
-        { id: 4, titulo: "Treino D" }
-    ];
+        // 🔥 Treino B
+        {
+            id: 2,
+            titulo: "Treino B",
+            exercicio: [
+                {
+                    idExercicio: 5,
+                    agrupamento: "Costas",
+                    nomeExercicio: "Puxada frente",
+                    equipamento: "Máquina",
+                },
+                {
+                    idExercicio: 6,
+                    agrupamento: "Costas",
+                    nomeExercicio: "Remada baixa",
+                    equipamento: "Cabo",
+                },
+                {
+                    idExercicio: 7,
+                    agrupamento: "Costas",
+                    nomeExercicio: "Levantamento terra",
+                    equipamento: "Barra",
+                },
+                {
+                    idExercicio: 8,
+                    agrupamento: "Bíceps",
+                    nomeExercicio: "Rosca direta",
+                    equipamento: "Barra",
+                }
+            ],
+        },
 
-    var exercicios = {
-        1: [
-            { id: 11, nome: "Supino inclinado" },
-            { id: 12, nome: "Puxada aberta" }
-        ],
-        2: [],
-        3: [],
-        4: []
-    };
+        {
+            id: 3,
+            titulo: "Treino C",
+            exercicio: [
+                {
+                    idExercicio: 9,
+                    agrupamento: "Pernas",
+                    nomeExercicio: "Agachamento livre",
+                    equipamento: "Barra",
+                },
+                {
+                    idExercicio: 10,
+                    agrupamento: "Pernas",
+                    nomeExercicio: "Leg press",
+                    equipamento: "Máquina",
+                },
+                {
+                    idExercicio: 11,
+                    agrupamento: "Posterior",
+                    nomeExercicio: "Mesa flexora",
+                    equipamento: "Máquina",
+                },
+                {
+                    idExercicio: 12,
+                    agrupamento: "Panturrilha",
+                    nomeExercicio: "Elevação de gêmeos",
+                    equipamento: "Máquina",
+                }
+            ],
+        },
 
-    var series = {
-        11: [
-            { rep: 12, carga: 40, descanso: 60 },
-            { rep: 10, carga: 45, descanso: 60 }
-        ],
-        12: []
-    };
-
-    function buscarTreinos (){
-        for(var i = 0; i < treinos.length; i++){
-            console.log(`TESTE :${treinos.id[i]}`) 
+        {
+            id: 4,
+            titulo: "Treino D",
+            exercicio: [
+                {
+                    idExercicio: 13,
+                    agrupamento: "Tríceps",
+                    nomeExercicio: "Tríceps pulley",
+                    equipamento: "Cabo",
+                },
+                {
+                    idExercicio: 14,
+                    agrupamento: "Tríceps",
+                    nomeExercicio: "Tríceps testa",
+                    equipamento: "Barra EZ",
+                },
+                {
+                    idExercicio: 15,
+                    agrupamento: "Ombro",
+                    nomeExercicio: "Desenvolvimento militar",
+                    equipamento: "Barra",
+                },
+                {
+                    idExercicio: 16,
+                    agrupamento: "Ombro",
+                    nomeExercicio: "Elevação frontal",
+                    equipamento: "Halteres",
+                }
+            ],
         }
+    ];
+    //  JSON.parse(sessionStorage.AQUARIOS)
+    function exibirTreinos() {
+
+        treinos.forEach(item => {
+            document.getElementById("linhaTreinos").innerHTML += `
+                   <button onclick="exibirExercicios(${item.id})" id="getTreino">
+                <div>${item.titulo}</div>
+                </button>
+
+        `
+
+        });
     }
-function buscarExercicios(){
 
-    for(var i = 0; i < exercicios.length; i++){
+
+    function exibirExercicios(idTreino) {
+        document.getElementById("exercicios").style.display = 'flex';
+        document.getElementById('listaExerciciosTreino').innerHTML =`
+                <table id="tabelaEx">
+                 <tr>
+                    <th>Exercício</th>
+                    <th>Agrupamento muscular</th>
+                    <th>Equipamento</th>
+                    <th>Ação</th>
+                </tr>
+                   </table>
+                
+                    
+           
+        `
+
+        const treino = treinos.find(t => t.id === idTreino);
+            document.getElementById("tabelaEx").style.display = 'flex';
+
+        treino.exercicio.forEach(ex => {
+
+                        document.getElementById("tabelaEx").innerHTML += `
+                            <tr class="linhaEx">
+                                <td class="tituloEx">${ex.nomeExercicio}</td>
+                                <td class="subInfoEx">${ex.agrupamento}</td>
+                                <td class="subInfoEx"> ${ex.equipamento}</td>
+
+                                <td>
+                                    <button class="btnFazer" onclick="abrirSeries(${ex.idExercicio}">
+                                        ▶ Realizar série
+                                    </button>
+                                </td>
+                            </tr>
+
+                  
+
+        `
+        });
+    }
+
+
+    function buscarTreinos() {
+
 
     }
 
-}
-
-    // for(var i = 0; i < treinos.length; i++){
-    //     console.log(`Treino: ${treinos.id[i]} \n Titulo: ${treinos.titulo[i]}`)
-
-
-    // }
 
 
 </script>

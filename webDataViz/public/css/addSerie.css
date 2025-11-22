@@ -33,10 +33,10 @@ main {
     height: 100%;
     display: flex;
     justify-content: center;
-    margin-top:3%;
+    flex-direction: column;
 }
 .containerTreino {
-    
+    flex-direction: row;
     width: 95%;
     height: 30%;
     display: flex;
@@ -60,7 +60,7 @@ main {
     display: flex;
     width: 90%;
 }
-.linhaTreinos{
+#linhaTreinos{
     height: 60%;
     width: 95%;
     display: flex;
@@ -85,58 +85,86 @@ background-color: #F5F5F5;
 transition: 0.7s;
 color: var(--preto);
 }
-/* 
-.itemTreino,
-.itemExercicio,
-.itemSerie {
-    background: #3a3a3a;
-    padding: 15px;
-    margin-top: 10px;
+#exercicios {
+    width: 30%;
+    margin-top: 5%;
+    margin-left: 4%;
+    border: var(--border);
     border-radius: 10px;
-    border: 1px solid #a90820;
-    cursor: pointer;
-    font-weight: 600;
-}
-.itemTreino:hover,
-.itemExercicio:hover {
-    background: #a90820;
-}
-
-.formSerie {
-    margin-top: 20px;
-    display: flex;
+    color: #F5F5F5;
+    overflow: hidden;
     flex-direction: column;
-    gap: 10px;
 }
 
-.formSerie input {
-    background: #3c3c3c;
-    border: 1px solid #a90820;
-    color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 15px;
+/* Tabela geral */
+#listaExerciciosTreino {
+    width: 100%;
+}
+#tabelaEx{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.formSerie button {
-    background: #a90820;
-    border: none;
+
+/* Cabeçalho */
+#listaExerciciosTreino th {
+    background-color: #1c1c1c;
     padding: 12px;
-    color: #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 700;
-}
-.formSerie button:hover {
-    background: #d30d27;
-}
-section .treinos{
-    height: 80%;
+    font-size: 1.2rem;
+    text-align: left;
+    border-bottom: var(--border);
 }
 
-.linhaTreinos{
-display: flex;
-width: 25%;
-height: 30%;
-background-color:var(--vermelho);
-} */
+.linhaEx {
+    background-color: #a90820;
+    height: 5%;
+    width: 100%;
+}
+
+tbody{
+    width: 100%;
+}
+
+.linhaEx td {
+    padding: 10px;
+    font-size: 1.1rem;
+    color: #fff;
+    width: 26%;
+    
+}
+
+/* Nome do exercício */
+.tituloEx {
+    font-size: 1.3rem;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+
+}
+
+.subInfoEx {
+    opacity: 0.9;
+  
+}
+
+
+
+/* Botão */
+.btnFazer {
+    width: 140px;
+    padding: 10px;
+    border-radius: 10px;
+    border: var(--border);
+    background-color: #F5F5F5;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btnFazer:hover {
+    background-color: #dadada;
+}
+
