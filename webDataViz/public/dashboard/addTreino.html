@@ -208,7 +208,7 @@
 
 
                         </tr>
-                            <div id="listaExercicios"></div>
+    <tr id="listaExercicios"></tr>                            
 
 
                     </table>
@@ -226,6 +226,12 @@
 </body>
 
 <script>
+
+    vNome = []
+    vDesc = []
+    vAgrupMusc = []
+    vEquipamento = []
+
     function addFicha() {
         secCadastrarTreino.style.display = 'none';
         addTreino.style.display = 'flex';
@@ -249,21 +255,28 @@
         var grupoEx = document.getElementById("iptGrupoEx").value;
         var equipEx = document.getElementById("iptEquipEx").value;
 
-        if (!nomeEx || !descricaoEx || !grupoEx || !equipEx) {
+
+
+
+        if (!nomeEx || !grupoEx || !equipEx) {
             alert("Preencha todos os campos!");
             return;
         }
 
         let lista = document.getElementById("listaExercicios");
 
+       vNomes.push(nomeEx);
+        vDesc.push(descricaoEx);
+        vAgrupMusc.push(grupoEx);
+        vEquipamento
+
+
         let div = document.createElement("div");
         div.className = "itemExercicio";
-        listaExercicios.innerHTML = `
-                         <tr>
+        listaExercicios.innerHTML += `
                             <td>${nomeEx}</td>
                             <td>${grupoEx}</td>
                             <td>${equipEx}</td>
-                        </tr>
         `;
 
         lista.appendChild(div);

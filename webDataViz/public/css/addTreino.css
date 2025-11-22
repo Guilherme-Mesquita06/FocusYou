@@ -515,15 +515,6 @@ option::checkmark {
     margin: 20px auto;
 }
 
-.itemExercicio {
-    background-color: var(--contraste1);
-    border: 2px solid var(--vermelho);
-    border-radius: 15px;
-    padding: 15px;
-    color: #fff;
-    font-size: larger;
-    margin-top: 10px;
-}
 
 .tabelaExercicio{
     padding-top: 50px;
