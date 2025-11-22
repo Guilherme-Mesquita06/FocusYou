@@ -19,17 +19,22 @@ function buscarTreinoPorFicha(idFicha, statusFicha) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n buscarTreinoPorFicha ()", idFicha, statusFicha);
     var instrucaoSql = `
        SELECT 
+       f.status AS statusFicha,
 	   f.id AS idFicha,
        t.id AS idTreino,
-		e.*
+       t.titulo AS titulo
         FROM ficha AS f
-        JOIN treino    AS t    ON t.fkFicha = f.id
-        JOIN exercicio AS e    ON e.fkTreino = t.id
+        JOIN treino AS t ON t.fkFicha = f.id
+        JOIN exercicio AS e ON e.fkTreino = t.id
         WHERE f.id = ${idFicha} AND f.status  = ${statusFicha};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+
+
 
 function deletar(idTreino) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idTreino);

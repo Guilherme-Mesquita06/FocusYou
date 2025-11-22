@@ -43,6 +43,31 @@ function buscarPorTreino(idTreino) {
   return database.executar(instrucaoSql);
 }
 
+function buscarExercicioPorTreino (statusFicha, idUsuario, idTreino){
+
+        console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n buscarExercicioPorTreino ()", statusFicha, idUsuario, idTreino);
+    var instrucaoSql = `
+SELECT
+    t.titulo AS treino,
+    e.id AS idExercicio,
+		 e.agrupamentoMuscular AS agrupamentoMuscular,
+	   e.nome AS nomeExercicio,
+     e.equipamento AS equipamento,
+     e.dificuldade AS dificuldade
+		FROM ficha AS f
+    JOIN treino AS t
+      ON t.fkFicha = f.id
+    JOIN usuario AS u
+      ON f.fkUsuario = u.id
+    JOIN exercicio AS e
+      ON e.fkTreino = t.id
+        WHERE u.id = ${idUsuario} AND f.status  = ${statusFicha} AND t.id = ${idTreino};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+
+}
+
 
 function deletar(idExercicio) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idExercicio);
@@ -71,6 +96,7 @@ function deletar(idExercicio) {
 module.exports = {
 
 cadastrar,
+buscarExercicioPorTreino,
 buscarPorTreino ,
 deletar,
 lista

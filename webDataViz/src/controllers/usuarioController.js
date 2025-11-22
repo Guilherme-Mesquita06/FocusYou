@@ -1,6 +1,8 @@
 var usuarioModel = require("../models/usuarioModel");
 var treinoModel = require("../models/treinoModel");
 var fichaModel = require("../models/fichaModel");
+var exercicioModel = require("../models/exercicioModel");
+
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -24,50 +26,77 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
+
                         fichaModel.temFicha(resultadoAutenticar[0].idUsuario)
                             .then((resultadoFicha) => {
                                 if (resultadoFicha.length > 0) {
 
-                                    if(resultadoFicha[0]['temFicha'] > 0){
+                                    if (resultadoFicha[0]['temFicha'] > 0) {
 
-                         var idFicha = resultadoFicha[0]['idFicha'];  
+                                        // para entender melhor o comportamento do json assisti este video: https://www.youtube.com/watch?v=3MREC-YEQG4
+                                        // Cujo onde aprendi que o resultado[0] Seria a primeira ocorrencia e busco o campo pelo .campo
+                                        treinoModel.buscarTreinoPorFicha(resultadoFicha[0].idFicha, 1)
+                                            .then((resultadoTreinos) => {
+                                                if (resultadoTreinos.length > 0) {
+                                                    var statusFicha = resultadoTreinos[0]['statusFicha'];
 
-                        treinoModel.buscarTreinoPorFicha(idFicha, 1)
-                            .then((resultadoTreinos) => {
-                                if (resultadoTreinos.length > 0) {
-                                    res.json({
-                                        id: resultadoAutenticar[0].id,
-                                        nome: resultadoAutenticar[0].nome,
-                                        email: resultadoAutenticar[0].email,
-                                        senha: resultadoAutenticar[0].senha,
-                                        usuario: resultadoAutenticar,
-                                        possuiFicha: true,
+                                                    exercicioModel.buscarExercicioPorTreino(resultadoTreinos[0].idTreino,statusFicha, resultadoAutenticar[0].idUsuario)
+                                                        .then((resultadoExercicios) => {
+                                                            if (resultadoExercicios.length > 0) {
 
-                                    });
+                                                                
+                                                                // treino = [1,2,3,4]
+                                                                //      i    0 1 2 3 
+                                                                // treino = 1 
+                                                                // exercio = [1,2,3,4]
+                                                                //      j     0 1 2 3
 
-                                    res.json({
-                                        id: resultadoAutenticar[0].id,
-                                        equipamento: resultadoAutenticar[0].equipamento,
-                                        nome: resultadoAutenticar[0].nomeExercicio,
-                                        agrupamentoMuscular: resultadoAutenticar[0].agrupamentoMuscular,
-                                        treino: resultadoAutenticar,
-                                        possuiFicha: true,
-                                    });
 
-                                    
-                                } else {
-                                    res.status(204).json({ treino: [] }, {
-                                        possuiFicha: false,
-                                    });
+
+                                                                for(var i = 0 ; i < resultadoTreinos.length ;i++){
+                                                                    for(var j = 0; j < resultadoExercicios.length; j++)
+                                                                 res.json({
+                                                                    id: resultadoAutenticar[0].id,
+                                                                    nome: resultadoAutenticar[0].nome,
+                                                                    email: resultadoAutenticar[0].email,
+                                                                    senha: resultadoAutenticar[0].senha,
+                                                                    usuario: resultadoAutenticar,
+
+                                                                    idTreino : resultadoTreinos[i].idTreino,
+                                                                    titulo: resultadoTreinos[i].titulo,
+                                                                    treino: resultadoTreinos[i],
+                                                                    possuiFicha: true,
+
+                                                                    idExercicio:resultadoExercicios[j].idExercicio,
+                                                                    agrupamentoMuscular: resultadoExercicios[j].agrupamentoMuscular,
+                                                                    nomeExercicio: resultadoExercicios[j].nomeExercicio,
+                                                                    equipamento: resultadoExercicios[j].equipamento,
+                                                                    dificuldade:resultadoExercicios[j].dificuldade
+
+                                                                });
+
+                                                                }
+                                         
+
+
+
+
+                                                            } else {
+                                                                res.status(204).json({ treino: [] }, { usuario: [] }, {
+                                                                    possuiFicha: false,
+                                                                });
+                                                            }
+
+
+                                                        });
+                                                }
+                                            });
+
+                                    }
                                 }
                             });
 
 
-                            }
-                        }
-                    });
-
-        
 
                     }
 

@@ -129,7 +129,7 @@
             </div>
 
             <!-- ADD TREINO NO MESMO LUGAR E ESCONDIDO -->
-            <section id="addTreino">
+            <section id="addTreino" style="display: none;">
                 <div class="contentAddTreino">
                     <div class="tituloTreino">
                         <p>Cadastrar treinos</p>
@@ -158,7 +158,7 @@
 
 
             <!-- SECTION PARA ADICIONAR EXERCÍCIO (INICIALMENTE OCULTA) -->
-            <section id="addExercicio" style="display: none;">
+            <section id="addExercicio">
                 <div class="contentAddExercicio">
 
                     <div class="tituloExercicio">
@@ -174,7 +174,7 @@
 
                         <div class="campoEx">
                             <label>Descrição</label>
-                            <input id="iptDescEx" type="text" placeholder="Máquina / Halteres...">
+                            <input id="iptDescEx" type="text" placeholder="Drop-Set / Rest-Pause ...">
                         </div>
 
                     </div>
@@ -197,8 +197,23 @@
                         <button onclick="adicionarExercicio()">Adicionar exercício</button>
                     </div>
 
+
+
+
+                    <table class="tabelaExercicio" style="width:100%">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Agrupamento Muscular</th>
+                            <th>Equipamento</th>
+
+
+                        </tr>
+                            <div id="listaExercicios"></div>
+
+
+                    </table>
+
                     <!-- LISTA DOS EXERCÍCIOS ADICIONADOS -->
-                    <div id="listaExercicios"></div>
 
                 </div>
             </section>
@@ -216,43 +231,49 @@
         addTreino.style.display = 'flex';
     }
     function addFicha() {
-    document.getElementById("secCadastrarTreino").style.display = 'none';
-    document.getElementById("addTreino").style.display = 'flex';
-}
-
-// Renomeei a função para evitar conflito com o elemento
-function abrirAddExercicio() {
-    document.getElementById("addTreino").style.display = 'none';
-    document.getElementById("addExercicio").style.display = 'flex';
-}
-
-function adicionarExercicio() {
-
-    // IDs CORRETOS
-    var nomeEx = document.getElementById("iptNomeEx").value;
-    var descricaoEx = document.getElementById("iptDescEx").value;
-    var grupoEx = document.getElementById("iptGrupoEx").value;
-    var equipEx = document.getElementById("iptEquipEx").value;
-
-    if (!nomeEx || !descricaoEx || !grupoEx || !equipEx) {
-        alert("Preencha todos os campos!");
-        return;
+        document.getElementById("secCadastrarTreino").style.display = 'none';
+        document.getElementById("addTreino").style.display = 'flex';
     }
 
-    let lista = document.getElementById("listaExercicios");
+    // Renomeei a função para evitar conflito com o elemento
+    function abrirAddExercicio() {
+        document.getElementById("addTreino").style.display = 'none';
+        document.getElementById("addExercicio").style.display = 'flex';
+    }
 
-    let div = document.createElement("div");
-    div.className = "itemExercicio";
-    div.innerHTML = `${grupoEx} | ${nomeEx} | ${descricaoEx} | ${equipEx}`;
+    function adicionarExercicio() {
 
-    lista.appendChild(div);
+        // IDs CORRETOS
+        var nomeEx = document.getElementById("iptNomeEx").value;
+        var descricaoEx = document.getElementById("iptDescEx").value;
+        var grupoEx = document.getElementById("iptGrupoEx").value;
+        var equipEx = document.getElementById("iptEquipEx").value;
 
-    // Limpar campos
-    document.getElementById("iptNomeEx").value = "";
-    document.getElementById("iptDescEx").value = "";
-    document.getElementById("iptGrupoEx").value = "";
-    document.getElementById("iptEquipEx").value = "";
-}
+        if (!nomeEx || !descricaoEx || !grupoEx || !equipEx) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        let lista = document.getElementById("listaExercicios");
+
+        let div = document.createElement("div");
+        div.className = "itemExercicio";
+        listaExercicios.innerHTML = `
+                         <tr>
+                            <td>${nomeEx}</td>
+                            <td>${grupoEx}</td>
+                            <td>${equipEx}</td>
+                        </tr>
+        `;
+
+        lista.appendChild(div);
+
+        // Limpar campos
+        document.getElementById("iptNomeEx").value = "";
+        document.getElementById("iptDescEx").value = "";
+        document.getElementById("iptGrupoEx").value = "";
+        document.getElementById("iptEquipEx").value = "";
+    }
 
 </script>
 

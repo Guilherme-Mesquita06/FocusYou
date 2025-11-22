@@ -524,3 +524,8 @@ option::checkmark {
     font-size: larger;
     margin-top: 10px;
 }
+
+.tabelaExercicio{
+    padding-top: 50px;
+    color: #fff;
+}

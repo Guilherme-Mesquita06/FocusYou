@@ -25,7 +25,8 @@ function temFicha (idUsuario){
         var instrucaoSql = `
         SELECT 
         COUNT(f.id) AS temFicha ,
-        f.id AS idFicha
+        f.id AS idFicha,
+        f.status AS status
         FROM usuario AS u
 		JOIN ficha AS f
         ON f.fkUsuario = u.id
