@@ -200,7 +200,7 @@
 
 
 
-                    <table class="tabelaExercicio" style="width:100%">
+                    <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
                         <tr>
                             <th>Nome</th>
                             <th>Agrupamento Muscular</th>
@@ -208,7 +208,7 @@
 
 
                         </tr>
-    <tr id="listaExercicios"></tr>                            
+                            
 
 
                     </table>
@@ -227,10 +227,12 @@
 
 <script>
 
-    vNome = []
-    vDesc = []
-    vAgrupMusc = []
-    vEquipamento = []
+   var vNome = []
+   var vDesc = []
+   var vAgrupMusc = []
+   var vEquipamento = []
+
+   const exercicioObj = []
 
     function addFicha() {
         secCadastrarTreino.style.display = 'none';
@@ -265,20 +267,27 @@
 
         let lista = document.getElementById("listaExercicios");
 
-       vNomes.push(nomeEx);
-        vDesc.push(descricaoEx);
-        vAgrupMusc.push(grupoEx);
-        vEquipamento
+        exercicioObj.push({
+         agrupamento: grupoEx,
+         nomeExercicio: nomeEx,
+         equipamento: equipEx,
+         descricao: descricaoEx 
 
-
+        });
         let div = document.createElement("div");
         div.className = "itemExercicio";
+
+
         listaExercicios.innerHTML += `
+                       <tr>
                             <td>${nomeEx}</td>
                             <td>${grupoEx}</td>
-                            <td>${equipEx}</td>
+                            <td>${equipEx}}</td>
+                        </tr> 
         `;
 
+
+      
         lista.appendChild(div);
 
         // Limpar campos

@@ -55,6 +55,7 @@ function autenticar(req, res) {
 
                                                                 for(var i = 0 ; i < resultadoTreinos.length ;i++){
                                                                     for(var j = 0; j < resultadoExercicios.length; j++)
+                                                                        
                                                                  res.json({
                                                                     id: resultadoAutenticar[0].id,
                                                                     nome: resultadoAutenticar[0].nome,
@@ -66,12 +67,14 @@ function autenticar(req, res) {
                                                                     titulo: resultadoTreinos[i].titulo,
                                                                     treino: resultadoTreinos[i],
                                                                     possuiFicha: true,
+                                                                    treino:resultadoTreinos,
 
                                                                     idExercicio:resultadoExercicios[j].idExercicio,
                                                                     agrupamentoMuscular: resultadoExercicios[j].agrupamentoMuscular,
                                                                     nomeExercicio: resultadoExercicios[j].nomeExercicio,
                                                                     equipamento: resultadoExercicios[j].equipamento,
-                                                                    dificuldade:resultadoExercicios[j].dificuldade
+                                                                    dificuldade:resultadoExercicios[j].dificuldade,
+                                                                    exercicio: resultadoExercicios,
 
                                                                 });
 
