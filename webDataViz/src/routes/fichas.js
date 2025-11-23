@@ -16,6 +16,9 @@ router.put("/editar/:idFicha/:idUsuario", function (req,res){
         fichaController.desativarFichas(req, res);
 
 })
+router.get("/buscar/temFichaAtiva/:idUsuario", function(req ,res){
+    fichaController.temFichaAtiva(req,res);
+})
 
 router.get("/buscar/:idUsuario", function (req, res) {
     fichaController.listarFichas(req, res);

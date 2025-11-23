@@ -54,7 +54,13 @@ fichaModel.lista(idUsuario).then((resultado) => {
 
   })
 }
+function temFichaAtiva(req, res){
+        var idUsuario = req.params.idUsuario;
 
+    fichaModel.temFichaAtiva(idUsuario).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
 
 function buscarTreinoPorFicha(req, res) {
     var idUsuario = req.params.idUsuario;
@@ -111,6 +117,7 @@ module.exports = {
     buscarTreinoPorFicha,
     editarStatus,
     listarFichas,
-    desativarFichas
+    desativarFichas,
+    temFichaAtiva
 
 }

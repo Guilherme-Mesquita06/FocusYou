@@ -382,7 +382,6 @@
     ];
     //  JSON.parse(sessionStorage.AQUARIOS) vai no lucar do treinos 
     function exibirTreinos() {
-
         treinos.forEach(item => {
             document.getElementById("linhaTreinos").innerHTML += `
                    <button onclick="exibirExercicios(${item.id})" id="getTreino">
