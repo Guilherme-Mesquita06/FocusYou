@@ -1,100 +1,68 @@
 USE focusYou;
 
-
 CREATE TABLE usuario (
-id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR (50) NOT NULL,
-	email VARCHAR (100) NOT NULL UNIQUE,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(100) NOT NULL,
-    peso DECIMAL (4,2) NOT NULL,
-    dataTreino DATE NOT NULL
+    peso DECIMAL(4,2) NOT NULL,
+    dataTreino DATE NOT NULL,
+    CONSTRAINT chk_email CHECK (email LIKE '%@%' AND email LIKE '%.com')
 );
 
-        SELECT id, nome, email FROM usuario WHERE email = email AND senha = senha;
-        
-
-      
-                
-
-
-ALTER TABLE usuario ADD CONSTRAINT CHECK (email LIKE '%@%' AND email LIKE '%.com');
-
-ALTER TABLE ficha MODIFY COLUMN dataFinal TIMESTAMP DEFAULT NULL;
 CREATE TABLE ficha (
-id INT PRIMARY KEY AUTO_INCREMENT,
-dataFinal TIMESTAMP DEFAULT NULL,
-dataInicio DATE NOT NULL,
-frequencia INT NOT NULL,
-objetivo VARCHAR (45) CHECK (objetivo IN ('Hipertrofia', 'Emagrecimento', 'Recuperacao', 'Condicionamento')),
-fkUsuario INT NOT NULL,
-			CONSTRAINT usuarioFicha
-			   FOREIGN KEY (fkUsuario)
-                 REFERENCES usuario (id),
-titulo VARCHAR (45) NOT NULL,
-descricao VARCHAR(255),
-status tinyint NOT NULL,                 
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    dataFinal TIMESTAMP NULL DEFAULT NULL,
+    dataInicio DATE NOT NULL,
+    frequencia INT NOT NULL,
+    objetivo VARCHAR(45),
+    fkUsuario INT NOT NULL,
+    titulo VARCHAR(45) NOT NULL,
+    descricao VARCHAR(255),
+    status TINYINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
+    CONSTRAINT chk_objetivo CHECK (objetivo IN ('Hipertrofia','Emagrecimento','Recuperacao','Condicionamento')),
+    CONSTRAINT fk_ficha_usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(id)
 );
-
-
-SELECT * FROM ficha; 
-
 
 CREATE TABLE treino (
-id INT PRIMARY KEY AUTO_INCREMENT,
-titulo VARCHAR (45) NOT NULL,
-observacao VARCHAR(255),
-fkFicha INT NOT NULL,
-	CONSTRAINT fichaTreino
-		FOREIGN KEY (fkFicha)
-          REFERENCES ficha (id)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(45) NOT NULL,
+    observacao VARCHAR(255),
+    fkFicha INT NOT NULL,
+    CONSTRAINT fk_treino_ficha FOREIGN KEY (fkFicha) REFERENCES ficha(id)
 );
-
-
-
--- Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails 
--- (`focusYou`.`exercicio`, CONSTRAINT `exercicioTreino` FOREIGN KEY (`fkTreino`) REFERENCES `treino` (`id`))
-
-
-
-
 
 CREATE TABLE exercicio (
-id INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR (45)NOT NULL,
-descricao VARCHAR (255),
-dificuldade VARCHAR(45), CONSTRAINT chkDificuldade CHECK  (dificuldade IN( 'Facil', 'Medio', 'Dificil')) ,
-agrupamentoMuscular VARCHAR(45) NOT NULL , CONSTRAINT Muscula CHECK  (agrupamentoMuscular IN( 'Peito' ,'Costas' ,'Lombar', 'Trapezio', 'Biceps' ,'Triceps', 'Ombro', 'Antebraço', 'Abdominal', 'Abdutor', 'Adutor' 
-,'Quadriceps', 'Posterior', 'Panturrilha' ,'Gluteo' ,'Tibia')) , 
-fkTreino INT NOT NULL,
-CONSTRAINT exercicioTreino
-						FOREIGN KEY (fkTreino)
-							REFERENCES treino(id),
-equipamento VARCHAR (75),
-	CONSTRAINT chkEquipamento CHECK (equipamento IN ('Halteres', 'Maquina', 'Barra','Rolinho', 'Colchonete'))
-                            
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    descricao VARCHAR(255),
+    dificuldade VARCHAR(45),
+    agrupamentoMuscular VARCHAR(45) NOT NULL,
+    fkTreino INT NOT NULL,
+    equipamento VARCHAR(75),
+
+    CONSTRAINT chk_dificuldade CHECK (dificuldade IN ('Facil','Medio','Dificil')),
+    CONSTRAINT chk_musculo CHECK (
+        agrupamentoMuscular IN ('Peito','Costas','Lombar','Trapezio','Biceps','Triceps',
+                                'Ombro','Antebraço','Abdominal','Abdutor','Adutor','Quadriceps',
+                                'Posterior','Panturrilha','Gluteo','Tibia')
+    ),
+    CONSTRAINT chk_equipamento CHECK (equipamento IN ('Halteres','Maquina','Barra','Rolinho','Colchonete')),
+    CONSTRAINT fk_exercicio_treino FOREIGN KEY (fkTreino) REFERENCES treino(id)
 );
 
-
-
-
-
-				
 CREATE TABLE serie (
-id INT PRIMARY KEY AUTO_INCREMENT,
-tempoDescanso TIME NOT NULL,                
-repeticoes INT NOT NULL,           
-cargaRealizada DECIMAL (4,1) NOT NULL,
-serieRealizada TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tempoDescanso TIME NOT NULL,
+    repeticoes INT NOT NULL,
+    cargaRealizada DECIMAL(4,1) NOT NULL,
+    serieRealizada TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fkExercicio INT NOT NULL,
 
-fkExercicio INT NOT NULL,
-		CONSTRAINT serieExercicio
-		  FOREIGN KEY (fkExercicio)
-				REFERENCES exercicio (id)
-
-);		
-
+    CONSTRAINT fk_serie_exercicio FOREIGN KEY (fkExercicio) REFERENCES exercicio(id)
+);
 
 
 -- --------------------------------------------------------------------------------
@@ -108,7 +76,12 @@ INSERT INTO usuario (nome, email, senha, peso, dataTreino) VALUES
 
 
 
-      
+      INSERT INTO ficha (dataFinal, dataInicio, frequencia, objetivo, fkUsuario, titulo, descricao, status)
+VALUES
+(NULL, '2025-02-15', 5, 'Hipertrofia', 1, 'Hipertrofia A', 'Bloco de peito e braço', 1),
+(NULL, '2025-02-20', 4, 'Hipertrofia', 2, 'Hipertrofia B', 'Treino de costas e bíceps', 1),
+(NULL, '2025-02-25', 3, 'Hipertrofia', 3, 'Hipertrofia C', 'Treino de perna completo', 1);
+
 	
       
 
@@ -133,128 +106,6 @@ INSERT INTO treino (titulo, observacao, fkFicha) VALUES
 
 
 
-
-
-
-
--- -----------------------------------------------------------------------------------------------------------------------------------
-
--- ----------------------------------------------------- INSERTS , SELECTS , UPDATES , DELETES ----------------------------------------------------------------------------
-
--- Observação : selects serão feitos em blocos por tabela seguindo a seguinte estrutura
--- usuario -> ficha -> treino -> exercicio -> serie
--- Ordem de comandos DML : INSERT , SELECT , UPDATE , DELETES 
--- --------------------------------------------------------------------------------	usuario ------------------------------------------------------------------------------------------
-
-
-
-
-        SELECT DISTINCT
-         u.id AS idUsuario,
-         u.email AS email,
-         u.senha AS senha,
-		 f.id AS idFicha,
-         t.id AS idTreino
-      FROM usuario AS u
-       JOIN ficha AS f
-	  ON f.fkUsuario = u.id
-       JOIN treino AS t
-      ON t.fkFicha = f.id
-	  WHERE email = 'gui@gmail.com' AND senha = '123';
-      
-      SELECT id AS idUsuario, nome, email FROM usuario WHERE email = 'gui@gmail.com' AND senha = '123';
-
-
-SELECT * FROM usuario;
-
-SELECT * FROM usuario WHERE email = 'ju@gmail.com' AND senha ='123';
-
-
-
-
-
-
-
-
-SELECT * FROM usuario WHERE email = 'gui@gmail.com' AND senha = '123';
-
--- ------------------------------------------------ FICHAS ---------------------------------------------------------------------------------------------------------------
-
-
-
-INSERT INTO ficha (dataFinal, dataInicio, frequencia, objetivo, fkUsuario, titulo, descricao, status)
-VALUES
-(NULL, '2025-02-15', 5, 'Hipertrofia', 1, 'Hipertrofia A', 'Bloco de peito e braço', 1),
-(NULL, '2025-02-20', 4, 'Hipertrofia', 2, 'Hipertrofia B', 'Treino de costas e bíceps', 1),
-(NULL, '2025-02-25', 3, 'Hipertrofia', 3, 'Hipertrofia C', 'Treino de perna completo', 1);
-
-
--- Conta quantas fichas o usuario tem no total
-SELECT u.nome AS 'Nome do usuario',
-         COUNT(f.titulo)  AS 'Quantidade de fichas'
-        FROM usuario AS u
-        JOIN ficha AS f
-        ON f.fkUsuario = u.id
-        WHERE u.id = 1
-        GROUP BY u.nome; -- Apenas nos campos que não tem operação matematica
-        
-   -- lista todas as fichas que o usuario tem     
-  SELECT u.nome AS 'Nome do usuario',
-		f.dataFinal AS dataFinal,
-        f.frequencia AS frequencia,
-        f.objetivo AS objetivo,
-        f.titulo AS titufloFicha,
-        f.status AS status,
-        f.created_at AS dtInicio
-        FROM usuario AS u
-        JOIN ficha AS f
-        ON f.fkUsuario = u.id
-        WHERE u.id = 1;
-        
-
-        
-        SELECT f.*,
-			  u.id AS idUsuariio
-        FROM usuario AS u
-        JOIN ficha AS f
-        ON u.id = f.fkUsuario
-        WHERE u.id = 1;
-        
-        
-        
-        UPDATE ficha SET status = 1
-			WHERE id = 4;
-            
-		UPDATE ficha AS f SET status = 0
-		WHERE id <> 1 AND (SELECT id FROM usuario WHERE id = 1);
-	
-
-        SELECT 
-         u.nome AS nome,
-         t.titulo AS tituloTreino
-      FROM usuario AS u
-      JOIN ficha AS f
-	  ON f.fkUsuario = u.id
-      JOIN treino AS t
-      ON t.fkFicha = f.id
-        WHERE f.id = 1 AND f.status  = 1;
-        
-        -- ELECIONA A FICHA EM ESPECIFICO
-  SELECT * FROM ficha WHERE id = 1;
-  
-  
-  
-   UPDATE ficha SET status = 1 WHERE id =  1;
-
--- -------------------------------------------------------------------------------------TREINOS ------------------------------------------------------------------------------------------------
-  SELECT COUNT(f.id) AS temFicha
-        FROM usuario AS u
-		JOIN ficha AS f
-        ON f.fkUsuario = u.id
-      WHERE u.id =6;
-
-
--- Treino 1 
 INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
 VALUES
 ('Supino Reto', 'Dificil', 'Peito',  1, 'Barra'),
@@ -328,6 +179,175 @@ VALUES
 
 	
   
+      INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
+SELECT id, '00:01:00', 12, 40.0 FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
+SELECT id, '00:01:20', 10, 45.0 FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
+SELECT id, '00:01:30', 8, 50.0 FROM exercicio;
+
+
+
+
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:00', 12, 30.0, '2025-01-05 10:00:00'
+FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:00', 10, 35.0, '2025-01-05 10:05:00'
+FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:00', 8, 40.0, '2025-01-05 10:10:00'
+FROM exercicio;
+
+
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:10', 12, 32.5, '2025-01-12 10:00:00'
+FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:10', 10, 37.5, '2025-01-12 10:05:00'
+FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:10', 8, 42.5, '2025-01-12 10:10:00'
+FROM exercicio;
+
+
+
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:20', 12, 35.0, '2025-01-19 10:00:00'
+FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:20', 10, 40.0, '2025-01-19 10:05:00'
+FROM exercicio;
+
+INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+SELECT id, '00:01:20', 8, 45.0, '2025-01-19 10:10:00';
+
+
+-- -----------------------------------------------------------------------------------------------------------------------------------
+
+-- ----------------------------------------------------- INSERTS , SELECTS , UPDATES , DELETES ----------------------------------------------------------------------------
+
+-- Observação : selects serão feitos em blocos por tabela seguindo a seguinte estrutura
+-- usuario -> ficha -> treino -> exercicio -> serie
+-- Ordem de comandos DML : INSERT , SELECT , UPDATE , DELETES 
+-- --------------------------------------------------------------------------------	usuario ------------------------------------------------------------------------------------------
+
+        SELECT id, nome, email FROM usuario WHERE email = email AND senha = senha;
+
+
+
+        SELECT DISTINCT
+         u.id AS idUsuario,
+         u.email AS email,
+         u.senha AS senha,
+		 f.id AS idFicha,
+         t.id AS idTreino
+      FROM usuario AS u
+       JOIN ficha AS f
+	  ON f.fkUsuario = u.id
+       JOIN treino AS t
+      ON t.fkFicha = f.id
+	  WHERE email = 'gui@gmail.com' AND senha = '123';
+      
+      SELECT id AS idUsuario, nome, email FROM usuario WHERE email = 'gui@gmail.com' AND senha = '123';
+
+
+SELECT * FROM usuario;
+
+SELECT * FROM usuario WHERE email = 'ju@gmail.com' AND senha ='123';
+
+
+
+
+
+
+
+
+SELECT * FROM usuario WHERE email = 'gui@gmail.com' AND senha = '123';
+
+-- ------------------------------------------------ FICHAS ---------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-- Conta quantas fichas o usuario tem no total
+SELECT u.nome AS 'Nome do usuario',
+         COUNT(f.titulo)  AS 'Quantidade de fichas'
+        FROM usuario AS u
+        JOIN ficha AS f
+        ON f.fkUsuario = u.id
+        WHERE u.id = 1
+        GROUP BY u.nome; -- Apenas nos campos que não tem operação matematica
+        
+   -- lista todas as fichas que o usuario tem     
+  SELECT u.nome AS 'Nome do usuario',
+		f.dataFinal AS dataFinal,
+        f.frequencia AS frequencia,
+        f.objetivo AS objetivo,
+        f.titulo AS titufloFicha,
+        f.status AS status,
+        f.created_at AS dtInicio
+        FROM usuario AS u
+        JOIN ficha AS f
+        ON f.fkUsuario = u.id
+        WHERE u.id = 1;
+        
+
+        
+        SELECT f.*,
+			  u.id AS idUsuariio
+        FROM usuario AS u
+        JOIN ficha AS f
+        ON u.id = f.fkUsuario
+        WHERE u.id = 1;
+        
+        
+        
+        UPDATE ficha SET status = 1
+			WHERE id = 4;
+            
+		UPDATE ficha AS f SET status = 0
+		WHERE id <> 1 AND (SELECT id FROM usuario WHERE id = 1);
+	
+
+        SELECT 
+         u.nome AS nome,
+         t.titulo AS tituloTreino
+      FROM usuario AS u
+      JOIN ficha AS f
+	  ON f.fkUsuario = u.id
+      JOIN treino AS t
+      ON t.fkFicha = f.id
+        WHERE f.id = 1 AND f.status  = 1;
+        
+        -- ELECIONA A FICHA EM ESPECIFICO
+  SELECT * FROM ficha WHERE id = 1;
+  
+  
+  
+   UPDATE ficha SET status = 1 WHERE id =  1;
+
+-- -------------------------------------------------------------------------------------TREINOS ------------------------------------------------------------------------------------------------
+  SELECT COUNT(f.id) AS temFicha
+        FROM usuario AS u
+		JOIN ficha AS f
+        ON f.fkUsuario = u.id
+      WHERE u.id =6;
+
+
+-- Treino 1 
+
   SELECT 
 	    t.*
         FROM ficha AS f
@@ -463,58 +483,7 @@ GROUP BY t.id, t.titulo;
         WHERE u.id = 1 AND MAX(f.id);
         
 -- ------------------------------------------------------------------------------------------------------------- SERIES ----------------------------------------------------------------------------------------
-      INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
-SELECT id, '00:01:00', 12, 40.0 FROM exercicio;
 
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
-SELECT id, '00:01:20', 10, 45.0 FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
-SELECT id, '00:01:30', 8, 50.0 FROM exercicio;
-
-
-
-
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:00', 12, 30.0, '2025-01-05 10:00:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:00', 10, 35.0, '2025-01-05 10:05:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:00', 8, 40.0, '2025-01-05 10:10:00'
-FROM exercicio;
-
-
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:10', 12, 32.5, '2025-01-12 10:00:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:10', 10, 37.5, '2025-01-12 10:05:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:10', 8, 42.5, '2025-01-12 10:10:00'
-FROM exercicio;
-
-
-
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:20', 12, 35.0, '2025-01-19 10:00:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:20', 10, 40.0, '2025-01-19 10:05:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:20', 8, 45.0, '2025-01-19 10:10:00'
 FROM exercicio;
 
 SELECT 
