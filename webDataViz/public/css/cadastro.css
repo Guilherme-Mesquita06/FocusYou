@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body {
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url("../assets/imgs/backgroun.png");
+
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.cadastroSection {
+    height: 65%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.cadastro {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    background-color: #090909;
+
+}
+
+.imgFocus {
+    height: 100%;
+    width: 50%;
+    background-color: #a90820;
+    display: flex;
+    align-items: center;
+
+}
+
+.imgFocus img {
+    height: 110%;
+    width: 100%;
+   
+}
+
+.campos {
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    margin-left: 15%;
+    justify-content: start;
+    align-items: center;
+}
+
+.titulo p {
+    font-size: 50px;
+    color: #fff;
+    font-weight: 600;
+    color: #eeebdd;
+}
+
+.formCad {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 4%;
+}
+.login{
+    display: flex;
+    justify-content: end;
+    padding-top: 10%;
+}
+
+.formCad form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    height: 85%;
+}
+
+.formCad input {
+    margin-bottom: 7%;
+    border-color: #eeebdd;
+    width: 95%;
+    height: 10%;
+    border-top: 30px;
+    border-left: 0px;
+    border-right: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    font-weight: bold;
+    font-size: large;
+
+}
+input:hover{
+        border-color: #eeebdda9;
+
+}
+
+label {
+    font-weight: 600;
+    font-size: larger;
+    color: #eeebdd;
+    margin-left: 2%;
+}
+
+.btn {
+    background-color: #fff;
+    width: 33%;
+    height: 10%;
+    border-radius: 15px;
+    align-items: center;
+    display: flex;
+    margin-top: 5;
+    justify-content: center;
+}
+
+.btn button {
+    font-size: large;
+    font-weight: 700;
+    color: #090909;
+    width: 100%;
+    background-color: #ffffff00;
+    border: none;
+    text-decoration: none;
+}
+
+.btn:hover {
+    transition: 0.6s;
+    background-color: #646b64;
+}
+
+.btn button:hover {
+    color: #fff;
+
+}
+.banner {
+  height: var(--tamanho-banner);
+  color: white;
+  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  background-size: cover;
+}
+
+.banner .container {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.banner .container p {
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  font-size: 36px;
+}
+
+.banner .container span {
+  font-weight: 800;
+}
+
+.loading-div {
+  width: 50px;
+  display: none;
+}
+
+.loading-div img {
+  height: 50px;
+  width: 50px;
+}
+
+.alerta_erro{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_erro {
+  display: none;
+  background-color: #fff;
+  color: black;
+  width: 230px;
+  position: fixed;
+  border-radius: 4px;
+  border: #6d4e58 3px solid;
+  padding: 10px;
+  margin-right: 10%;
+}
+
+.card_erro #mensagem_erro{
+  font-weight: 500;
+  font-size: 20px;
+}
+#div_erros_login {
+  display: none
+}

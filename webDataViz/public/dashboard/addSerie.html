@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/addSerie.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <title>Document</title>
+</head>
+
+<body onload="exibirTreinos()">
+    <div class="header">
+        <div class="container">
+            <div class="logoTitulo">
+                <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="" />
+            </div>
+
+            <nav class="navbar">
+                <div class="links">
+                    <div>
+                        <a href="">Inicial</a>
+                    </div>
+                    <div>
+                        <a href="./addTreino.html">Ficha</a>
+                    </div>
+                    <div>
+                        <a href="./login1.html">Dashboard</a>
+                    </div>
+                    <div>
+                        <a href="">Historico</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <section class="content">
+            <div class="containerTreino">
+                <section class="treinos secDiv">
+                    <h2>Treinos da ficha ativa</h2>
+                    <div id="linhaTreinos"> </div>
+
+
+
+                </section>
+            </div>
+
+
+            <section id="exercicios" style="display: none;">
+                <h2>Exercícios</h2>
+                <div id="listaExerciciosTreino"></div>
+                
+            </section>
+            
+            <section id="serie">
+                <h2>Cadastar serie </h2>
+                <div class="form">
+                    <div class="row">
+                        <div class="campoSerie">
+                            <label for="">Repetições</label>
+                            <input type="number" id="iptRepeticoes" placeholder="10">
+                        </div>
+                        <div class="campoSerie">
+                            <label  for="">Carga Realizada (em Kg)</label>
+                            <input type="number" id="iptCarga" placeholder="30">
+                        </div>
+
+
+                        <div class="campoSerie">
+                            <label for="">Tempo De Descanso (Segundos)</label>
+                            <input type="time" id="iptTempo" placeholder="1:20 ">
+                        </div>
+                        <div class="btnFeito">
+                            <button  onclick="">
+                                cadastrar série
+                            </button>
+                        </div>
+                    </div>
+                      
+                </div>
+
+            </section> 
+
+ 
+
+
+        </section>
+
+    </main>
+</body>
+
+
+<script>
+    var treino = 0
+    const treinos = [
+        {
+            id: 1,
+            titulo: "Treino A",
+            exercicio: [
+                {
+                    idExercicio: 1,
+                    agrupamento: "Peito",
+                    nomeExercicio: "Supino reto",
+                    equipamento: "Máquina",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+
+                },
+                {
+                    idExercicio: 2,
+                    agrupamento: "Peito",
+                    nomeExercicio: "Supino inclinado",
+                    equipamento: "Halteres",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 3,
+                    agrupamento: "Peito",
+                    nomeExercicio: "Crossover",
+                    equipamento: "Polia",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 4,
+                    agrupamento: "Ombro",
+                    nomeExercicio: "Elevação lateral",
+                    equipamento: "Halteres",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                }
+            ],
+        },
+
+        {
+            id: 2,
+            titulo: "Treino B",
+            exercicio: [
+                {
+                    idExercicio: 5,
+                    agrupamento: "Costas",
+                    nomeExercicio: "Puxada frente",
+                    equipamento: "Máquina",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 6,
+                    agrupamento: "Costas",
+                    nomeExercicio: "Remada baixa",
+                    equipamento: "Cabo",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 7,
+                    agrupamento: "Costas",
+                    nomeExercicio: "Levantamento terra",
+                    equipamento: "Barra",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 8,
+                    agrupamento: "Bíceps",
+                    nomeExercicio: "Rosca direta",
+                    equipamento: "Barra",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                }
+            ],
+        },
+
+        {
+            id: 3,
+            titulo: "Treino C",
+            exercicio: [
+                {
+                    idExercicio: 9,
+                    agrupamento: "Pernas",
+                    nomeExercicio: "Agachamento livre",
+                    equipamento: "Barra",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 10,
+                    agrupamento: "Pernas",
+                    nomeExercicio: "Leg press",
+                    equipamento: "Máquina",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 11,
+                    agrupamento: "Posterior",
+                    nomeExercicio: "Mesa flexora",
+                    equipamento: "Máquina",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 12,
+                    agrupamento: "Panturrilha",
+                    nomeExercicio: "Elevação de gêmeos",
+                    equipamento: "Máquina",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                }
+            ],
+        },
+
+        {
+            id: 4,
+            titulo: "Treino D",
+            exercicio: [
+                {
+                    idExercicio: 13,
+                    agrupamento: "Tríceps",
+                    nomeExercicio: "Tríceps pulley",
+                    equipamento: "Cabo",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 14,
+                    agrupamento: "Tríceps",
+                    nomeExercicio: "Tríceps testa",
+                    equipamento: "Barra EZ",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 15,
+                    agrupamento: "Ombro",
+                    nomeExercicio: "Desenvolvimento militar",
+                    equipamento: "Barra",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                },
+                {
+                    idExercicio: 16,
+                    agrupamento: "Ombro",
+                    nomeExercicio: "Elevação frontal",
+                    equipamento: "Halteres",
+                    serie: [
+                        {
+                            idSerie: 0,
+                            tempoDescanso: '',
+                            repeticoes: 0,
+                            carga: 0,
+                            timestamp: ''
+                        }
+
+                    ],
+                }
+            ],
+        }
+    ];
+    //  JSON.parse(sessionStorage.AQUARIOS) vai no lucar do treinos 
+    function exibirTreinos() {
+
+        treinos.forEach(item => {
+            document.getElementById("linhaTreinos").innerHTML += `
+                   <button onclick="exibirExercicios(${item.id})" id="getTreino">
+                <div>${item.titulo}</div>
+                </button>
+
+        `
+
+        });
+    }
+
+
+    function exibirExercicios(idTreino) {
+        document.getElementById("exercicios").style.display = 'flex';
+        document.getElementById('listaExerciciosTreino').innerHTML = `
+                <table id="tabelaEx">
+                 <tr>
+                    <th>Exercício</th>
+                    <th>Agrupamento muscular</th>
+                    <th>Equipamento</th>
+                    <th>Ação</th>
+                </tr>
+                   </table>
+                
+                    
+           
+        `
+
+        const treino = treinos.find(t => t.id === idTreino);
+
+
+        document.getElementById("tabelaEx").style.display = 'flex';
+
+        treino.exercicio.forEach(ex => {
+
+            document.getElementById("tabelaEx").innerHTML += `
+                            <tr class="linhaEx">
+                                <td class="tituloEx">${ex.nomeExercicio}</td>
+                                <td class="subInfoEx">${ex.agrupamento}</td>
+                                <td class="subInfoEx"> ${ex.equipamento}</td>
+
+                                <td>
+                                    <button class="btnFazer" onclick="RealizarSeries(${ex.idExercicio}">
+                                        ▶ Realizar série
+                                    </button>
+                                </td>
+                            </tr>`;
+        });
+    }
+
+    function RealizarSeries(idExercicio) {
+        const exercicio = treinos.find(t => t.exercicio.some(ex => ex.idExercicio === idExercicio));
+
+
+    }
+
+
+
+</script>
+
+</html>

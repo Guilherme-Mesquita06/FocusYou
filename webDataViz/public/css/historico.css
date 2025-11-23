@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+    --preto: #1E201E;
+    --contraste: #2C2C2C;
+    --border: 1px solid #a90820;
+    --contraste1: #3C3D37;
+    --vermelho: #a90820;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--preto);
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+
+main {
+    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
+    flex: 1;
+    /* ocupa TODO o espaço restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fichas {
+    width: 100%;
+    height: 40%;
+    background-color: aliceblue;
+    margin-top: 5%;
+}
+
+#contentFicha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--contraste);
+}
+
+.fichaCard {
+    height: 100%;
+    width: 20%;
+    border-radius: 10px;
+    background-color: var(--contraste1);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.campo {
+    width: 90%;
+    height: 15%;
+    border-bottom: 2px solid #a90820;
+    color: #F5F5F5;
+    font-weight: 500;
+}
+
+.acoes {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 5%;
+    justify-content: space-af;
+}
+
+.acoes button {
+    border: var(--border);
+    background-color: var(--contraste1);
+    color: #F5F5F5;
+    font-weight: 600;
+    border-radius: 10px;
+    height: 50%;
+    width: 40%;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+
+button:hover {
+    background-color: #F5F5F5;
+    transition: 0.5s;
+    color: #1E201E;
+}
+
+#iptCheck {
+    background-color: #1E201E;
+    width: 15%;
+    border-radius: 10px;
+}
+
+.check {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+div label {
+    color: #F5F5F5;
+    font-weight: 600;
+
+}

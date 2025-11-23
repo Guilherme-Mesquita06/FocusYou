@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/addTreino.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <div class="logoTitulo">
+                <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="">
+            </div>
+
+            <nav class="navbar">
+                <div class="links">
+                    <div>
+                        <a href="./addSerie.html">Home</a>
+                    </div>
+                    <div>
+                        <a href="">Ficha</a>
+                    </div>
+                    <div>
+                        <a href="./login1.html">Dashboard</a>
+                    </div>
+                    <div>
+                        <a href="">Historico</a>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+
+    <main>
+
+        <section class="content">
+
+            <section class="lateral">
+                <div class="lateralContainer">
+
+                    <div class="card">
+                        <div class="headerCard">
+                            <p class="cardTitulo">Treino A</p>
+                            <p><span>Peito costas e triceps</span></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="headerCard">
+                            <p class="cardTitulo">Treino B</p>
+                            <p><span>Peito costas e triceps</span></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="headerCard">
+                            <p class="cardTitulo">Treino C</p>
+                            <p><span>Peito costas e triceps</span></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="headerCard">
+                            <p class="cardTitulo">Treino D</p>
+                            <p><span>Peito costas e triceps</span></p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FORMULÁRIO QUE SOME -->
+            <div id="secCadastrarTreino" >
+                <div class="titulo">
+                    <p class="secTitulo">Cadastre informações da sua Ficha</p>
+                </div>
+
+                <div class="form">
+
+                    <div class="campos">
+                        <div class="campo">
+                            <label>Titulo</label>
+                            <input type="text" placeholder="Foco em ombros">
+                        </div>
+
+                        <div class="campo">
+                            <label>Data inicio</label>
+                            <input type="date">
+                        </div>
+                    </div>
+
+                    <div class="campos">
+                        <div class="campo">
+                            <label>Frequencia Semanal</label>
+                            <input type="text">
+                        </div>
+
+                        <div class="campo">
+                            <label>Objetivo</label>
+                            <form>
+                                <p>
+                                    <select id="objSelect">
+                                        <option value="">Selecione seu objetivo</option>
+                                        <option value="forca">💪🏼 Força</option>
+                                        <option value="hipertrofia">🏋🏼‍♂️ Hipertrofia</option>
+                                        <option value="reabilitacao">🚑 Reabilitação</option>
+                                    </select>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="observacao">
+                        <label>Observações</label>
+                        <textarea></textarea>
+                    </div>
+
+                    <div class="btn">
+                        <button onclick="addFicha()">Cadastrar ficha</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ADD TREINO NO MESMO LUGAR E ESCONDIDO -->
+            <section id="addTreino" style="display: none;">
+                <div class="contentAddTreino">
+                    <div class="tituloTreino">
+                        <p>Cadastrar treinos</p>
+                    </div>
+                    <div class="campos camposTreino">
+                        <div class="campo campoTreino">
+                            <label>Titulo do treino</label>
+                            <input type="text" placeholder="Costas e biecps">
+
+                        </div>
+
+
+                        <div class="observacao">
+                            <label>Observações</label>
+                            <textarea class="textAreaTreino"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="btn btnTreino">
+                        <button onclick="abrirAddExercicio()">Cadastrar Treino</button>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECTION PARA ADICIONAR EXERCÍCIO (INICIALMENTE OCULTA) -->
+            <section id="addExercicio" style="display: none;">
+                <div class="contentAddExercicio">
+
+                    <div class="tituloExercicio">
+                        <p>Adicionar Exercício</p>
+                    </div>
+
+                    <div class="camposExercicio">
+
+                        <div class="campoEx">
+                            <label>Nome</label>
+                            <input id="iptNomeEx" type="text" placeholder="Supino inclinado">
+                        </div>
+
+                        <div class="campoEx">
+                            <label>Descrição</label>
+                            <input id="iptDescEx" type="text" placeholder="Drop-Set / Rest-Pause ...">
+                        </div>
+
+                    </div>
+
+                    <div class="camposExercicio">
+
+                        <div class="campoEx">
+                            <label>Agrupamento muscular</label>
+                            <input id="iptGrupoEx" type="text" placeholder="Peitoral / Costas / Bíceps...">
+                        </div>
+
+                        <div class="campoEx">
+                            <label>Equipamento</label>
+                            <input id="iptEquipEx" type="text" placeholder="Máquina / Halteres / Barra">
+                        </div>
+
+                    </div>
+
+                    <div class="btnAddEx">
+                        <button onclick="adicionarExercicio()">Adicionar exercício</button>
+                    </div>
+
+
+
+
+                    <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Agrupamento Muscular</th>
+                            <th>Equipamento</th>
+
+
+                        </tr>
+                            
+
+
+                    </table>
+
+                    <!-- LISTA DOS EXERCÍCIOS ADICIONADOS -->
+
+                </div>
+            </section>
+
+
+        </section>
+
+    </main>
+
+</body>
+
+<script>
+
+   var vNome = []
+   var vDesc = []
+   var vAgrupMusc = []
+   var vEquipamento = []
+
+   const exercicioObj = []
+
+    function addFicha() {
+        secCadastrarTreino.style.display = 'none';
+        addTreino.style.display = 'flex';
+    }
+    function addFicha() {
+        document.getElementById("secCadastrarTreino").style.display = 'none';
+        document.getElementById("addTreino").style.display = 'flex';
+    }
+
+    // Renomeei a função para evitar conflito com o elemento
+    function abrirAddExercicio() {
+        document.getElementById("addTreino").style.display = 'none';
+        document.getElementById("addExercicio").style.display = 'flex';
+    }
+
+    function adicionarExercicio() {
+
+        // IDs CORRETOS
+        var nomeEx = document.getElementById("iptNomeEx").value;
+        var descricaoEx = document.getElementById("iptDescEx").value;
+        var grupoEx = document.getElementById("iptGrupoEx").value;
+        var equipEx = document.getElementById("iptEquipEx").value;
+
+
+
+
+        if (!nomeEx || !grupoEx || !equipEx) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        let lista = document.getElementById("listaExercicios");
+
+        exercicioObj.push({
+         agrupamento: grupoEx,
+         nomeExercicio: nomeEx,
+         equipamento: equipEx,
+         descricao: descricaoEx 
+
+        });
+        let div = document.createElement("div");
+        div.className = "itemExercicio";
+
+
+        listaExercicios.innerHTML += `
+                       <tr>
+                            <td>${nomeEx}</td>
+                            <td>${grupoEx}</td>
+                            <td>${equipEx}}</td>
+                        </tr> 
+        `;
+
+
+      
+        
+        lista.appendChild(div);
+
+        // Limpar campos
+        document.getElementById("iptNomeEx").value = "";
+        document.getElementById("iptDescEx").value = "";
+        document.getElementById("iptGrupoEx").value = "";
+        document.getElementById("iptEquipEx").value = "";
+    }
+
+</script>
+
+</html>

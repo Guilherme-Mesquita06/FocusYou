@@ -1,0 +1,522 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+    --preto: #1E201E;
+    --contraste: #2C2C2C;
+    --border: 1px solid #a90820;
+    --contraste1: #3C3D37;
+    --vermelho: #a90820;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--preto);
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+
+main {
+    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
+    flex: 1;
+    /* ocupa TODO o espaço restante */
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER LATERAL : onde os treinos vão ficar */
+.lateral {
+    width: 20%;
+    border: var(--border);
+    border-radius: 20px;
+    margin-left: 1%;
+    height: 90%;
+
+    margin-top: 1%;
+}
+
+
+.lateralContainer {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    display: block;
+    overflow-y: scroll;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-width: thin;
+    scrollbar-color: var(--vermelho) #bbda550a;
+}
+
+
+.card {
+    width: 90%;
+    height: 30%;
+    background-color: #2C2C2C;
+    border-radius: 30px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.titulo span {
+    color: #5f6f7A;
+}
+
+/* ______________________________________________ */
+
+.content {
+    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
+    flex: 1;
+    /* ocupa TODO o espaço restante */
+    display: flex;
+    flex-direction: row;
+}
+
+#secCadastrarTreino {
+    width: 60%;
+    height: 90%;
+    display: flex;
+    margin-top: 2%;
+    margin-left: 5%;
+    flex-direction: column;
+    background-color: var(--contraste);
+}
+
+.titulo {
+    width: 100%;
+    height: 15%;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 8%;
+    justify-content: center;
+}
+
+.headerCard {
+    width: 100%;
+    height: 15%;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 8%;
+}
+
+
+.cardTitulo {
+    color: #fff;
+    font-weight: 600;
+    margin-top: 4%;
+
+}
+
+.headerCard p {
+    font-size: x-large;
+
+}
+
+
+.secTitulo {
+    color: #fff;
+    font-weight: 700;
+    font-size: xx-large;
+
+
+}
+
+.form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.campos {
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 25%;
+}
+
+
+.campo {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    width: 40%;
+    height: 80%;
+    margin-left: 2%;
+}
+
+
+.campo input {
+    width: 80%;
+    height: 100%;
+    border-radius: 6px;
+    background-color: var(--contraste1);
+    border: 2px solid #a90820;
+    color: #fff;
+    font-weight: 800;
+    font-size: larger;
+}
+
+input:hover {
+    border: 3px solid #fff;
+}
+
+.campo label {
+    font-weight: 500;
+    color: #fff;
+    text-transform: capitalize;
+    font-size: larger;
+}
+
+
+.observacao {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.observacao label {
+    font-weight: 500;
+    color: #fff;
+    font-size: x-large;
+    align-self: start;
+    margin-left: 12%;
+}
+
+.observacao textarea {
+    height: 60%;
+    width: 78%;
+    background-color: var(--contraste1);
+    border-radius: 15px;
+    font-weight: 500;
+    color: #fff;
+    align-self: center;
+    font-size: x-large;
+    border: var(--border);
+}
+
+
+
+
+
+
+
+
+
+/* SELECT: Posso defini a cor da fonte, hover e cor de fundo antes de ver os options */
+select,
+::picker(select) {
+    appearance: base-select;
+}
+
+
+form label {
+    width: fit-content;
+    align-self: center;
+}
+
+
+form select {
+    border: var(--border);
+    background: #ffffff00;
+    padding: 10px;
+    transition: 0.4s;
+
+
+}
+
+#objSelect {
+    width: 100%;
+    font-weight: 700;
+    color: #fff;
+    transition: 0.4s;
+
+}
+
+/* Hover sem clicar no select */
+select:hover,
+select:focus {
+    background: #53000094;
+}
+
+/* Seta ela tem uma animação de rodar */
+select::picker-icon {
+    color: #999999;
+    appearance: base-select;
+    transition: 0.4s rotate;
+}
+
+/* Esse rodar é em 180º */
+select:open::picker-icon {
+    rotate: 180deg;
+}
+
+option {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    color: #fff;
+    border: 2px solid #dddddd;
+    background-color: #1E201E;
+    padding: 10px;
+    transition: 0.4s;
+
+}
+
+
+option:hover {
+    border-radius: 8px 8px 0 0;
+
+    background-color: rgb(231, 19, 12);
+
+
+}
+
+::picker(select) {
+    border-radius: 8px;
+}
+
+
+option .icon {
+    font-size: 1.6rem;
+}
+
+selectedcontent .icon {
+    display: none;
+}
+
+option:checked {
+    font-weight: bold;
+}
+
+
+option .icon {
+    font-size: 1.6rem;
+    text-box: trim-both cap alphabetic;
+}
+
+selectedcontent .icon {
+    display: none;
+}
+
+/* quando for marcado eçe vai adicionar icon no conteudo */
+option::checkmark {
+    order: 1;
+    margin-left: auto;
+    content: "☑️";
+}
+
+/* https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select */
+/* ANIMAÇÃO DA VOLTA do option */
+::picker(select) {
+    opacity: 0;
+    transition: all 0.5s allow-discrete;
+}
+
+::picker(select):popover-open {
+    opacity: 1;
+}
+
+@starting-style {
+    ::picker(select):popover-open {
+        opacity: 0;
+    }
+}
+
+
+#addTreino {
+    display: block;
+    margin-top: 3%;
+    width: 70%;
+    height: 60%;
+    background-color: var(--contraste);
+    align-self: start;
+    border: var(--border);
+    border-radius: 10px;
+    align-items: start;
+    margin-left: 5%;
+
+}
+
+.contentAddTreino {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.camposTreino {
+
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 50%;
+}
+.campoTreino{
+    height: 40%;
+}
+
+
+.tituloTreino {
+    width: 100%;
+    height: 15%;
+    justify-content: start;
+    display: flex;
+    align-items: center;
+}
+
+.tituloTreino p {
+    font-size: x-large;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 3%;
+    padding-top: 1%;
+}
+
+.btnTreino{
+    margin-top: 10%;
+}
+.btn {
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5%;
+    margin-bottom: 5%;
+}
+
+.btn button {
+    font-size: large;
+    font-weight: 700;
+    color: #090909;
+    height: 40%;
+    width: 105%;
+    background-color: #ffffff00;
+    border: none;
+    text-decoration: none;
+    background-color: #dddddd;
+    border-radius: 20px;
+
+}
+
+
+
+.btn button:hover {
+    background-color: var(--vermelho);
+    color: #dddddd;
+    transition: 0.6s;
+
+}
+
+
+
+#addExercicio {
+    margin-top: 3%;
+    width: 70%;
+    height: auto;
+    background-color: var(--contraste);
+    border: var(--border);
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentAddExercicio {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tituloExercicio p {
+    font-size: x-large;
+    color: #fff;
+    font-weight: bold;
+    padding-left: 2%;
+}
+
+.camposExercicio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.campoEx {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.campoEx label {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: large;
+}
+
+.campoEx input {
+    height: 40px;
+    border-radius: 8px;
+    background-color: var(--contraste1);
+    border: 2px solid var(--vermelho);
+    color: #fff;
+    font-size: larger;
+    padding-left: 10px;
+}
+
+.btnAddEx {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4%;
+    margin-top: 20px;
+}
+
+.btnAddEx button {
+    height: 45px;
+    width: 25%;
+    border-radius: 15px;
+    background-color: #ddd;
+    font-weight: 700;
+    border: none;
+    transition: .4s;
+}
+
+.btnAddEx button:hover {
+    background-color: var(--vermelho);
+    color: #fff;
+}
+
+#listaExercicios {
+    width: 90%;
+    margin: 20px auto;
+}
+
+
+.tabelaExercicio{
+    padding-top: 50px;
+    color: #fff;
+}

@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+    --preto: #1E201E;
+    --contraste: #2C2C2C;
+    --border: 1px solid #a90820;
+    --contraste1: #3C3D37;
+    --vermelho: #a90820;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--preto);
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+
+main {
+    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
+    flex: 1;
+    /* ocupa TODO o espaço restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.containerTreino {
+    flex-direction: row;
+    width: 95%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.secDiv {
+    background: #2c2c2c;
+    padding: 15px;
+    border-radius: 15px;
+    overflow-y: auto;
+    border: 2px solid #a90820;
+}
+
+.treinos {
+    height: 100%;
+    color: #FFF;
+    flex-direction: column;
+    display: flex;
+    width: 90%;
+}
+
+#linhaTreinos {
+    height: 60%;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#getTreino {
+    width: 20%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    color: #F5F5F5;
+    font-weight: 900;
+    background-color: var(--vermelho);
+}
+
+#getTreino:hover {
+    background-color: #F5F5F5;
+    transition: 0.7s;
+    color: var(--preto);
+}
+
+#exercicios {
+    width: 30%;
+    margin-top: 5%;
+    margin-left: 4%;
+    border: var(--border);
+    border-radius: 10px;
+    color: #F5F5F5;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+/* Tabela geral */
+#listaExerciciosTreino {
+    width: 100%;
+}
+
+#tabelaEx {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Cabeçalho */
+#listaExerciciosTreino th {
+    background-color: #1c1c1c;
+    padding: 12px;
+    font-size: 1.2rem;
+    text-align: left;
+    border-bottom: var(--border);
+}
+.contentExercicioSerie{
+    width: 100%;
+    height: 60%;
+    background-color: yellow;
+}
+.linhaEx {
+    background-color: #a90820;
+    height: 5%;
+    width: 100%;
+}
+
+tbody {
+    width: 100%;
+}
+
+.linhaEx td {
+    padding: 10px;
+    font-size: 1.1rem;
+    color: #fff;
+    width: 26%;
+
+}
+
+/* Nome do exercício */
+.tituloEx {
+    font-size: 1.3rem;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+
+}
+
+.subInfoEx {
+    opacity: 0.9;
+
+}
+
+
+
+/* Botão */
+.btnFazer {
+    width: 140px;
+    padding: 10px;
+    border-radius: 10px;
+    border: var(--border);
+    background-color: #F5F5F5;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btnFazer:hover {
+    background-color: #dadada;
+}
+#exercicios {
+    width: 45%;
+}
+#serie {
+    width: 30%;
+    height: 40%;
+    align-self: flex-end;
+    margin-right: 9%;
+    margin-top: 5%;
+    border: var(--border);
+    border-radius: 10px;
+    display: block;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#serie h2 {
+    display: flex;
+    color: #F5F5F5;
+
+}
+
+.form {
+    display: flex;
+    width: 100%;
+    height: 90%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.row {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    bottom: 10%;
+
+}
+
+
+
+.campoSerie,
+input {
+    width: 70%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+.campoSerie{
+    width: 100%;
+    height: 100%;
+}
+input {
+    border-radius: 10px;
+    background-color: var(--preto);
+    border: 2px solid #a90820;
+    font-weight: 800;
+    font-size: larger;
+    color:#F5F5F5;
+
+}
+
+.campoSerie label {
+    color: #F5F5F5;
+    font-weight: 500;
+}
+
+.btnFeito {
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-right: 5%;
+    margin-bottom: 5%;
+}
+
+.btnFeito button {
+    font-size: large;
+    font-weight: 700;
+    color: #090909;
+    height: 100%;
+    width: 50%;
+    background-color: #ffffff00;
+    border: none;
+    text-decoration: none;
+    background-color: #dddddd;
+    border-radius: 20px;
+
+}
+
+
+
+.btnFeito button:hover {
+    background-color: var(--vermelho);
+    color: #dddddd;
+    transition: 0.6s;
+
+}
+
+

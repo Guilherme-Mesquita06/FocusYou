@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div class="header">
+        <div class="container">
+            <div class="logoTitulo">
+                <h1 class="tituloNav">FocusYou</h1>
+                <img src="./assets/icon/LogoFocus.svg" width="90vw" alt="">
+            </div>
+
+            <nav class="navbar">
+                <div class="links">
+                    <div>
+                        <a href="">Inicial</a>
+                    </div>
+                    <div>
+                        <a href="">Simulador</a>
+                    </div>
+                    <div>
+                        <a href="./login1.html">Login</a>
+                    </div>
+                    <div>
+                        <a href="./cadastro.html">Cadastro</a>
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </div>
+    </div>
+    <main>
+
+        <section class="cadastroSection">
+            <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
+            </div>
+            <div class="cadastro">
+                <div class="imgFocus">
+                    <img src="./assets/imgs/fundoCad.png" alt="">
+                </div>
+                <div class="campos">
+                    <div class="titulo">
+                        <p>Login</p>
+                    </div>
+                    <div class="formCad login">
+                        <form action="">
+
+                            <label for="email">Email</label>
+                            <input id="iptEmail" type="text" placeholder="usuariouser@provedor.com">
+
+                            <label for="password">Senha</label>
+                            <input id="iptSenha" type="password" placeholder="******">
+
+                        </form>
+                        <div class="btn">
+                            <button onclick="entrar()">Entrar</button>
+                        </div>
+
+                        <div id="div_aguardar" class="loading-div">
+                            <img src="./assets/circle-loading.gif" id="loading-gif">
+                        </div>
+                        <div id="div_erros_login"></div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+
+<script>
+
+
+    function entrar() {
+        var emailVar = iptEmail.value;
+        var senhaVar = iptSenha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+            }),
+        })
+        // Mesma coisa q a arrow function =>
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                console.log("ESQUESTTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+                    console.log('DESGRAAAÇAAA?')
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.EMAIL_USUARIO = json.email; // Armazena o json na sessão e utiliza dps quando precisar
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.idUsuario;
+
+
+                         setTimeout(function () {
+                            buscarFicha()
+                        }, 1000); // apenas para exibir o loading
+
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        finalizarAguardar(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+    function buscarFicha(){
+        var idUsuario = sessionStorage.ID_USUARIO;
+ // THEN = ENTAO
+ // buscar ficha entao voce transforma h
+        fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(resposta => {
+            console.log(resposta)
+            if(resposta.length == 0){
+
+                window.location = './dashboard/addTreino.html'
+
+            }else{
+                window.location = './dashboard/historicoFicha.html'
+            }
+
+        }))
+
+        
+    }
+
+ 
+
+</script>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/cadastro.css">
+  <link rel="stylesheet" href="./css/layout.css">
+
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="header">
+    <div class="container">
+      <div class="logoTitulo">
+        <h1 class="tituloNav">FocusYou</h1>
+        <img src="./assets/icon/LogoFocus.svg" width="90vw" alt="">
+      </div>
+
+      <nav class="navbar">
+        <div class="links">
+          <div>
+            <a href="">Inicial</a>
+          </div>
+          <div>
+            <a href="">Simulador</a>
+          </div>
+          <div>
+            <a href="./login1.html">Login</a>
+          </div>
+          <div>
+            <a href="">Cadastro</a>
+          </div>
+
+        </div>
+
+      </nav>
+
+    </div>
+  </div>
+  <main>
+
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+
+    <section class="cadastroSection">
+      <div class="cadastro">
+        <div class="imgFocus">
+          <img src="./assets/imgs/fundoCad.png" alt="">
+        </div>
+        <div class="campos">
+          <div class="titulo">
+            <p>Cadastro</p>
+          </div>
+          <div class="formCad">
+            <form>
+              <label for="iptNome">Nome </label>
+              <input id="iptNome" type="text" placeholder="">
+
+              <label for="iptEmail">Email</label>
+              <input id="iptEmail" type="text" placeholder="usuariouser@provedor.com">
+
+              <label>Senha</label>
+              <input id="iptSenha" type="password" placeholder="******">
+
+              <label>Peso atual</label>
+              <input id="iptPeso" type="number" placeholder="89.5">
+
+              <label>Data que começou a treinar</label>
+              <input id="iptDataTreino" type="date">
+            </form>
+
+          </div>
+          <div class="btn">
+            <button onclick="cadastrar()">Cadastrar</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+
+<script>
+
+
+let emailsCadastrados = []
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = iptNome.value;
+    var emailVar = iptEmail.value;
+    var senhaVar = iptSenha.value;
+    var pesoVar = iptPeso.value;
+    var dataTreinoVar = iptDataTreino.value;
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      pesoVar == "" ||
+      dataTreinoVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+    }
+    //   //  finalizarAguardar();
+    //   return false;
+    // } else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
+
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        pesoServer: pesoVar,
+        dataTreinoServer: dataTreinoVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login1.html";
+          }, "2000");
+
+          limparFormulario();
+          // finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        
+        // finalizarAguardar();
+      });
+
+    return false;
+    }
+  
+
+</script>
+
+</html>

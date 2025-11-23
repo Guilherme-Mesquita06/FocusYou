@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/historico.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <title>Document</title>
+</head>
+
+<body onload=" exibirFichas()">
+
+    <div class="header">
+        <div class="container">
+            <div class="logoTitulo">
+                <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="">
+            </div>
+
+            <nav class="navbar">
+                <div class="links">
+                    <div>
+                        <a href="./addSerie.html">Home</a>
+                    </div>
+                    <div>
+                        <a href="">Ficha</a>
+                    </div>
+                    <div>
+                        <a href="./login1.html">Dashboard</a>
+                    </div>
+                    <div>
+                        <a href="">Historico</a>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+
+    <main>
+
+        <section class="content">
+
+            <section class="fichas">
+                <div id="contentFicha"></div>
+
+            </section>
+
+        </section>
+    </main>
+</body>
+
+<script>
+ 
+    function exibirFichas(){
+        var idUsuario = sessionStorage.ID_USUARIO;
+     fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(fichas => {
+        console.log(fichas)
+
+        fichas.forEach(ficha => {
+            document.getElementById('contentFicha').innerHTML += `
+             <div class="fichaCard">
+                        <div class="campo">
+                            <p>titulo: ${ficha.titulo}</p>
+                        </div>
+                        <div class="campo">
+                            <p>Objetivo: Hipertrofia</p>
+                        </div>
+
+                        <div class="camp(idUsuario){o">
+                            <p>Data inicio: ${ficha.dataInicio} </p>
+                        </div>
+                     
+                         <div class="campo">
+                            <p>Frequencia: ${ficha.frequencia} </p>
+                        </div>
+                        <div class="acoes">
+                            <div class="check">
+                            <label for="AtivarFicha">Ativar ficha</label>
+                            <input type="checkbox" id="iptCheck">
+                            </div>
+                            <button onclick="">Treinar</button>
+                        </div>
+
+
+                    </div>`;    
+        });
+     }))
+
+    }
+        const check = document.getElementById('iptCheck') ;
+
+// ,editarStatus(${ficha.idFicha})   desativarFicha(${idUsuario}, ${ficha.idFicha})
+function desativarFicha(idUsuario, idFicha){
+    
+    
+
+        fetch (`/fichas/editar/${idFicha}/${idUsuario}`, {
+            method: "PUT",
+            headers:{
+                "content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                status:0
+            }).then(resposta => {
+                console.log('Todas as fichas estão desativadas para uso')
+            }).catch(resposta => {
+                console.log(`#Erro: ${resposta}`)
+            })
+
+            })
+            
+            
+
+        }
+        if (check.checked){
+            desativarFicha();
+    }
+</script>
+
+</html>
