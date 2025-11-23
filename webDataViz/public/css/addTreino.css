@@ -410,8 +410,8 @@ option::checkmark {
     font-size: large;
     font-weight: 700;
     color: #090909;
-    height: 100%;
-    width: 25%;
+    height: 40%;
+    width: 105%;
     background-color: #ffffff00;
     border: none;
     text-decoration: none;

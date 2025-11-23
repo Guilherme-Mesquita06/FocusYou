@@ -21,6 +21,7 @@ body {
     overflow-y: scroll;
 
 }
+
 main {
     /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
     flex: 1;
@@ -28,13 +29,15 @@ main {
     display: flex;
     flex-direction: column;
 }
-.content{
+
+.content {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
+
 .containerTreino {
     flex-direction: row;
     width: 95%;
@@ -53,26 +56,28 @@ main {
     border: 2px solid #a90820;
 }
 
-.treinos{
+.treinos {
     height: 100%;
     color: #FFF;
     flex-direction: column;
     display: flex;
     width: 90%;
 }
-#linhaTreinos{
+
+#linhaTreinos {
     height: 60%;
     width: 95%;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-#getTreino{
+
+#getTreino {
     width: 20%;
     height: 100%;
     border-radius: 20px;
     display: flex;
-    border:none;
+    border: none;
     justify-content: center;
     align-items: center;
     font-size: xx-large;
@@ -80,11 +85,13 @@ main {
     font-weight: 900;
     background-color: var(--vermelho);
 }
-#getTreino:hover{
-background-color: #F5F5F5;
-transition: 0.7s;
-color: var(--preto);
+
+#getTreino:hover {
+    background-color: #F5F5F5;
+    transition: 0.7s;
+    color: var(--preto);
 }
+
 #exercicios {
     width: 30%;
     margin-top: 5%;
@@ -100,7 +107,8 @@ color: var(--preto);
 #listaExerciciosTreino {
     width: 100%;
 }
-#tabelaEx{
+
+#tabelaEx {
     flex-direction: column;
     display: flex;
     justify-content: center;
@@ -116,14 +124,18 @@ color: var(--preto);
     text-align: left;
     border-bottom: var(--border);
 }
-
+.contentExercicioSerie{
+    width: 100%;
+    height: 60%;
+    background-color: yellow;
+}
 .linhaEx {
     background-color: #a90820;
     height: 5%;
     width: 100%;
 }
 
-tbody{
+tbody {
     width: 100%;
 }
 
@@ -132,7 +144,7 @@ tbody{
     font-size: 1.1rem;
     color: #fff;
     width: 26%;
-    
+
 }
 
 /* Nome do exercício */
@@ -146,7 +158,7 @@ tbody{
 
 .subInfoEx {
     opacity: 0.9;
-  
+
 }
 
 
@@ -167,4 +179,111 @@ tbody{
 .btnFazer:hover {
     background-color: #dadada;
 }
+#exercicios {
+    width: 45%;
+}
+#serie {
+    width: 30%;
+    height: 40%;
+    align-self: flex-end;
+    margin-right: 9%;
+    margin-top: 5%;
+    border: var(--border);
+    border-radius: 10px;
+    display: block;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#serie h2 {
+    display: flex;
+    color: #F5F5F5;
+
+}
+
+.form {
+    display: flex;
+    width: 100%;
+    height: 90%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.row {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    bottom: 10%;
+
+}
+
+
+
+.campoSerie,
+input {
+    width: 70%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+.campoSerie{
+    width: 100%;
+    height: 100%;
+}
+input {
+    border-radius: 10px;
+    background-color: var(--preto);
+    border: 2px solid #a90820;
+    font-weight: 800;
+    font-size: larger;
+    color:#F5F5F5;
+
+}
+
+.campoSerie label {
+    color: #F5F5F5;
+    font-weight: 500;
+}
+
+.btnFeito {
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-right: 5%;
+    margin-bottom: 5%;
+}
+
+.btnFeito button {
+    font-size: large;
+    font-weight: 700;
+    color: #090909;
+    height: 100%;
+    width: 50%;
+    background-color: #ffffff00;
+    border: none;
+    text-decoration: none;
+    background-color: #dddddd;
+    border-radius: 20px;
+
+}
+
+
+
+.btnFeito button:hover {
+    background-color: var(--vermelho);
+    color: #dddddd;
+    transition: 0.6s;
+
+}
+
 

@@ -15,7 +15,7 @@ router.get("buscar/temFicha/:idUsuario" ,function(req, res){
 
 
 router.get("/buscar/:idUsuario", function (req, res) {
-    fichaController.lista(req, res);
+    fichaController.listarFichas(req, res);
 })
 
 router.put("/editar/:idFicha/:status", function (req, res) {

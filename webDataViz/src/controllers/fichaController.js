@@ -46,6 +46,16 @@ function cadastrarFicha(req, res) {
 }
 
 
+function listarFichas(req, res){
+var idUsuario = req.params.idUsuario;
+
+fichaModel.lista(idUsuario).then((resultado) => {
+    res.status(200).json(resultado);
+
+  })
+}
+
+
 function buscarTreinoPorFicha(req, res) {
     var idUsuario = req.params.idUsuario;
 
@@ -79,6 +89,7 @@ function editarStatus(req, res) {
 module.exports = {
     cadastrarFicha,
     buscarTreinoPorFicha,
-    editarStatus
+    editarStatus,
+    listarFichas
 
 }
