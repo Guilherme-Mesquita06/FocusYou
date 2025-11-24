@@ -41,41 +41,7 @@
 
         <section class="content">
 
-            <section class="lateral">
-                <div class="lateralContainer">
-
-                    <div class="card">
-                        <div class="headerCard">
-                            <p class="cardTitulo">Treino A</p>
-                            <p><span>Peito costas e triceps</span></p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="headerCard">
-                            <p class="cardTitulo">Treino B</p>
-                            <p><span>Peito costas e triceps</span></p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="headerCard">
-                            <p class="cardTitulo">Treino C</p>
-                            <p><span>Peito costas e triceps</span></p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="headerCard">
-                            <p class="cardTitulo">Treino D</p>
-                            <p><span>Peito costas e triceps</span></p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- FORMULÁRIO QUE SOME -->
+            <!-- FORMULÁRIO FICHA -->
             <div id="secCadastrarTreino">
                 <div class="titulo">
                     <p class="secTitulo">Cadastre informações da sua Ficha</p>
@@ -111,7 +77,6 @@
                                         <option value="hipertrofia">🏋🏼‍♂️ Hipertrofia</option>
                                         <option value="reabilitacao">🚑 Reabilitação</option>
                                         <option value="Emagrecimento">🏃🏻 Emagrecimento</option>
-
                                     </select>
                                 </p>
                             </form>
@@ -130,37 +95,34 @@
                 </div>
             </div>
 
-            <!-- ADD TREINO NO MESMO LUGAR E ESCONDIDO -->
-            <section id="addTreino" style="display: none;">
+            <!-- ADD TREINO LOGO ABAIXO -->
+             <section id="addTreino">
                 <div class="contentAddTreino">
                     <div class="tituloTreino">
                         <p>Cadastrar treinos</p>
                     </div>
+
                     <div class="campos camposTreino">
                         <div class="campo campoTreino">
                             <label>Titulo do treino</label>
                             <input id="iptTreinoTitulo" type="text" placeholder="Costas e biecps">
-
                         </div>
-
 
                         <div class="observacao">
                             <label>Observações</label>
-                            <textarea id="iptTreino" class="textAreaTreino"></textarea>
+                            <textarea id="observacaoTreino" class="textAreaTreino"></textarea>
                         </div>
                     </div>
 
-
-                    <div class="btn btnTreino">
-                        <button onclick="abrirAddExercicio()">Cadastrar Treino</button>
-
+                    <div class="btnTreino">
+                        <button onclick="cadastrarTreino()">Cadastrar Treino</button>
                     </div>
                 </div>
-            </section>
+            </section> 
 
+            <!-- ADD EXERCÍCIO ABAIXO -->
+             <section id="addExercicio">
 
-            <!-- SECTION PARA ADICIONAR EXERCÍCIO (INICIALMENTE OCULTA) -->
-            <section id="addExercicio" style="display: none;">
                 <div class="contentAddExercicio">
 
                     <div class="tituloExercicio">
@@ -168,7 +130,6 @@
                     </div>
 
                     <div class="camposExercicio">
-
                         <div class="campoEx">
                             <label>Nome</label>
                             <input id="iptNomeEx" type="text" placeholder="Supino inclinado">
@@ -178,11 +139,9 @@
                             <label>Descrição</label>
                             <input id="iptDescEx" type="text" placeholder="Drop-Set / Rest-Pause ...">
                         </div>
-
                     </div>
 
                     <div class="camposExercicio">
-
                         <div class="campoEx">
                             <label>Agrupamento muscular</label>
                             <input id="iptGrupoEx" type="text" placeholder="Peitoral / Costas / Bíceps...">
@@ -192,42 +151,38 @@
                             <label>Equipamento</label>
                             <input id="iptEquipEx" type="text" placeholder="Máquina / Halteres / Barra">
                         </div>
-
                     </div>
 
                     <div class="btnAddEx">
                         <button class="btnExercicio" onclick="adicionarExercicio()">Adicionar exercício</button>
                     </div>
 
-
-
-
                     <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
                         <tr>
                             <th>Nome</th>
                             <th>Agrupamento Muscular</th>
                             <th>Equipamento</th>
-
-
                         </tr>
-
-
-
-                    </table>
-
-                    <!-- LISTA DOS EXERCÍCIOS ADICIONADOS -->
+                    </table> 
 
                 </div>
             </section>
-
 
         </section>
 
     </main>
 
+
 </body>
 
 <script>
+    function cadastrarExercicios (){
+        
+    }
+
+
+
+
     function cadastrarFicha() {
         var idUsuario = sessionStorage.ID_USUARIO
         var tituloVar = iptTitulo.value
@@ -262,20 +217,42 @@
             }),
 
         }).then(resposta => resposta.json())
-        .then(ficha => {
-            console.log('Ronaldo:', ficha);
+            .then(ficha => {
+            
+                console.log('Ronaldo:', ficha);
+                sessionStorage.ID_FICHA = ficha.insertId;
 
-            sessionStorage.ID_FICHA = ficha.idFicha;
 
-            document.getElementById("secCadastrarTreino").style.display = 'none';
-            document.getElementById("addTreino").style.display = 'flex';
+                console.log(sessionStorage.ID_FICHA )
 
-        });
+            });
     }
 
 
+    function cadastrarTreino() {
 
+        var tituloTreinoVar = iptTreinoTitulo.value;
+        var observacaoTreinoVar = observacaoTreino.value;
+        var idFichaVar = sessionStorage.ID_FICHA;
 
+        fetch("/treinos/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                tituloTreinoVar: tituloTreinoVar,
+                observacaoTreinoVar: observacaoTreinoVar,
+                idFichaVar: idFichaVar
+            }),
+        }).then(resposta => resposta.json().then(treino => {
+            console.log('Treino:', treino);
+
+            iptTreinoTitulo.value = '';
+            observacaoTreino.value = '';
+
+        }))
+    }
 
 
 
@@ -292,8 +269,7 @@
 
     // Renomeei a função para evitar conflito com o elemento
     function abrirAddExercicio() {
-        document.getElementById("addTreino").style.display = 'none';
-        document.getElementById("addExercicio").style.display = 'flex';
+
     }
 
     function adicionarExercicio() {

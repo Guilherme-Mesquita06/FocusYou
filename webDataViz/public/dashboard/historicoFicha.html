@@ -52,6 +52,8 @@
 
 <script>
 
+
+
     function exibirFichas() {
         var idUsuario = sessionStorage.ID_USUARIO;
         fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(fichas => {
@@ -138,7 +140,7 @@
 
 
 
-        } else {
+        } else {fieldCount
             console.log('Nao ta mais ativa')
         }
     }
@@ -161,8 +163,6 @@
 
             if(qtdFicha == 1){
                window.location = './addSerie.html';
-
-
             }else{
                 console.log('Você não tem ficha ativa, assina-le a caixa ao lado')
             }

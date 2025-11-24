@@ -4,9 +4,9 @@ var treinoModel = require("../models/treinoModel");
 
 
 function cadastrar(req, res) {
-    var titulo = req.body.titulo;
-    var observacao = req.body.observacao;
-    var idFicha = req.body.idFicha;
+    var titulo = req.body.tituloTreinoVar;
+    var observacao = req.body.observacaoTreinoVar;
+    var idFicha = req.body.idFichaVar;
 
 
 
@@ -18,7 +18,7 @@ function cadastrar(req, res) {
     } else {
 
 
-        treinoModel.cadastrar(titulo, observacao,idFicha, )
+        treinoModel.cadastrar(titulo, observacao,idFicha)
             .then((resultado) => {
                 res.status(201).json(resultado);
             }

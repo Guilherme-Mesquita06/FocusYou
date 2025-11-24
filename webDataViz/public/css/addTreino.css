@@ -1,12 +1,13 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+/* ---------------------------------------------------
+   ROOT + RESET
+--------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
     --preto: #1E201E;
     --contraste: #2C2C2C;
-    --border: 1px solid #a90820;
     --contraste1: #3C3D37;
+    --border: 1px solid #a90820;
     --vermelho: #a90820;
 }
 
@@ -16,152 +17,104 @@
     box-sizing: border-box;
 }
 
+/* ---------------------------------------------------
+   BODY + MAIN
+--------------------------------------------------- */
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    width: 100vw;
+    height: 210vh;
     font-family: "Poppins", sans-serif;
     background-color: var(--preto);
-    width: 100vw;
     overflow-x: hidden;
     overflow-y: scroll;
 
 }
 
 main {
-    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
-    flex: 1;
-    /* ocupa TODO o espaço restante */
-    display: flex;
     flex-direction: column;
-}
-
-/* HEADER LATERAL : onde os treinos vão ficar */
-.lateral {
-    width: 20%;
-    border: var(--border);
-    border-radius: 20px;
-    margin-left: 1%;
-    height: 90%;
-
-    margin-top: 1%;
-}
-
-
-.lateralContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    flex-direction: column;
-    display: block;
-    overflow-y: scroll;
-    scrollbar-gutter: stable both-edges;
-    scrollbar-width: thin;
-    scrollbar-color: var(--vermelho) #bbda550a;
-}
-
-
-.card {
-    width: 90%;
-    height: 30%;
-    background-color: #2C2C2C;
-    border-radius: 30px;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
 
 }
 
-.titulo span {
-    color: #5f6f7A;
-}
 
-/* ______________________________________________ */
 
+/* ---------------------------------------------------
+   CONTEÚDO PRINCIPAL
+--------------------------------------------------- */
 .content {
-    /* O Flex ele subtrai o conteudo que esta sendo usado ai fica certinho */
-    flex: 1;
-    /* ocupa TODO o espaço restante */
+    width: 90%;
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+
 }
 
+/* ---------------------------------------------------
+   FORMULÁRIO CADASTRAR FICHA
+--------------------------------------------------- */
 #secCadastrarTreino {
-    width: 60%;
-    height: 90%;
+    height: 40%;
+    width: 80%;
     display: flex;
-    margin-top: 2%;
-    margin-left: 5%;
     flex-direction: column;
     background-color: var(--contraste);
+    justify-content: center;
+    align-self: center;
+    border: var(--border);
+    border-radius: 10px;
 }
 
 .titulo {
+    height: 20%;
     width: 100%;
-    height: 15%;
-    align-items: start;
-    display: flex;
-    flex-direction: column;
-    margin-left: 8%;
-    justify-content: center;
 }
-
-.headerCard {
-    width: 100%;
-    height: 15%;
-    align-items: start;
-    display: flex;
-    flex-direction: column;
-    margin-left: 8%;
-}
-
-
-.cardTitulo {
-    color: #fff;
-    font-weight: 600;
-    margin-top: 4%;
-
-}
-
-.headerCard p {
-    font-size: x-large;
-
-}
-
 
 .secTitulo {
-    color: #fff;
-    font-weight: 700;
     font-size: xx-large;
-
-
+    color: #ddd;
+    font-weight: 600;
+    margin-left: 5%;
 }
 
 .form {
+    width: 90%;
+    height: 90%;
     display: flex;
-    flex: 1;
     flex-direction: column;
+    margin-left: 7%;
 }
 
+/* CAMPOS EM LINHA */
 .campos {
-    display: flex;
-    align-items: start;
-    flex-direction: row;
-    justify-content: center;
     width: 100%;
-    height: 25%;
-}
-
-
-.campo {
+    height: 35%;
     display: flex;
     justify-content: center;
     align-items: start;
-    flex-direction: column;
-    width: 40%;
-    height: 80%;
-    margin-left: 2%;
 }
 
+/* CAMPO INDIVIDUAL */
+.campo {
+    width: 45%;
+    height: 95%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.campo label {
+    color: #fff;
+    font-weight: 500;
+    font-size: larger;
+}
 
 .campo input {
     width: 80%;
@@ -178,270 +131,171 @@ input:hover {
     border: 3px solid #fff;
 }
 
-.campo label {
-    font-weight: 500;
-    color: #fff;
-    text-transform: capitalize;
-    font-size: larger;
-}
-
-
+/* OBSERVAÇÃO */
 .observacao {
-    height: 100%;
     width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 .observacao label {
-    font-weight: 500;
-    color: #fff;
-    font-size: x-large;
     align-self: start;
     margin-left: 12%;
+    color: #fff;
+    font-size: x-large;
+    font-weight: 500;
 }
 
 .observacao textarea {
-    height: 60%;
     width: 78%;
-    background-color: var(--contraste1);
+    height: 60%;
     border-radius: 15px;
-    font-weight: 500;
-    color: #fff;
-    align-self: center;
-    font-size: x-large;
+    background-color: var(--contraste1);
     border: var(--border);
+    color: #fff;
+    font-size: x-large;
+    font-weight: 500;
 }
 
-
-
-
-
-
-
-
-
-/* SELECT: Posso defini a cor da fonte, hover e cor de fundo antes de ver os options */
-select,
-::picker(select) {
-    appearance: base-select;
-}
-
-
-form label {
-    width: fit-content;
-    align-self: center;
-}
-
-
-form select {
+/* SELECT */
+select {
     border: var(--border);
     background: #ffffff00;
     padding: 10px;
     transition: 0.4s;
-
-
 }
 
 #objSelect {
     width: 100%;
-    font-weight: 700;
     color: #fff;
-    transition: 0.4s;
-
+    font-weight: 700;
 }
 
-/* Hover sem clicar no select */
 select:hover,
 select:focus {
     background: #53000094;
 }
 
-/* Seta ela tem uma animação de rodar */
-select::picker-icon {
-    color: #999999;
-    appearance: base-select;
-    transition: 0.4s rotate;
-}
-
-/* Esse rodar é em 180º */
-select:open::picker-icon {
-    rotate: 180deg;
-}
-
 option {
-    display: flex;
-    justify-content: flex-start;
-    gap: 20px;
-    color: #fff;
-    border: 2px solid #dddddd;
-    background-color: #1E201E;
     padding: 10px;
-    transition: 0.4s;
-
-}
-
-
-option:hover {
-    border-radius: 8px 8px 0 0;
-
-    background-color: rgb(231, 19, 12);
-
-
-}
-
-::picker(select) {
-    border-radius: 8px;
-}
-
-
-option .icon {
-    font-size: 1.6rem;
-}
-
-selectedcontent .icon {
-    display: none;
-}
-
-option:checked {
-    font-weight: bold;
-}
-
-
-option .icon {
-    font-size: 1.6rem;
-    text-box: trim-both cap alphabetic;
-}
-
-selectedcontent .icon {
-    display: none;
-}
-
-/* quando for marcado eçe vai adicionar icon no conteudo */
-option::checkmark {
-    order: 1;
-    margin-left: auto;
-    content: "☑️";
-}
-
-/* https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select */
-/* ANIMAÇÃO DA VOLTA do option */
-::picker(select) {
-    opacity: 0;
-    transition: all 0.5s allow-discrete;
-}
-
-::picker(select):popover-open {
-    opacity: 1;
-}
-
-@starting-style {
-    ::picker(select):popover-open {
-        opacity: 0;
-    }
-}
-
-
-#addTreino {
-    display: block;
-    margin-top: 3%;
-    width: 70%;
-    height: 60%;
-    background-color: var(--contraste);
-    align-self: start;
-    border: var(--border);
-    border-radius: 10px;
-    align-items: start;
-    margin-left: 5%;
-
-}
-
-.contentAddTreino {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.camposTreino {
-
-    align-items: center;
-    justify-content: start;
-    width: 100%;
-    height: 50%;
-}
-.campoTreino{
-    height: 40%;
-}
-
-
-.tituloTreino {
-    width: 100%;
-    height: 15%;
-    justify-content: start;
-    display: flex;
-    align-items: center;
-}
-
-.tituloTreino p {
-    font-size: x-large;
-    font-weight: bold;
+    background-color: #1E201E;
+    border: 2px solid #dddddd;
     color: #fff;
-    padding-left: 3%;
-    padding-top: 1%;
+    transition: 0.4s;
 }
 
-.btnTreino{
-    margin-top: 10%;
-}
+/* BOTÃO FORMULARIO */
 .btn {
     width: 100%;
-    height: 10%;
-    align-items: center;
+    height: 30%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     padding-right: 5%;
     margin-bottom: 5%;
 }
 
 .btn button {
+    width: 50%;
+    height: 70%;
+    border-radius: 20px;
+    border: none;
     font-size: large;
     font-weight: 700;
-    color: #090909;
-    height: 100%;
-    width: 85%;
-    background-color: #ffffff00;
-    border: none;
-    text-decoration: none;
     background-color: #dddddd;
-    border-radius: 20px;
-
+    transition: 0.6s;
 }
-
-
 
 .btn button:hover {
     background-color: var(--vermelho);
     color: #dddddd;
-    transition: 0.6s;
-
 }
 
-
-
-#addExercicio {
-    margin-top: 3%;
-    width: 70%;
-    height: auto;
+/* ---------------------------------------------------
+   CADASTRAR TREINO
+--------------------------------------------------- */
+#addTreino {
+    width: 75%;
+    height: 40%;
+    margin: 3% 5%;
     background-color: var(--contraste);
-    border: var(--border);
     border-radius: 10px;
-    padding-bottom: 20px;
-    margin-left: 5%;
+    border: var(--border);
+}
+
+.contentAddTreino {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.tituloTreino {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
+
+.tituloTreino p {
+    padding-left: 3%;
+    padding-top: 1%;
+    color: #fff;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.camposTreino {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.campoTreino {
+    height: 40%;
+}
+.btnTreino{
+    width: 100%;
+    height: 15%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+.btnTreino 
+button {
+    width: 60%;
+    height: 65%;
+    border-radius: 20px;
+    border: none;
+    font-size: large;
+    font-weight: 700;
+    background-color: #dddddd;
+    transition: 0.6s;
+}
+.btnTreino button:hover{
+    background-color: var(--vermelho);
+    color: #dddddd;
+}
+
+/* ---------------------------------------------------
+   ADICIONAR EXERCÍCIO
+--------------------------------------------------- */
+#addExercicio {
+    width: 70%;
+    margin: 3% 0 0 5%;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--contraste);
+    border-radius: 10px;
+    border: var(--border);
 }
 
 .contentAddExercicio {
@@ -452,17 +306,17 @@ option::checkmark {
 }
 
 .tituloExercicio p {
-    font-size: x-large;
-    color: #fff;
-    font-weight: bold;
     padding-left: 2%;
+    color: #fff;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 .camposExercicio {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 20px;
 }
 
 .campoEx {
@@ -472,36 +326,35 @@ option::checkmark {
 }
 
 .campoEx label {
+    margin-bottom: 5px;
     color: #fff;
     font-weight: 600;
-    margin-bottom: 5px;
     font-size: large;
 }
 
 .campoEx input {
     height: 40px;
+    padding-left: 10px;
     border-radius: 8px;
     background-color: var(--contraste1);
     border: 2px solid var(--vermelho);
     color: #fff;
     font-size: larger;
-    padding-left: 10px;
 }
 
 .btnAddEx {
+    margin: 20px 4% 0 0;
     display: flex;
     justify-content: flex-end;
-    margin-right: 4%;
-    margin-top: 20px;
 }
 
 .btnExercicio {
-    height: 45px;
     width: 25%;
+    height: 45px;
     border-radius: 15px;
+    border: none;
     background-color: #ddd;
     font-weight: 700;
-    border: none;
     transition: .4s;
 }
 
@@ -510,13 +363,13 @@ option::checkmark {
     color: #fff;
 }
 
+/* TABELA DE EXERCÍCIOS */
 #listaExercicios {
     width: 90%;
     margin: 20px auto;
 }
 
-
-.tabelaExercicio{
+.tabelaExercicio {
     padding-top: 50px;
     color: #fff;
 }
