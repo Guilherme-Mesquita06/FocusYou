@@ -410,8 +410,8 @@ option::checkmark {
     font-size: large;
     font-weight: 700;
     color: #090909;
-    height: 40%;
-    width: 105%;
+    height: 100%;
+    width: 85%;
     background-color: #ffffff00;
     border: none;
     text-decoration: none;
@@ -495,7 +495,7 @@ option::checkmark {
     margin-top: 20px;
 }
 
-.btnAddEx button {
+.btnExercicio {
     height: 45px;
     width: 25%;
     border-radius: 15px;
@@ -505,7 +505,7 @@ option::checkmark {
     transition: .4s;
 }
 
-.btnAddEx button:hover {
+.btnExercicio:hover {
     background-color: var(--vermelho);
     color: #fff;
 }

@@ -76,7 +76,7 @@
             </section>
 
             <!-- FORMULÁRIO QUE SOME -->
-            <div id="secCadastrarTreino" >
+            <div id="secCadastrarTreino">
                 <div class="titulo">
                     <p class="secTitulo">Cadastre informações da sua Ficha</p>
                 </div>
@@ -86,19 +86,19 @@
                     <div class="campos">
                         <div class="campo">
                             <label>Titulo</label>
-                            <input type="text" placeholder="Foco em ombros">
+                            <input id="iptTitulo" type="text" placeholder="Foco em ombros">
                         </div>
 
                         <div class="campo">
                             <label>Data inicio</label>
-                            <input type="date">
+                            <input id="iptDtInicio" type="date">
                         </div>
                     </div>
 
                     <div class="campos">
                         <div class="campo">
                             <label>Frequencia Semanal</label>
-                            <input type="text">
+                            <input id="iptFrequencia" type="text">
                         </div>
 
                         <div class="campo">
@@ -106,10 +106,12 @@
                             <form>
                                 <p>
                                     <select id="objSelect">
-                                        <option value="">Selecione seu objetivo</option>
+                                        <option value="" selected disabled>Selecione seu objetivo</option>
                                         <option value="forca">💪🏼 Força</option>
                                         <option value="hipertrofia">🏋🏼‍♂️ Hipertrofia</option>
                                         <option value="reabilitacao">🚑 Reabilitação</option>
+                                        <option value="Emagrecimento">🏃🏻 Emagrecimento</option>
+
                                     </select>
                                 </p>
                             </form>
@@ -118,11 +120,11 @@
 
                     <div class="observacao">
                         <label>Observações</label>
-                        <textarea></textarea>
+                        <textarea id="textObservacao"></textarea>
                     </div>
 
                     <div class="btn">
-                        <button onclick="addFicha()">Cadastrar ficha</button>
+                        <button onclick="cadastrarFicha()">Cadastrar ficha</button>
                     </div>
 
                 </div>
@@ -137,14 +139,14 @@
                     <div class="campos camposTreino">
                         <div class="campo campoTreino">
                             <label>Titulo do treino</label>
-                            <input type="text" placeholder="Costas e biecps">
+                            <input id="iptTreinoTitulo" type="text" placeholder="Costas e biecps">
 
                         </div>
 
 
                         <div class="observacao">
                             <label>Observações</label>
-                            <textarea class="textAreaTreino"></textarea>
+                            <textarea id="iptTreino" class="textAreaTreino"></textarea>
                         </div>
                     </div>
 
@@ -194,7 +196,7 @@
                     </div>
 
                     <div class="btnAddEx">
-                        <button onclick="adicionarExercicio()">Adicionar exercício</button>
+                        <button class="btnExercicio" onclick="adicionarExercicio()">Adicionar exercício</button>
                     </div>
 
 
@@ -208,7 +210,7 @@
 
 
                         </tr>
-                            
+
 
 
                     </table>
@@ -226,22 +228,67 @@
 </body>
 
 <script>
+    function cadastrarFicha() {
+        var idUsuario = sessionStorage.ID_USUARIO
+        var tituloVar = iptTitulo.value
+        var dataInicioVar = iptDtInicio.value
+        var frequenciaVar = Number(iptFrequencia.value);
+        var objetivoVar = objSelect.value;
+        const observacaoVar = document.getElementById('textObservacao').value;
 
-   var vNome = []
-   var vDesc = []
-   var vAgrupMusc = []
-   var vEquipamento = []
 
-   const exercicioObj = []
+        if (
+            tituloVar == "" ||
+            dataInicioVar == "" ||
+            frequenciaVar == "" ||
+            objetivoVar == "" ||
+            objetivoVar == ""
+        ) {
+            console.log('Preencha todos os campos')
+        }
 
-    function addFicha() {
-        secCadastrarTreino.style.display = 'none';
-        addTreino.style.display = 'flex';
+        fetch("/fichas/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUsuario: idUsuario,
+                tituloVar: tituloVar,
+                dataInicioVar: dataInicioVar,
+                frequenciaVar: frequenciaVar,
+                objetivoVar: objetivoVar,
+                observacaoVar: observacaoVar
+            }),
+
+        }).then(resposta => resposta.json())
+        .then(ficha => {
+            console.log('Ronaldo:', ficha);
+
+            sessionStorage.ID_FICHA = ficha.idFicha;
+
+            document.getElementById("secCadastrarTreino").style.display = 'none';
+            document.getElementById("addTreino").style.display = 'flex';
+
+        });
     }
-    function addFicha() {
-        document.getElementById("secCadastrarTreino").style.display = 'none';
-        document.getElementById("addTreino").style.display = 'flex';
-    }
+
+
+
+
+
+
+
+
+
+    var vNome = []
+    var vDesc = []
+    var vAgrupMusc = []
+    var vEquipamento = []
+
+    const exercicioObj = []
+
+
 
     // Renomeei a função para evitar conflito com o elemento
     function abrirAddExercicio() {
@@ -268,10 +315,10 @@
         let lista = document.getElementById("listaExercicios");
 
         exercicioObj.push({
-         agrupamento: grupoEx,
-         nomeExercicio: nomeEx,
-         equipamento: equipEx,
-         descricao: descricaoEx 
+            agrupamento: grupoEx,
+            nomeExercicio: nomeEx,
+            equipamento: equipEx,
+            descricao: descricaoEx
 
         });
         let div = document.createElement("div");
@@ -287,8 +334,8 @@
         `;
 
 
-      
-        
+
+
         lista.appendChild(div);
 
         // Limpar campos

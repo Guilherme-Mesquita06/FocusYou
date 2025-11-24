@@ -144,12 +144,13 @@
     }
 
     function treinar(){
-        var qtdFicha = 0;
+    var qtdFicha = 0;
      var idUsuario = sessionStorage.ID_USUARIO;
      console.log('ta chamando')
         // fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(fichas => {
 
-        fetch(`/fichas/buscar/temFichaAtiva/${idUsuario}`).then(resposta => resposta.json().then(fichaAtiva =>{
+        fetch(`/fichas/buscar/temFichaAtiva/${idUsuario}`).then(resposta => resposta.json()
+        .then(fichaAtiva =>{
             console.log(fichaAtiva)
 
                         fichaAtiva.forEach(ativa => {

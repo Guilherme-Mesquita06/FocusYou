@@ -22,7 +22,7 @@ CREATE TABLE ficha (
     status TINYINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT chk_objetivo CHECK (objetivo IN ('Hipertrofia','Emagrecimento','Recuperacao','Condicionamento')),
+    CONSTRAINT chk_objetivo CHECK (objetivo IN ('Hipertrofia','Emagrecimento','Recuperacao','Forca')),
     CONSTRAINT fk_ficha_usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(id)
 );
 
