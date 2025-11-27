@@ -22,14 +22,14 @@
                     <div>
                         <a href="./addSerie.html">Home</a>
                     </div>
-                    <div>
-                        <a href="">Ficha</a>
+                    <div style="background-color: #a90820;">
+                        <a>Ficha</a>
                     </div>
                     <div>
                         <a href="./login1.html">Dashboard</a>
                     </div>
                     <div>
-                        <a href="">Historico</a>
+                        <a href="./historicoFicha.html">Historico</a>
                     </div>
                 </div>
             </nav>
@@ -46,7 +46,7 @@
                 <div class="titulo">
                     <p class="secTitulo">Cadastre informações da sua Ficha</p>
                     <p style="color:#fff; margin-left: 5%;">Em caso de recarregar a pagina sua ficha não será perdida!
-                    Apenas prossiga no cadastro
+                        Apenas prossiga no cadastro
                     </p>
                 </div>
 
@@ -98,12 +98,13 @@
                 </div>
             </div>
 
-            <!-- ADD TREINO LOGO ABAIXO -->
             <section id="addTreino">
                 <div class="contentAddTreino">
                     <div class="tituloTreino">
                         <p>Cadastrar treinos</p>
                     </div>
+                    <p style="color:#fff; margin-left: 3%;">Após cadastrar a ficha, cadastre os treinos! seprando-os por
+                        agrupamento muscular</p>
 
                     <div class="campos camposTreino">
                         <div class="campo campoTreino">
@@ -123,7 +124,6 @@
                 </div>
             </section>
 
-            <!-- ADD EXERCÍCIO ABAIXO -->
             <section id="addExercicio">
 
                 <div class="contentAddExercicio">
@@ -131,11 +131,27 @@
                     <div class="tituloExercicio">
                         <p>Adicionar Exercício</p>
                     </div>
+                    <div class="camposExercicio">
 
-                    <div class="campoEx">
-                        <label>Treino</label>
-                        <select id="selectTreino"></select>
+                        <div class="campoEx">
+                            <label>Treino</label>
+                            <select id="selectTreino"></select>
+                        </div>
+
+
+                        <div class="campoEx">
+                            <label>Dificuldade</label>
+                            <select id="iptDificuldadeEx">
+                                <option value="#">Selecione sua dificuldade</option>
+                                <option value="Dificil">difícil</option>
+                                <option value="Media">Medio</option>
+                                <option value="Facil">Fácil</option>
+
+
+                            </select>
+                        </div>
                     </div>
+
 
 
                     <div class="camposExercicio">
@@ -169,7 +185,7 @@
 
                     <div id="divListaExercicios">
 
-              <!-- <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
+                        <!-- <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
                         <tr>
                             <th class="tituloEx">Nome</th>
                             <th class="tituloEx">Agrupamento Muscular</th>
@@ -183,10 +199,11 @@
                     </table>
                          -->
                     </div>
-            
-                <div class="btnAddEx">
-                    <button class="btnExercicio" onclick="adicionarExercicio()">Cadastrar lista de exercicios</button>
-                </div>
+
+                    <div class="btnAddEx">
+                        <button class="btnExercicio" onclick="adicionarExercicio()">Cadastrar lista de
+                            exercicios</button>
+                    </div>
 
             </section>
 
@@ -220,7 +237,6 @@
             tituloVar == "" ||
             dataInicioVar == "" ||
             frequenciaVar == "" ||
-            objetivoVar == "" ||
             objetivoVar == ""
         ) {
             console.log('Preencha todos os campos')
@@ -247,22 +263,27 @@
                 console.log(sessionStorage.ID_FICHA)
 
             });
+
+        document.getElementById("objetivoVar").value = "";
+        document.getElementById("iptTitulo").value = "";
+        document.getElementById("dataInicioVar").value = "";
+        document.getElementById("frequenciaVar").value = "";
     }
 
     function listarTreinos() {
         const idFicha = sessionStorage.ID_FICHA;
-        
+
         fetch(`/treinos/listar/${idFicha}`)
-        .then(resposta => resposta.json())
-        .then(treinos => {
-            sessionStorage.TREINOS = JSON.stringify(treinos);
-            console.log(treinos)
-            carregarTreinosSelect(treinos);
+            .then(resposta => resposta.json())
+            .then(treinos => {
+                sessionStorage.TREINOS = JSON.stringify(treinos);
+                console.log(treinos)
+                carregarTreinosSelect(treinos);
             });
 
     }
-        function carregarTreinosSelect(treinos) {
-        
+    function carregarTreinosSelect(treinos) {
+
         const select = document.getElementById("selectTreino");
         select.innerHTML = `<option disabled selected>Selecione um treino</option
     function adicionarExercicio() {
@@ -323,20 +344,8 @@
 
 
 
-    function adicionarExercicio() {
-        const idTreino = document.getElementById("selectTreino").value;
-        const nomeEx = iptNomeEx.value;
-        const descEx = iptDescEx.value;
-        const grupoEx = iptGrupoEx.value;
-        const equipEx = iptEquipEx.value;
-
-        if (!idTreino) {
-            alert("Selecione um treino!");
-            return;
-        }
 
 
-    }
 
 
 
@@ -347,11 +356,13 @@
         var descricaoEx = document.getElementById("iptDescEx").value;
         var grupoEx = document.getElementById("iptGrupoEx").value;
         var equipEx = document.getElementById("iptEquipEx").value;
+        var dificuldadeEx = document.getElementById("iptDificuldadeEx").value;
 
 
 
 
-        if (!nomeEx || !grupoEx || !equipEx) {
+
+        if (!nomeEx || !grupoEx || !equipEx || !dificuldadeEx) {
             alert("Preencha todos os campos!");
             return;
         }
@@ -362,16 +373,19 @@
             agrupamento: grupoEx,
             nomeExercicio: nomeEx,
             equipamento: equipEx,
-            descricao: descricaoEx
+            descricao: descricaoEx,
+            dificuldade: dificuldadeEx
 
         });
         console.table(exercicioObj)
-            document.getElementById("divListaExercicios").innerHTML = `
+        document.getElementById("divListaExercicios").innerHTML = `
                    <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
                         <tr>
                             <th class="tituloEx">Nome</th>
                             <th class="tituloEx">Agrupamento Muscular</th>
                             <th class="tituloEx">Equipamento</th>
+                            <th class="tituloEx">Dificuldade</th>
+
                         </tr>
                     </table>
             `;
@@ -382,6 +396,8 @@
                                 <td class="subInfoEx">${ex.nomeExercicio}</td>
                                 <td class="subInfoEx">${ex.agrupamento}</td>
                                 <td class="subInfoEx"> ${ex.equipamento}</td>
+                                <td class="subInfoEx"> ${ex.dificuldade}</td>
+
                         </tr>
             `;
 
