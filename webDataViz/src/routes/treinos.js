@@ -15,5 +15,8 @@ router.get("/buscar/:idUsuario/:statusFicha", function(req, res){
 router.delete("/delete/:idTreino" , function(req, res ){
     treinoController.deletar(req,res)
 })
+router.get("/listar/:idFicha", function(req, res){
+    treinoController.listar(req, res);
+})
 
 module.exports = router;

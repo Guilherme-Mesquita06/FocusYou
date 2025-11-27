@@ -77,9 +77,30 @@ function deletar(req, res) {
         );
 }
 
+function listar (req, res){
+    var idFicha =  req.params.idFicha;
+
+
+    treinoModel.listar(idFicha)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
 
 module.exports = {
     cadastrar,
     buscarTreinoPorFicha,
-    deletar
+    deletar,
+    listar
 }

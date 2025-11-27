@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body onload="listarTreinos(), carregarTreinosSelect(treinos)">
 
     <div class="header">
         <div class="container">
@@ -45,6 +45,9 @@
             <div id="secCadastrarTreino">
                 <div class="titulo">
                     <p class="secTitulo">Cadastre informações da sua Ficha</p>
+                    <p style="color:#fff; margin-left: 5%;">Em caso de recarregar a pagina sua ficha não será perdida!
+                    Apenas prossiga no cadastro
+                    </p>
                 </div>
 
                 <div class="form">
@@ -96,7 +99,7 @@
             </div>
 
             <!-- ADD TREINO LOGO ABAIXO -->
-             <section id="addTreino">
+            <section id="addTreino">
                 <div class="contentAddTreino">
                     <div class="tituloTreino">
                         <p>Cadastrar treinos</p>
@@ -118,16 +121,22 @@
                         <button onclick="cadastrarTreino()">Cadastrar Treino</button>
                     </div>
                 </div>
-            </section> 
+            </section>
 
             <!-- ADD EXERCÍCIO ABAIXO -->
-             <section id="addExercicio">
+            <section id="addExercicio">
 
                 <div class="contentAddExercicio">
 
                     <div class="tituloExercicio">
                         <p>Adicionar Exercício</p>
                     </div>
+
+                    <div class="campoEx">
+                        <label>Treino</label>
+                        <select id="selectTreino"></select>
+                    </div>
+
 
                     <div class="camposExercicio">
                         <div class="campoEx">
@@ -157,15 +166,28 @@
                         <button class="btnExercicio" onclick="adicionarExercicio()">Adicionar exercício</button>
                     </div>
 
-                    <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Agrupamento Muscular</th>
-                            <th>Equipamento</th>
-                        </tr>
-                    </table> 
 
+                    <div id="divListaExercicios">
+
+              <!-- <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
+                        <tr>
+                            <th class="tituloEx">Nome</th>
+                            <th class="tituloEx">Agrupamento Muscular</th>
+                            <th class="tituloEx">Equipamento</th>
+                        </tr>
+                             <tr>
+                                <td class="subInfoEx">${ex.nomeExercicio}</td>
+                                <td class="subInfoEx">${ex.agrupamento}</td>
+                                <td class="subInfoEx"> ${ex.equipamento}</td>
+                        </tr>
+                    </table>
+                         -->
+                    </div>
+            
+                <div class="btnAddEx">
+                    <button class="btnExercicio" onclick="adicionarExercicio()">Cadastrar lista de exercicios</button>
                 </div>
+
             </section>
 
         </section>
@@ -176,14 +198,16 @@
 </body>
 
 <script>
-    function cadastrarExercicios (){
-        
-    }
 
+
+
+    const idFicha = sessionStorage.ID_FICHA;
 
 
 
     function cadastrarFicha() {
+
+
         var idUsuario = sessionStorage.ID_USUARIO
         var tituloVar = iptTitulo.value
         var dataInicioVar = iptDtInicio.value
@@ -218,15 +242,56 @@
 
         }).then(resposta => resposta.json())
             .then(ficha => {
-            
                 console.log('Ronaldo:', ficha);
                 sessionStorage.ID_FICHA = ficha.insertId;
-
-
-                console.log(sessionStorage.ID_FICHA )
+                console.log(sessionStorage.ID_FICHA)
 
             });
     }
+
+    function listarTreinos() {
+        const idFicha = sessionStorage.ID_FICHA;
+        
+        fetch(`/treinos/listar/${idFicha}`)
+        .then(resposta => resposta.json())
+        .then(treinos => {
+            sessionStorage.TREINOS = JSON.stringify(treinos);
+            console.log(treinos)
+            carregarTreinosSelect(treinos);
+            });
+
+    }
+        function carregarTreinosSelect(treinos) {
+        
+        const select = document.getElementById("selectTreino");
+        select.innerHTML = `<option disabled selected>Selecione um treino</option
+    function adicionarExercicio() {
+
+
+
+    function adicionarExercicio() {
+        const idTreino = document.getElementById("selectTreino").value;
+        const nomeEx = iptNomeEx.value;
+        const descEx = iptDescEx.value;
+        const grupoEx = iptGrupoEx.value;
+        const equipEx = iptEquipEx.value;
+
+        if (!idTreino) {
+            alert("Selecione um treino!");
+            return;
+        }
+
+
+
+    >`;
+
+        treinos.forEach(treino => {
+            select.innerHTML += `
+            <option  value="${treino.id}">${treino.titulo}</option>
+        `;
+        });
+    }
+
 
 
     function cadastrarTreino() {
@@ -247,6 +312,7 @@
             }),
         }).then(resposta => resposta.json().then(treino => {
             console.log('Treino:', treino);
+            listarTreinos();
 
             iptTreinoTitulo.value = '';
             observacaoTreino.value = '';
@@ -257,20 +323,22 @@
 
 
 
+    function adicionarExercicio() {
+        const idTreino = document.getElementById("selectTreino").value;
+        const nomeEx = iptNomeEx.value;
+        const descEx = iptDescEx.value;
+        const grupoEx = iptGrupoEx.value;
+        const equipEx = iptEquipEx.value;
 
-    var vNome = []
-    var vDesc = []
-    var vAgrupMusc = []
-    var vEquipamento = []
+        if (!idTreino) {
+            alert("Selecione um treino!");
+            return;
+        }
 
-    const exercicioObj = []
-
-
-
-    // Renomeei a função para evitar conflito com o elemento
-    function abrirAddExercicio() {
 
     }
+
+
 
     function adicionarExercicio() {
 
@@ -297,22 +365,30 @@
             descricao: descricaoEx
 
         });
-        let div = document.createElement("div");
-        div.className = "itemExercicio";
+        console.table(exercicioObj)
+            document.getElementById("divListaExercicios").innerHTML = `
+                   <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
+                        <tr>
+                            <th class="tituloEx">Nome</th>
+                            <th class="tituloEx">Agrupamento Muscular</th>
+                            <th class="tituloEx">Equipamento</th>
+                        </tr>
+                    </table>
+            `;
+
+        exercicioObj.forEach(ex => {
+            document.getElementById("listaExercicios").innerHTML += `
+                        <tr>
+                                <td class="subInfoEx">${ex.nomeExercicio}</td>
+                                <td class="subInfoEx">${ex.agrupamento}</td>
+                                <td class="subInfoEx"> ${ex.equipamento}</td>
+                        </tr>
+            `;
+
+        }),
+            console.log(exercicioObj)
 
 
-        listaExercicios.innerHTML += `
-                       <tr>
-                            <td>${nomeEx}</td>
-                            <td>${grupoEx}</td>
-                            <td>${equipEx}}</td>
-                        </tr> 
-        `;
-
-
-
-
-        lista.appendChild(div);
 
         // Limpar campos
         document.getElementById("iptNomeEx").value = "";
@@ -320,6 +396,18 @@
         document.getElementById("iptGrupoEx").value = "";
         document.getElementById("iptEquipEx").value = "";
     }
+
+
+    var vNome = []
+    var vDesc = []
+    var vAgrupMusc = []
+    var vEquipamento = []
+
+    const exercicioObj = []
+
+
+
+
 
 </script>
 

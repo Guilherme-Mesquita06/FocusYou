@@ -405,6 +405,8 @@
                     <th>Ação</th>
                 </tr>
                    </table>
+                ,
+
                 
                     
            
@@ -416,7 +418,6 @@
         document.getElementById("tabelaEx").style.display = 'flex';
 
         treino.exercicio.forEach(ex => {
-
             document.getElementById("tabelaEx").innerHTML += `
                             <tr class="linhaEx">
                                 <td class="tituloEx">${ex.nomeExercicio}</td>

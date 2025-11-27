@@ -47,6 +47,7 @@ function cadastrarFicha(req, res) {
 
 
 function listarFichas(req, res) {
+    
     var idUsuario = req.params.idUsuario;
 
     fichaModel.lista(idUsuario).then((resultado) => {

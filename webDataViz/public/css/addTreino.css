@@ -166,6 +166,8 @@ select {
     background: #ffffff00;
     padding: 10px;
     transition: 0.4s;
+    color: #dddddd;
+    font-weight: 600;
 }
 
 #objSelect {
@@ -363,12 +365,24 @@ button {
     color: #fff;
 }
 
-/* TABELA DE EXERCÍCIOS */
+
+
+#divListaExercicio{
+    width: 100%;
+}
+
 #listaExercicios {
     width: 90%;
     margin: 20px auto;
+    justify-content: center;
+    text-align: center;
 }
-
+.tituloEx{
+    background-color: var(--preto);
+}
+.subInfoEx{
+    background-color: #a90820;
+}
 .tabelaExercicio {
     padding-top: 50px;
     color: #fff;

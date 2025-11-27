@@ -12,7 +12,23 @@ function cadastrar(titulo, observacao, idFicha) {
 }
 
 
+function listar(idFicha){
+    console.log("ACESSEI O AVISO MODEL \n \n\tidFicha\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ",  idFicha);
 
+    var instrucaoSql = `
+  SELECT 
+	    t.titulo AS titulo,
+        t.observacao AS observacao
+        FROM ficha AS f
+        JOIN treino AS t
+        ON t.fkFicha = f.id
+        WHERE f.id = ${idFicha}; 
+        `;
+
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 
 function buscarTreinoPorFicha(idFicha, statusFicha) {
@@ -58,15 +74,12 @@ function deletar(idTreino) {
     database.executar(instrucaoSql2)
     return database.executar(instrucaoSql3);
 }
-// }
-//    DELETE FROM exercicio WHERE fkTreino IN (SELECT id FROM treino WHERE fkTreino = ${idTreino});
-//    DELETE FROM treino WHERE id = ${idTreino});
-
 
 
 module.exports = {
 
     cadastrar,
     buscarTreinoPorFicha,
-    deletar
+    deletar,
+    listar
 }
