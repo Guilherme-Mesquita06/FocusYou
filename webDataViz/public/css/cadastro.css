@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 body {
     background-color: rgba(0, 0, 0, 0.5);
@@ -7,7 +7,7 @@ body {
 }
 
 main {
-    width: 100vw;
+    width: 98vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -18,6 +18,7 @@ main {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 5%;
 }
 
 .cadastro {
@@ -31,7 +32,7 @@ main {
 
 .imgFocus {
     height: 100%;
-    width: 50%;
+    width: 45%;
     background-color: #a90820;
     display: flex;
     align-items: center;
@@ -39,7 +40,7 @@ main {
 }
 
 .imgFocus img {
-    height: 110%;
+    height: 100%;
     width: 100%;
    
 }

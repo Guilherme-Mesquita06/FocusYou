@@ -22,7 +22,7 @@
                     <div>
                         <a href="./addSerie.html">Home</a>
                     </div>
-                    <div style="background-color: #a90820;">
+                    <div>
                         <a>Ficha</a>
                     </div>
                     <div>
@@ -138,44 +138,68 @@
                             <select id="selectTreino"></select>
                         </div>
 
-
                         <div class="campoEx">
-                            <label>Dificuldade</label>
-                            <select id="iptDificuldadeEx">
-                                <option value="#">Selecione sua dificuldade</option>
-                                <option value="Dificil">difícil</option>
-                                <option value="Media">Medio</option>
-                                <option value="Facil">Fácil</option>
-
-
-                            </select>
+                            <label>Equipamento</label>
+                            <input id="iptEquipEx" type="text" placeholder="Máquina / Halteres / Barra">
                         </div>
                     </div>
 
 
 
                     <div class="camposExercicio">
-                        <div class="campoEx">
-                            <label>Nome</label>
-                            <input id="iptNomeEx" type="text" placeholder="Supino inclinado">
-                        </div>
 
                         <div class="campoEx">
-                            <label>Descrição</label>
+                            <label>Agrupamento muscular</label>
+                            <select id="slctGrupoEx">
+                                <option value="" selected disabled>Selecione o agrupamento muscular</option>
+
+                                <option value="Peito">🏋️ Peito</option>
+                                <option value="Costas">🏋️‍♂️ Costas</option>
+                                <option value="Lombar">🦴 Lombar</option>
+                                <option value="Trapezio">💪 Trapézio</option>
+                                <option value="Biceps">💪 Bíceps</option>
+                                <option value="Triceps">💪 Tríceps</option>
+                                <option value="Ombro">🏋️ Ombro</option>
+                                <option value="Antebraço">✋ Antebraço</option>
+                                <option value="Abdominal">🔥 Abdominal</option>
+                                <option value="Abdutor">🦵 Abdutor</option>
+                                <option value="Adutor">🦵 Adutor</option>
+                                <option value="Quadriceps">🦿 Quadríceps</option>
+                                <option value="Posterior">🦿 Posterior</option>
+                                <option value="Panturrilha">🦶 Panturrilha</option>
+                                <option value="Gluteo">🍑 Glúteo</option>
+                                <option value="Tibia">🦵 Tíbia</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="campoEx">
+                            <label>Observação</label>
                             <input id="iptDescEx" type="text" placeholder="Drop-Set / Rest-Pause ...">
                         </div>
                     </div>
 
                     <div class="camposExercicio">
                         <div class="campoEx">
-                            <label>Agrupamento muscular</label>
-                            <input id="iptGrupoEx" type="text" placeholder="Peitoral / Costas / Bíceps...">
+                            <label>Nome do exercicio</label>
+                            <input id="iptNomeEx" type="text" placeholder="Supino inclinado">
                         </div>
 
+
                         <div class="campoEx">
-                            <label>Equipamento</label>
-                            <input id="iptEquipEx" type="text" placeholder="Máquina / Halteres / Barra">
+                            <label>Dificuldade</label>
+                            <select id="iptDificuldadeEx">
+                                <option value="#">Selecione sua dificuldade</option>
+                                <option value="Dificil">🔴 Difícil</option>
+                                <option value="Media"> 🟡Medio</option>
+                                <option value="Facil"> 🟢Fácil</option>
+
+
+                            </select>
                         </div>
+
+
                     </div>
 
                     <div class="btnAddEx">
@@ -183,22 +207,7 @@
                     </div>
 
 
-                    <div id="divListaExercicios">
-
-                        <!-- <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
-                        <tr>
-                            <th class="tituloEx">Nome</th>
-                            <th class="tituloEx">Agrupamento Muscular</th>
-                            <th class="tituloEx">Equipamento</th>
-                        </tr>
-                             <tr>
-                                <td class="subInfoEx">${ex.nomeExercicio}</td>
-                                <td class="subInfoEx">${ex.agrupamento}</td>
-                                <td class="subInfoEx"> ${ex.equipamento}</td>
-                        </tr>
-                    </table>
-                         -->
-                    </div>
+                    <div id="divListaExercicios"> </div>
 
                     <div class="btnAddEx">
                         <button class="btnExercicio" onclick="adicionarExercicio()">Cadastrar lista de
@@ -286,25 +295,8 @@
 
         const select = document.getElementById("selectTreino");
         select.innerHTML = `<option disabled selected>Selecione um treino</option
-    function adicionarExercicio() {
+            >`;
 
-
-
-    function adicionarExercicio() {
-        const idTreino = document.getElementById("selectTreino").value;
-        const nomeEx = iptNomeEx.value;
-        const descEx = iptDescEx.value;
-        const grupoEx = iptGrupoEx.value;
-        const equipEx = iptEquipEx.value;
-
-        if (!idTreino) {
-            alert("Selecione um treino!");
-            return;
-        }
-
-
-
-    >`;
 
         treinos.forEach(treino => {
             select.innerHTML += `
@@ -348,13 +340,13 @@
 
 
 
-
+// Function de adicionar o exercicio na tabela
     function adicionarExercicio() {
 
         // IDs CORRETOS
         var nomeEx = document.getElementById("iptNomeEx").value;
         var descricaoEx = document.getElementById("iptDescEx").value;
-        var grupoEx = document.getElementById("iptGrupoEx").value;
+        var grupoEx = document.getElementById("slctGrupoEx").value;
         var equipEx = document.getElementById("iptEquipEx").value;
         var dificuldadeEx = document.getElementById("iptDificuldadeEx").value;
 
