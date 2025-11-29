@@ -117,6 +117,14 @@
                             <textarea id="observacaoTreino" class="textAreaTreino"></textarea>
                         </div>
                     </div>
+<div id="alertaTreino1" style="    
+    display: none;
+    color: #ff3b3b;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 10px 0 20px 10px;">
+                        De um titulo ao seu treino.
+                    </div>
 
                     <div class="btnTreino">
                         <button onclick="cadastrarTreino()">Cadastrar Treino</button>
@@ -139,8 +147,19 @@
                         </div>
 
                         <div class="campoEx">
-                            <label>Equipamento</label>
-                            <input id="iptEquipEx" type="text" placeholder="Máquina / Halteres / Barra">
+                            <label>Equipamentos</label>
+
+                            <select id="iptEquipEx">
+                                <option value="#">Selecione o equipamento a ser utilizado</option>
+                                <option value="Halteres">❚█══█❚ Halteres</option>
+                                <option value="Barra"> 🏋🏼‍♂️ Barra</option>
+                                <option value="Maquina">⚙️🦾 Máquina</option>
+                                <option value="Colchonete">⬛ Colchonete</option>
+                                <option value="Elastico">➰ Elástico</option>
+                                <option value="Rolinho"> 🌀 Rolinho</option>
+
+
+                            </select>
                         </div>
                     </div>
 
@@ -192,7 +211,7 @@
                             <select id="slctDificuldadeEx">
                                 <option value="#">Selecione sua dificuldade</option>
                                 <option value="Dificil">🔴 Difícil</option>
-                                <option value="Media"> 🟡Medio</option>
+                                <option value="Medio"> 🟡Medio</option>
                                 <option value="Facil"> 🟢Fácil</option>
 
 
@@ -203,9 +222,32 @@
                     </div>
 
                     <div class="btnAddEx">
-                        <button class="btnExercicio" onclick="adicionarExercicio(), listarExercicios(idTreino)">Adicionar exercicio</button>
+                        <button class="btnExercicio" onclick=" listarExercicios(idTreino)">Listar exercicios</button>
+                        <button class="btnExercicio"
+                            onclick="adicionarExercicio(), listarExercicios(idTreino)">Adicionar exercicio</button>
+
                     </div>
 
+
+
+                    <div id="alertaTreino" style="    
+    display: none;
+    color: #ff3b3b;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 10px 0 20px 10px;">
+
+
+                        Selecione um treino para listar os exercícios já cadastrados.
+                    </div>
+                    <div id="alertaExercicio" style="    
+    display: none;
+    color: #ff3b3b;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 10px 0 20px 10px;">
+                        Preencha os campos para adicionar um exercicio.
+                    </div>
 
                     <div id="divListaExercicios"> </div>
 
@@ -284,13 +326,16 @@
                 sessionStorage.TREINOS = JSON.stringify(treinos);
                 console.log(treinos)
                 carregarTreinosSelect(treinos);
-            });
+            }).catch(err => {
+                console.log(`#ERRO: ${err}`);
+
+            })
 
     }
     function carregarTreinosSelect(treinos) {
 
         const select = document.getElementById("selectTreino");
-        select.innerHTML = `<option disabled selected>Selecione um treino</option
+        select.innerHTML = `<option value="0" disabled selected>Selecione um treino</option
             >`;
 
 
@@ -311,6 +356,11 @@
         var observacaoTreinoVar = observacaoTreino.value;
         var idFichaVar = sessionStorage.ID_FICHA;
 
+        if(iptTreinoTitulo.value == ""){
+                        document.getElementById("alertaTreino1").style.display = "flex";
+
+        }else{
+
 
         fetch("/treinos/cadastrar", {
             method: "POST",
@@ -329,21 +379,35 @@
             iptTreinoTitulo.value = '';
             observacaoTreino.value = '';
 
-        }))
+        })).catch(err => {
+            console.log(`#ERRO: ${err}`);
+
+        })
+    }
     }
 
 
 
     function listarExercicios(idTreino) {
         console.log(idTreino)
-        fetch(`/exercicios/buscar/${idTreino}`).then(resposta => resposta.json())
-        .then(exercicios => {
-            console.log('Exercicio: ', exercicios)
-            
-   console.table(exercicios)
+        idTreino = document.getElementById("selectTreino").value
 
 
-        document.getElementById("divListaExercicios").innerHTML = `
+        if (idTreino == 0) {
+            document.getElementById("alertaTreino").style.display = "flex";
+
+        } else {
+
+
+
+            fetch(`/exercicios/buscar/${idTreino}`).then(resposta => resposta.json())
+                .then(exercicios => {
+                    console.log('Exercicio: ', exercicios)
+
+                    console.table(exercicios)
+
+
+                    document.getElementById("divListaExercicios").innerHTML = `
                    <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
                         <tr>
                             <th class="tituloEx">Nome</th>
@@ -355,8 +419,8 @@
                     </table>
             `;
 
-        exercicios.forEach(ex => {
-            document.getElementById("listaExercicios").innerHTML += `
+                    exercicios.forEach(ex => {
+                        document.getElementById("listaExercicios").innerHTML += `
                         <tr>
                                 <td class="subInfoEx">${ex.nomeExercicio}</td>
                                 <td class="subInfoEx">${ex.agrupamento}</td>
@@ -366,22 +430,26 @@
                         </tr>
             `;
 
-   
-
-        }),
 
 
-
-        document.getElementById("iptNomeEx").value = "";
-        document.getElementById("iptDescEx").value = "";
-        document.getElementById("slctGrupoEx").value = "";
-        document.getElementById("iptEquipEx").value = "";
-        document.getElementById("slctDificuldadeEx").value = "";
+                    }),
 
 
 
-            console.log(exercicios)
-        })
+                        document.getElementById("iptNomeEx").value = "";
+                    document.getElementById("iptDescEx").value = "";
+                    document.getElementById("slctGrupoEx").value = "";
+                    document.getElementById("iptEquipEx").value = "";
+                    document.getElementById("slctDificuldadeEx").value = "";
+
+
+
+                    console.log(exercicios)
+                }).catch(err => {
+                    console.log(`#ERRO: ${err}`);
+
+                })
+        }
 
     }
     // Function de adicionar o exercicio na tabela
@@ -399,14 +467,14 @@
 
 
 
-        if (!nomeExVar || !grupoExVar || !equipExVar|| !dificuldadeExVar) {
-            alert("Preencha todos os campos!");
-            return;
-        }
+        if (!nomeExVar || !grupoExVar || !equipExVar || !dificuldadeExVar) {
+                    document.getElementById("alertaExercicio").style.display = "flex";
 
-        let lista = document.getElementById("listaExercicios");
+        } else {
 
-         fetch("/exercicios/cadastrar", {
+            let lista = document.getElementById("listaExercicios");
+
+            fetch("/exercicios/cadastrar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -421,10 +489,14 @@
 
                 }),
 
-            }).then(resposta => resposta.json().then(exercicio =>{
+            }).then(resposta => resposta.json().then(exercicio => {
                 console.log('Exercicio:', exercicio)
                 listarExercicios(idTreino)
-            }))
+            })).catch(err => {
+                console.log(`#ERRO: ${err}`);
+
+            })
+        }
     }
 
 
