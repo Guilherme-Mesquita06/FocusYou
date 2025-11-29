@@ -84,7 +84,7 @@
                                 </p>
                             </form>
                         </div>
-                    </div>
+                    </div>addSerie
 
                     <div class="observacao">
                         <label>Observações</label>
@@ -117,7 +117,7 @@
                             <textarea id="observacaoTreino" class="textAreaTreino"></textarea>
                         </div>
                     </div>
-<div id="alertaTreino1" style="    
+                    <div id="alertaTreino1" style="    
     display: none;
     color: #ff3b3b;
     font-weight: 900;
@@ -356,34 +356,35 @@
         var observacaoTreinoVar = observacaoTreino.value;
         var idFichaVar = sessionStorage.ID_FICHA;
 
-        if(iptTreinoTitulo.value == ""){
-                        document.getElementById("alertaTreino1").style.display = "flex";
+        if (iptTreinoTitulo.value == "") {
+            document.getElementById("alertaTreino1").style.display = "flex";
 
-        }else{
+        } else {
+            document.getElementById("alertaTreino1").style.display = "block";
 
 
-        fetch("/treinos/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                tituloTreinoVar: tituloTreinoVar,
-                observacaoTreinoVar: observacaoTreinoVar,
-                idFichaVar: idFichaVar
-            }),
-        }).then(resposta => resposta.json().then(treino => {
-            console.log('Treino:', treino);
-            listarTreinos();
+            fetch("/treinos/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    tituloTreinoVar: tituloTreinoVar,
+                    observacaoTreinoVar: observacaoTreinoVar,
+                    idFichaVar: idFichaVar
+                }),
+            }).then(resposta => resposta.json().then(treino => {
+                console.log('Treino:', treino);
+                listarTreinos();
 
-            iptTreinoTitulo.value = '';
-            observacaoTreino.value = '';
+                iptTreinoTitulo.value = '';
+                observacaoTreino.value = '';
 
-        })).catch(err => {
-            console.log(`#ERRO: ${err}`);
+            })).catch(err => {
+                console.log(`#ERRO: ${err}`);
 
-        })
-    }
+            })
+        }
     }
 
 
@@ -397,6 +398,10 @@
             document.getElementById("alertaTreino").style.display = "flex";
 
         } else {
+            document.getElementById("alertaTreino").style.display = "none";
+            document.getElementById("alertaTreino1").style.display = "none";
+            document.getElementById("alertaExercicio").style.display = "none";
+
 
 
 
@@ -468,9 +473,12 @@
 
 
         if (!nomeExVar || !grupoExVar || !equipExVar || !dificuldadeExVar) {
-                    document.getElementById("alertaExercicio").style.display = "flex";
+            document.getElementById("alertaExercicio").style.display = "flex";
 
         } else {
+            document.getElementById("alertaTreino").style.display = "none";
+            document.getElementById("alertaTreino1").style.display = "none";
+            document.getElementById("alertaExercicio").style.display = "none";
 
             let lista = document.getElementById("listaExercicios");
 

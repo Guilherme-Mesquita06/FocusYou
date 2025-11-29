@@ -14,7 +14,7 @@ router.get("/lista/:idUsuario", function (req, res) {
     exercicioController.lista(req, res);
 })
 // Lista de todos os exercicios do treino selecionado
-router.get("/buscar/:idTreino", function (req, res) {
+router.get("/buscar/ativo/:idTreino", function (req, res) {
     exercicioController.buscarPorTreino(req, res);
 })
 // listando todos os exercicios de cada treino do usuario

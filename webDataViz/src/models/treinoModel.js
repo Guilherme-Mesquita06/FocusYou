@@ -31,18 +31,19 @@ function listar(idFicha){
 }
 
 
-function buscarTreinoPorFicha(idFicha, statusFicha) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n buscarTreinoPorFicha ()", idFicha, statusFicha);
+function buscarTreinoPorFicha(idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n buscarFichaAtiva ()", idUsuario);
     var instrucaoSql = `
-       SELECT 
-       f.status AS statusFicha,
-	   f.id AS idFicha,
-       t.id AS idTreino,
-       t.titulo AS titulo
+  SELECT 
+		f.titulo AS tituloFicha,
+	    t.titulo AS tituloTreino,
+		t.id AS idTreino
         FROM ficha AS f
-        JOIN treino AS t ON t.fkFicha = f.id
-        JOIN exercicio AS e ON e.fkTreino = t.id
-        WHERE f.id = ${idFicha} AND f.status  = ${statusFicha};
+        JOIN treino AS t
+        ON t.fkFicha = f.id
+        JOIN usuario AS u
+        ON f.fkUsuario = u.id
+        WHERE u.id = ${idUsuario} AND f.status  = 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

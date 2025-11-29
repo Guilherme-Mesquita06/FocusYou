@@ -36,9 +36,8 @@ function cadastrar(req, res) {
 
 function buscarTreinoPorFicha(req, res) {
     var idUsuario = req.params.idUsuario;
-    var statusFicha = req.params.statusFicha
 
-    treinoModel.buscarTreinoPorFicha(idUsuario, statusFicha)
+    treinoModel.buscarTreinoPorFicha(idUsuario)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {

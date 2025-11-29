@@ -8,7 +8,7 @@ var treinoController = require("../controllers/treinoController");
 router.post("/cadastrar", function (req, res) {
     treinoController.cadastrar(req, res);
 })
-router.get("/buscar/:idUsuario/:statusFicha", function(req, res){
+router.get("/buscar/ativo/:idUsuario", function(req, res){
     treinoController.buscarTreinoPorFicha(req,res)
 
 })
