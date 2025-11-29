@@ -18,13 +18,13 @@ function listar(idFicha){
     var instrucaoSql = `
   SELECT 
 	    t.titulo AS titulo,
-        t.observacao AS observacao
+        t.observacao AS observacao,
+        t.id AS idTreino
         FROM ficha AS f
         JOIN treino AS t
         ON t.fkFicha = f.id
         WHERE f.id = ${idFicha}; 
         `;
-
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

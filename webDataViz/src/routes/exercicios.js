@@ -7,6 +7,8 @@ var exercicioController = require("../controllers/exercicioController");
 router.post("/cadastrar", function (req, res) {
     exercicioController.cadastrar(req, res);
 })
+
+
 // Lista de todos os exercicios cadastratados pelo usuario
 router.get("/lista/:idUsuario", function (req, res) {
     exercicioController.lista(req, res);

@@ -5,13 +5,12 @@ var exercicioModel = require("../models/exercicioModel");
 
 function cadastrar(req, res) {
 
-    var nome = req.body.nome;
-    var descricao = req.body.descricao;
-    var dificuldade = req.body.dificuldade;
-    var agrupamentoMuscular = req.body.agrupamentoMuscular;
-    var numSeries = req.body.numSeries;
-    var idTreino = req.body.idTreino;
-    var equipamento = req.body.equipamento;
+    var idTreino = req.body.idTreinoServer;
+    var agrupamento = req.body.agrupamentoServer;
+    var nomeExercicio = req.body.nomeExercicioServer;
+    var equipamento = req.body.equipamentoServer;
+    var descricao = req.body.descricaoServer;
+    var dificuldade = req.body.dificuldadeServer;
 
 
 
@@ -20,8 +19,8 @@ function cadastrar(req, res) {
     } else if (equipamento == undefined) {
         res.status(400).send("Equipamento está undefined!");
 
-    } else if (nome == undefined) {
-        res.status(400).send("nome está undefined!");
+    } else if (nomeExercicio == undefined) {
+        res.status(400).send("nomeExercicio está undefined!");
 
     }
 
@@ -29,18 +28,15 @@ function cadastrar(req, res) {
         res.status(400).send("dificuldade está undefined!");
 
     }
-    else if (numSeries == undefined) {
-        res.status(400).send("numSeries está undefined!");
 
-    }
-    else if (agrupamentoMuscular == undefined) {
+    else if (agrupamento == undefined) {
         res.status(400).send("agrupamentoMuscular está undefined!");
 
     }
     else {
 
 
-        exercicioModel.cadastrar(nome, descricao, dificuldade,agrupamentoMuscular,numSeries, idTreino , equipamento )
+        exercicioModel.cadastrar(nomeExercicio, descricao, dificuldade,agrupamento, idTreino , equipamento )
             .then((resultado) => {
                 res.status(201).json(resultado);
             }

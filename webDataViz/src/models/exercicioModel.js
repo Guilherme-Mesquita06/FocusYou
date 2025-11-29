@@ -1,10 +1,10 @@
 var database = require("../database/config");
 
 
-function cadastrar(nome, descricao, dificuldade,agrupamentoMuscular,numSeries, idTreino , equipamento ) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", nome, descricao, dificuldade,agrupamentoMuscular,numSeries, idTreino , equipamento);
+function cadastrar(nomeExercicio, descricao, dificuldade,agrupamento, idTreino , equipamento ) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", nomeExercicio, descricao, dificuldade,agrupamento, idTreino , equipamento);
     var instrucaoSql = `
-        INSERT INTO exercicio (nome, descricao, dificuldade,agrupamentoMuscular,numSeries, fkTreino , equipamento) VALUES ('${nome}', '${descricao}', '${dificuldade}', '${agrupamentoMuscular}', ${numSeries}, ${idTreino}, '${equipamento}');
+        INSERT INTO exercicio (nome, descricao, dificuldade,agrupamento, fkTreino , equipamento ) VALUES ('${nomeExercicio}', '${descricao}','${dificuldade}', '${agrupamento}', ${idTreino}, '${equipamento}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -31,14 +31,21 @@ function lista(idUsuario) {
 }
 
 function buscarPorTreino(idTreino) {
+      console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPorTreino()");
+
   var instrucaoSql = `
-  	SELECT 
-		e.*
+	SELECT 
+		e.agrupamento AS agrupamento,
+		e.nome AS nomeExercicio,
+        e.equipamento AS equipamento,
+        e.dificuldade AS dificuldade,
+        e.descricao AS descricao
         FROM treino AS t
         JOIN exercicio AS e
         ON e.fkTreino = t.id
         WHERE t.id = ${idTreino};
   `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
   return database.executar(instrucaoSql);
 }

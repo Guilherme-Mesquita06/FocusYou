@@ -189,7 +189,7 @@
 
                         <div class="campoEx">
                             <label>Dificuldade</label>
-                            <select id="iptDificuldadeEx">
+                            <select id="slctDificuldadeEx">
                                 <option value="#">Selecione sua dificuldade</option>
                                 <option value="Dificil">🔴 Difícil</option>
                                 <option value="Media"> 🟡Medio</option>
@@ -203,16 +203,12 @@
                     </div>
 
                     <div class="btnAddEx">
-                        <button class="btnExercicio" onclick="adicionarExercicio()">Adicionar exercício</button>
+                        <button class="btnExercicio" onclick="adicionarExercicio(), listarExercicios(idTreino)">Adicionar exercicio</button>
                     </div>
 
 
                     <div id="divListaExercicios"> </div>
 
-                    <div class="btnAddEx">
-                        <button class="btnExercicio" onclick="adicionarExercicio()">Cadastrar lista de
-                            exercicios</button>
-                    </div>
 
             </section>
 
@@ -228,7 +224,7 @@
 
 
     const idFicha = sessionStorage.ID_FICHA;
-
+    let idTreino = 0;
 
 
     function cadastrarFicha() {
@@ -300,9 +296,11 @@
 
         treinos.forEach(treino => {
             select.innerHTML += `
-            <option  value="${treino.id}">${treino.titulo}</option>
-        `;
+            <option  value="${treino.idTreino}">${treino.titulo}</option>`;
         });
+
+
+
     }
 
 
@@ -312,6 +310,7 @@
         var tituloTreinoVar = iptTreinoTitulo.value;
         var observacaoTreinoVar = observacaoTreino.value;
         var idFichaVar = sessionStorage.ID_FICHA;
+
 
         fetch("/treinos/cadastrar", {
             method: "POST",
@@ -335,41 +334,15 @@
 
 
 
+    function listarExercicios(idTreino) {
+        console.log(idTreino)
+        fetch(`/exercicios/buscar/${idTreino}`).then(resposta => resposta.json())
+        .then(exercicios => {
+            console.log('Exercicio: ', exercicios)
+            
+   console.table(exercicios)
 
 
-
-
-
-// Function de adicionar o exercicio na tabela
-    function adicionarExercicio() {
-
-        // IDs CORRETOS
-        var nomeEx = document.getElementById("iptNomeEx").value;
-        var descricaoEx = document.getElementById("iptDescEx").value;
-        var grupoEx = document.getElementById("slctGrupoEx").value;
-        var equipEx = document.getElementById("iptEquipEx").value;
-        var dificuldadeEx = document.getElementById("iptDificuldadeEx").value;
-
-
-
-
-
-        if (!nomeEx || !grupoEx || !equipEx || !dificuldadeEx) {
-            alert("Preencha todos os campos!");
-            return;
-        }
-
-        let lista = document.getElementById("listaExercicios");
-
-        exercicioObj.push({
-            agrupamento: grupoEx,
-            nomeExercicio: nomeEx,
-            equipamento: equipEx,
-            descricao: descricaoEx,
-            dificuldade: dificuldadeEx
-
-        });
-        console.table(exercicioObj)
         document.getElementById("divListaExercicios").innerHTML = `
                    <table id="listaExercicios" class="tabelaExercicio" style="width:100%">
                         <tr>
@@ -382,7 +355,7 @@
                     </table>
             `;
 
-        exercicioObj.forEach(ex => {
+        exercicios.forEach(ex => {
             document.getElementById("listaExercicios").innerHTML += `
                         <tr>
                                 <td class="subInfoEx">${ex.nomeExercicio}</td>
@@ -393,25 +366,67 @@
                         </tr>
             `;
 
+   
+
         }),
-            console.log(exercicioObj)
 
 
 
-        // Limpar campos
         document.getElementById("iptNomeEx").value = "";
         document.getElementById("iptDescEx").value = "";
-        document.getElementById("iptGrupoEx").value = "";
+        document.getElementById("slctGrupoEx").value = "";
         document.getElementById("iptEquipEx").value = "";
+        document.getElementById("slctDificuldadeEx").value = "";
+
+
+
+            console.log(exercicios)
+        })
+
+    }
+    // Function de adicionar o exercicio na tabela
+    function adicionarExercicio() {
+
+        // IDs CORRETOS
+        idTreino = document.getElementById("selectTreino").value
+        var nomeExVar = document.getElementById("iptNomeEx").value;
+        var descricaoExVar = document.getElementById("iptDescEx").value;
+        var grupoExVar = document.getElementById("slctGrupoEx").value;
+        var equipExVar = document.getElementById("iptEquipEx").value;
+        var dificuldadeExVar = document.getElementById("slctDificuldadeEx").value;
+
+
+
+
+
+        if (!nomeExVar || !grupoExVar || !equipExVar|| !dificuldadeExVar) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        let lista = document.getElementById("listaExercicios");
+
+         fetch("/exercicios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idTreinoServer: idTreino,
+                    agrupamentoServer: grupoExVar,
+                    nomeExercicioServer: nomeExVar,
+                    equipamentoServer: equipExVar,
+                    descricaoServer: descricaoExVar,
+                    dificuldadeServer: dificuldadeExVar
+
+                }),
+
+            }).then(resposta => resposta.json().then(exercicio =>{
+                console.log('Exercicio:', exercicio)
+                listarExercicios(idTreino)
+            }))
     }
 
-
-    var vNome = []
-    var vDesc = []
-    var vAgrupMusc = []
-    var vEquipamento = []
-
-    const exercicioObj = []
 
 
 
