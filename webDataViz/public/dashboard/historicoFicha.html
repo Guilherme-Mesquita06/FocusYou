@@ -42,6 +42,8 @@
         <section class="content">
 
             <section class="fichas">
+                <div id="contentFicha">
+                </div>
                 <div id="contentFicha"></div>
 
             </section>
@@ -58,19 +60,20 @@
         var idUsuario = sessionStorage.ID_USUARIO;
         fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(fichas => {
             console.log(fichas)
+            // Fonte: https://www.alura.com.br/artigos/formatar-datas-horas-moedas-javascript?utm_term=&campaign_id=11384329873_164240702375_703935132410&hsa_kw=&hsa_mt=&gad_campaignid=11384329873
 
             fichas.forEach(ficha => {
                 document.getElementById('contentFicha').innerHTML += `
              <div class="fichaCard">
-                        <div class="campo">
-                            <p>titulo: ${ficha.titulo}</p>
-                        </div>
+                                    <div id="ativo"></div>
+
+                            <p class="titulo">${ficha.titulo}</p>
                         <div class="campo">
                             <p>Objetivo: Hipertrofia</p>
                         </div>
 
                         <div class="campo">
-                            <p>Data inicio: ${ficha.dataInicio.tolocaleDateString('pt-br')} </p>
+                            <p>Data inicio: ${new Date(ficha.dataInicio).toLocaleDateString('pt-BR')} </p>
                         </div>
                      
                          <div class="campo">
@@ -79,7 +82,7 @@
                         <div class="acoes">
                             <div class="check">
                             <label for="AtivarFicha">Ativar ficha</label>
-                            <input type="checkbox" id="iptCheck" onchange="desativarFichas(${idUsuario}, ${ficha.idFicha})">
+                            <input type="checkbox" id="iptCheck" onchange="desativarFichas(${idUsuario}, ${ficha.idFicha}), ativarFicha(${ficha.idFicha}) ">
                             </div>
                             <button onclick="treinar()">Treinar</button>
                         </div>
@@ -95,27 +98,29 @@
 
 
 
-
     function ativarFicha(idFicha) {
-  
-        var status = 1
+        
+        console.log(status)
 
-        fetch(`/fichas/editar/${idFicha}/${status}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(resposta => {
-                    console.log(resposta)
-                    console.log("A ficha está ativa para o treino!");
-                })
-                .catch(erro => {
-                    console.log(`#Erro: ${erro}`);
-                });
+        fetch(`/fichas/editar/${idFicha}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
             }
+        })
+            .then(resposta => {
+                console.log(resposta)
+                console.log("A ficha está ativa para o treino!");
 
-    
+                document.getElementById("ativo").style.backgroundColor = "#5CE65C";
+
+            })
+            .catch(erro => {
+                console.log(`#Erro: ${erro}`);
+            });
+    }
+
+
 
 
 
@@ -140,35 +145,37 @@
 
 
 
-        } else {fieldCount
+        } else {
+            fieldCount
             console.log('Nao ta mais ativa')
         }
     }
 
-    function treinar(){
-    var qtdFicha = 0;
-     var idUsuario = sessionStorage.ID_USUARIO;
-     console.log('ta chamando')
+    function treinar() {
+        let qtdFicha;
+        var idUsuario = sessionStorage.ID_USUARIO;
+        console.log('ta chamando')
         // fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(fichas => {
 
         fetch(`/fichas/buscar/temFichaAtiva/${idUsuario}`).then(resposta => resposta.json()
-        .then(fichaAtiva =>{
-            console.log(fichaAtiva)
+            .then(fichaAtiva => {
+                console.log('TA ATIVAAA', fichaAtiva)
 
-                        fichaAtiva.forEach(ativa => {
+                fichaAtiva.forEach(ativa => {
                     qtdFicha = ativa.qtd
-            } )
-            
-            console.log('MAMAE EU SOU O MAIORAL' + qtdFicha )
+                })
 
-            if(qtdFicha == 1){
-               window.location = './addSerie.html';
-            }else{
-                console.log('Você não tem ficha ativa, assina-le a caixa ao lado')
-            }
-        })
+                console.log('MAMAE EU SOU O MAIORAL ' + qtdFicha)
 
-   ) }
+                if (qtdFicha == 1) {
+                    window.location = './addSerie.html';
+                } else {
+                    console.log('Você não tem ficha ativa, assina-le a caixa ao lado')
+                }
+            })
+
+        )
+    }
 
 
 

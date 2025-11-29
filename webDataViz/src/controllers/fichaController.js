@@ -72,12 +72,11 @@ function buscarTreinoPorFicha(req, res) {
 }
 
 
-function editarStatus(req, res) {
+function ativarStatus(req, res) {
     // Passar com params 
-    var status = req.params.status;
     var idFicha = req.params.idFicha;
 
-    fichaModel.editarStatus(status, idFicha)
+    fichaModel.ativarStatus( idFicha)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -116,7 +115,7 @@ function desativarFichas(req, res) {
 module.exports = {
     cadastrarFicha,
     buscarTreinoPorFicha,
-    editarStatus,
+    ativarStatus,
     listarFichas,
     desativarFichas,
     temFichaAtiva

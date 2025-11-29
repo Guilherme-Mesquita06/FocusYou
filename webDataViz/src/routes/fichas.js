@@ -24,8 +24,8 @@ router.get("/buscar/:idUsuario", function (req, res) {
     fichaController.listarFichas(req, res);
 })
 
-router.put("/editar/:idFicha/:status", function (req, res) {
-    fichaController.editarStatus(req, res);
+router.put("/editar/:idFicha", function (req, res) {
+    fichaController.ativarStatus(req, res);
 })
 
 router.get("/buscar/:idFicha" , function (req, res){
