@@ -39,7 +39,8 @@ function buscarPorTreino(idTreino) {
 		e.nome AS nomeExercicio,
         e.equipamento AS equipamento,
         e.dificuldade AS dificuldade,
-        e.descricao AS descricao
+        e.descricao AS descricao,
+        e.id AS idExercicio
         FROM treino AS t
         JOIN exercicio AS e
         ON e.fkTreino = t.id

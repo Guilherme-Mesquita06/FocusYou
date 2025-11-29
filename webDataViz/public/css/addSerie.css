@@ -30,12 +30,13 @@ main {
     flex-direction: column;
 }
 
-#titulo{
+#titulo {
     display: flex;
     justify-content: center;
     align-items: center;
     color: #F5F5F5;
 }
+
 #titulo p {
     font-size: x-large;
     font-weight: 700;
@@ -45,7 +46,6 @@ main {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
     flex-direction: column;
 }
 
@@ -55,9 +55,13 @@ main {
     height: 30%;
     display: flex;
     justify-content: center;
-
 }
 
+.exerciciosSeries {
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+}
 
 .secDiv {
     background: #2c2c2c;
@@ -104,7 +108,8 @@ main {
 }
 
 #exercicios {
-    width: 30%;
+    width: 50%;
+    height: 100%;
     margin-top: 5%;
     margin-left: 4%;
     border: var(--border);
@@ -114,9 +119,14 @@ main {
     flex-direction: column;
 }
 
+/*    Exercicios width: 90%;  */
+/*ListaExercicios 60% */
+
+
 /* Tabela geral */
 #listaExerciciosTreino {
     width: 100%;
+    height: 100%;
 }
 
 #tabelaEx {
@@ -124,22 +134,32 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+
 }
 
+thead {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
 
 /* Cabeçalho */
-#listaExerciciosTreino th {
+th {
     background-color: #1c1c1c;
     padding: 12px;
     font-size: 1.2rem;
     text-align: left;
+    width: 32%;
+    margin-right: 6%;
     border-bottom: var(--border);
 }
-.contentExercicioSerie{
-    width: 100%;
-    height: 60%;
-    background-color: yellow;
+
+.contentExercicioSeries {
+    width: 98%;
+    height: 100%;
 }
+
 .linhaEx {
     background-color: #a90820;
     height: 5%;
@@ -148,13 +168,15 @@ main {
 
 tbody {
     width: 100%;
+    height: 100%;
+    padding: 0;
 }
 
 .linhaEx td {
     padding: 10px;
     font-size: 1.1rem;
     color: #fff;
-    width: 26%;
+    width: 30%;
 
 }
 
@@ -190,20 +212,19 @@ tbody {
 .btnFazer:hover {
     background-color: #dadada;
 }
-#exercicios {
-    width: 45%;
-}
+
 #serie {
-    width: 30%;
-    height: 40%;
-    align-self: flex-end;
-    margin-right: 9%;
-    margin-top: 5%;
+    width: 40%;
+    height: 100%;
+    margin-right: 3%;
+    margin-left: 3%;
     border: var(--border);
     border-radius: 10px;
-    display: block;
     flex-direction: column;
     padding: 20px;
+    justify-content: start;
+    display: flex;
+    align-items: center;
 }
 
 #serie h2 {
@@ -214,8 +235,8 @@ tbody {
 
 .form {
     display: flex;
+    height: 100%;
     width: 100%;
-    height: 90%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -224,38 +245,34 @@ tbody {
 
 .row {
     display: flex;
-    width: 100%;
-    height: 100%;
+height: 100%;
     flex-direction: column;
     align-items: center;
     position: relative;
-    bottom: 10%;
+    bottom: 5%;
 
 }
 
-
-
-.campoSerie,
-input {
-    width: 70%;
-    height: 40%;
+.campoSerie {
+ 
     display: flex;
     align-items: center;
     flex-direction: column;
-
-
-}
-.campoSerie{
-    width: 100%;
+    justify-content: center;
+       width: 100%;
     height: 100%;
 }
+
 input {
     border-radius: 10px;
     background-color: var(--preto);
     border: 2px solid #a90820;
     font-weight: 800;
-    font-size: larger;
-    color:#F5F5F5;
+    font-size: x-large;
+    color: #F5F5F5;
+   width: 100%;
+    height: 100%;
+    text-align: center;
 
 }
 
@@ -266,12 +283,11 @@ input {
 
 .btnFeito {
     width: 100%;
-    height: 10%;
+    height: 20%;
     align-items: center;
     display: flex;
     justify-content: center;
-    padding-right: 5%;
-    margin-bottom: 5%;
+  
 }
 
 .btnFeito button {
@@ -280,6 +296,7 @@ input {
     color: #090909;
     height: 100%;
     width: 50%;
+    
     background-color: #ffffff00;
     border: none;
     text-decoration: none;
@@ -296,5 +313,3 @@ input {
     transition: 0.6s;
 
 }
-
-

@@ -44,346 +44,56 @@
                 <section class="treinos secDiv">
                     <h2>Treinos da ficha ativa</h2>
                     <div id="linhaTreinos"> </div>
-
-
-
                 </section>
+
+
+
             </div>
 
 
             <section id="exercicios" style="display: none;">
                 <h2>Exercícios</h2>
-                <div id="listaExerciciosTreino"></div>
+                <div class="exerciciosSeries">
+                    <div id="listaExerciciosTreino"></div>
+                    <div id="serie" style="display: none;"></div>
 
-            </section>
-
-            <section id="serie">
-                <h2>Cadastar serie </h2>
-                <div class="form">
-                    <div class="row">
-                        <div class="campoSerie">
-                            <label for="">Repetições</label>
-                            <input type="number" id="iptRepeticoes" placeholder="10">
-                        </div>
-                        <div class="campoSerie">
-                            <label for="">Carga Realizada (em Kg)</label>
-                            <input type="number" id="iptCarga" placeholder="30">
-                        </div>
-
-
-                        <div class="campoSerie">
-                            <label for="">Tempo De Descanso (Segundos)</label>
-                            <input type="time" id="iptTempo" placeholder="1:20 ">
-                        </div>
-                        <div class="btnFeito">
-                            <button onclick="">
-                                cadastrar série
-                            </button>
-                        </div>
-                    </div>
 
                 </div>
-
             </section>
-
-
-
-
         </section>
 
     </main>
 </body>
-
-
+<!-- 
+                    <div class="serie">
+                        <h2>Cadastar serie </h2>
+                        <div class="form">
+                            <div class="row">
+                                <div class="campoSerie">
+                                    <label for="">Repetições</label>
+                                    <input type="number" id="iptRepeticoes" placeholder="10">
+                                </div>
+                                <div class="campoSerie">
+                                    <label for="">Carga Realizada (em Kg)</label>
+                                    <input type="number" id="iptCarga" placeholder="30">
+                                </div>
+                                <div class="campoSerie">
+                                    <label for="">Tempo De Descanso (Segundos)</label>
+                                    <input type="time" id="iptTempo" placeholder="1:20 ">
+                                </div>
+                                <div class="btnFeito">
+                                    <button onclick="">
+                                        cadastrar série
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
 <script>
     var treino = 0
-    const treinos = [
-        {
-            id: 1,
-            titulo: "Treino A",
-            exercicio: [
-                {
-                    idExercicio: 1,
-                    agrupamento: "Peito",
-                    nomeExercicio: "Supino reto",
-                    equipamento: "Máquina",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
 
-                    ],
 
-                },
-                {
-                    idExercicio: 2,
-                    agrupamento: "Peito",
-                    nomeExercicio: "Supino inclinado",
-                    equipamento: "Halteres",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 3,
-                    agrupamento: "Peito",
-                    nomeExercicio: "Crossover",
-                    equipamento: "Polia",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 4,
-                    agrupamento: "Ombro",
-                    nomeExercicio: "Elevação lateral",
-                    equipamento: "Halteres",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                }
-            ],
-        },
-
-        {
-            id: 2,
-            titulo: "Treino B",
-            exercicio: [
-                {
-                    idExercicio: 5,
-                    agrupamento: "Costas",
-                    nomeExercicio: "Puxada frente",
-                    equipamento: "Máquina",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 6,
-                    agrupamento: "Costas",
-                    nomeExercicio: "Remada baixa",
-                    equipamento: "Cabo",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 7,
-                    agrupamento: "Costas",
-                    nomeExercicio: "Levantamento terra",
-                    equipamento: "Barra",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 8,
-                    agrupamento: "Bíceps",
-                    nomeExercicio: "Rosca direta",
-                    equipamento: "Barra",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                }
-            ],
-        },
-
-        {
-            id: 3,
-            titulo: "Treino C",
-            exercicio: [
-                {
-                    idExercicio: 9,
-                    agrupamento: "Pernas",
-                    nomeExercicio: "Agachamento livre",
-                    equipamento: "Barra",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 10,
-                    agrupamento: "Pernas",
-                    nomeExercicio: "Leg press",
-                    equipamento: "Máquina",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 11,
-                    agrupamento: "Posterior",
-                    nomeExercicio: "Mesa flexora",
-                    equipamento: "Máquina",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 12,
-                    agrupamento: "Panturrilha",
-                    nomeExercicio: "Elevação de gêmeos",
-                    equipamento: "Máquina",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                }
-            ],
-        },
-
-        {
-            id: 4,
-            titulo: "Treino D",
-            exercicio: [
-                {
-                    idExercicio: 13,
-                    agrupamento: "Tríceps",
-                    nomeExercicio: "Tríceps pulley",
-                    equipamento: "Cabo",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 14,
-                    agrupamento: "Tríceps",
-                    nomeExercicio: "Tríceps testa",
-                    equipamento: "Barra EZ",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 15,
-                    agrupamento: "Ombro",
-                    nomeExercicio: "Desenvolvimento militar",
-                    equipamento: "Barra",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                },
-                {
-                    idExercicio: 16,
-                    agrupamento: "Ombro",
-                    nomeExercicio: "Elevação frontal",
-                    equipamento: "Halteres",
-                    serie: [
-                        {
-                            idSerie: 0,
-                            tempoDescanso: '',
-                            repeticoes: 0,
-                            carga: 0,
-                            timestamp: ''
-                        }
-
-                    ],
-                }
-            ],
-        }
-    ];
-
+    let idTreino;
 
     const idUsuario = sessionStorage.ID_USUARIO;
 
@@ -403,13 +113,14 @@
 
 
                 treinos.forEach(treino => {
+
                     document.getElementById("titulo").innerHTML = `
                 <p>${treino.tituloFicha}</p>
                 
                 `;
 
                     document.getElementById("linhaTreinos").innerHTML += `
-                   <button onclick="exibirExercicios(${treino.id})" id="getTreino">
+                   <button onclick="exibirExercicios(${treino.idTreino})" id="getTreino">
                 <div>${treino.tituloTreino}</div>
                 </button>
 
@@ -423,10 +134,16 @@
 
     function exibirExercicios(idTreino) {
 
+            document.getElementById("exercicios").style.width = '40%';
+        document.getElementById("listaExerciciosTreino").style.width = '98%';
+        document.getElementById("serie").style.display='none';
 
-        
-        document.getElementById("exercicios").style.display = 'flex';
-        document.getElementById('listaExerciciosTreino').innerHTML = `
+        fetch(`/exercicios/buscar/ativo/${idTreino}`)
+            .then(resposta => resposta.json())
+            .then(exercicios => {
+
+                document.getElementById("exercicios").style.display = 'flex';
+                document.getElementById('listaExerciciosTreino').innerHTML = `
                 <table id="tabelaEx">
                  <tr>
                     <th>Exercício</th>
@@ -435,36 +152,63 @@
                     <th>Ação</th>
                 </tr>
                    </table>
-                ,
+                `
+                document.getElementById("tabelaEx").style.display = 'flex';
 
-                
-                    
-           
-        `
-
-        const treino = treinos.find(t => t.id === idTreino);
-
-
-        document.getElementById("tabelaEx").style.display = 'flex';
-
-        treino.exercicio.forEach(ex => {
-            document.getElementById("tabelaEx").innerHTML += `
+                exercicios.forEach(ex => {
+                    document.getElementById("tabelaEx").innerHTML += `
+                        <tbody>
                             <tr class="linhaEx">
                                 <td class="tituloEx">${ex.nomeExercicio}</td>
                                 <td class="subInfoEx">${ex.agrupamento}</td>
                                 <td class="subInfoEx"> ${ex.equipamento}</td>
 
                                 <td>
-                                    <button class="btnFazer" onclick="RealizarSeries(${ex.idExercicio}">
+                                    <button class="btnFazer" onclick="RealizarSeries(${ex.idExercicio})">
                                         ▶ Realizar série
                                     </button>
                                 </td>
-                            </tr>`;
-        });
+                            </tr>
+                              <tbody>
+                              `;
+                });
+            });
+
     }
 
     function RealizarSeries(idExercicio) {
-        const exercicio = treinos.find(t => t.exercicio.some(ex => ex.idExercicio === idExercicio));
+        /*    Exercicios width: 90%;  */
+        /*ListaExercicios 60% */
+        document.getElementById("exercicios").style.width = '90%';
+        document.getElementById("listaExerciciosTreino").style.width = '93%';
+        document.getElementById("serie").style.display='flex';
+
+        document.getElementById("serie").innerHTML = `
+                <div class="form">
+                                <h2> Cadastar serie </h2>
+
+                    <div class="row">
+                        <div class="campoSerie">
+                            <label for="">Repetições</label>
+                            <input type="number" id="iptRepeticoes" placeholder="10">
+                        </div>
+                        <div class="campoSerie">
+                            <label for="">Carga Realizada (em Kg)</label>
+                            <input type="number" id="iptCarga" placeholder="30">
+                        </div>
+                        <div class="campoSerie">
+                            <label for="">Tempo De Descanso (Segundos)</label>
+                            <input type="time" id="iptTempo" placeholder="1:20 ">
+                        </div>
+                       
+                    </div>
+                     <div class="btnFeito">
+                            <button onclick="">cadastrar série</button>
+                        </div>
+                </div>
+        `;
+
+
 
 
     }
