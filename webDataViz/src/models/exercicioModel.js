@@ -56,9 +56,7 @@ function buscarExercicioPorTreino (statusFicha, idUsuario, idTreino){
         console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n buscarExercicioPorTreino ()", statusFicha, idUsuario, idTreino);
     var instrucaoSql = `
 SELECT
-    t.titulo AS treino,
-    e.id AS idExercicio,
-		 e.agrupamentoMuscular AS agrupamentoMuscular,
+		 e.agrupamento AS agrupamento,
 	   e.nome AS nomeExercicio,
      e.equipamento AS equipamento,
      e.dificuldade AS dificuldade

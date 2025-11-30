@@ -17,10 +17,13 @@ router.get("/lista/:idUsuario", function (req, res) {
 router.get("/buscar/ativo/:idTreino", function (req, res) {
     exercicioController.buscarPorTreino(req, res);
 })
+
+router.get("/buscar/:idTreino", function (req, res) {
+    exercicioController.buscarPorTreino(req, res);
+})
 // listando todos os exercicios de cada treino do usuario
 router.get("/buscar/:idUsuario/:statusFicha/:idTreino", function (req, res) {
     exercicioController.buscarExercicioPorTreino(req, res)
-
 })
 
 
