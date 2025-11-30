@@ -64,31 +64,7 @@
 
     </main>
 </body>
-<!-- 
-                    <div class="serie">
-                        <h2>Cadastar serie </h2>
-                        <div class="form">
-                            <div class="row">
-                                <div class="campoSerie">
-                                    <label for="">Repetições</label>
-                                    <input type="number" id="iptRepeticoes" placeholder="10">
-                                </div>
-                                <div class="campoSerie">
-                                    <label for="">Carga Realizada (em Kg)</label>
-                                    <input type="number" id="iptCarga" placeholder="30">
-                                </div>
-                                <div class="campoSerie">
-                                    <label for="">Tempo De Descanso (Segundos)</label>
-                                    <input type="time" id="iptTempo" placeholder="1:20 ">
-                                </div>
-                                <div class="btnFeito">
-                                    <button onclick="">
-                                        cadastrar série
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+
 <script>
     var treino = 0
 
@@ -203,17 +179,50 @@
                        
                     </div>
                      <div class="btnFeito">
-                            <button onclick="">cadastrar série</button>
+                            <button onclick="cadastrarSerie(${idExercicio})">cadastrar série</button>
                         </div>
                 </div>
         `;
-
-
-
-
     }
 
+function cadastrarSerie(idExercicio){
 
+    let repeticoesVar = Number(iptRepeticoes.value)
+    let tempoVar = iptTempo.value
+    let cargaVar = Number(iptCarga.value)
+
+    if(
+        iptRepeticoes.value == "" ||
+        iptTempo.value == "" || 
+        iptCarga.value == "" 
+
+    ){
+   console.log('Preencha todos os campos')
+
+}else{
+
+    fetch(`/series/cadastrar` , {
+    method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+       body: JSON.stringify({
+        idExercicio: idExercicio,
+        tempoServer:tempoVar,
+        repeticoesServer:repeticoesVar,
+        cargaServer:cargaVar,
+
+       }),
+       
+       }).then(resposta => resposta.json())
+         .then(serie => {
+        console.log('UUUUIAAAAA' , serie)
+    }).catch(err => {
+        console.log('Não sou o maioral', err)
+    })
+}
+
+}
 
 </script>
 

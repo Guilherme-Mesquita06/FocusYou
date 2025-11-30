@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
+    <title>Aretê Dashboard</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logoTitulo">
+                <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="" />
+            </div>
+
+            <nav class="navbar">
+                <div class="links">
+                    <div>
+                        <a href="">Inicial</a>
+                    </div>
+                    <div>
+                        <a href="./addTreino.html">Ficha</a>
+                    </div>
+                    <div>
+                        <a href="./login1.html">Dashboard</a>
+                    </div>
+                    <div>
+                        <a href="">Historico</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <main>
+
+        <div class="tituloSection">
+            <p class="titulo">Indicadores Mensais</p>
+        </div>
+        <section class="indicadoresMensais">
+            <div class="mensaisContent">
+                <div class="indicadores">
+                    <div class="indicadoresContent">
+                        <div class="indicador"></div>
+                        <div class="indicador"></div>
+                        <div class="indicador"></div>
+                    </div>
+                    <div class="conquistasMensais">
+                        <div class="conquistasContent">
+
+                            <div class="grafico1">
+                                <canvas id="linha"></canvas>
+
+                            </div>
+                            <div class="grafico2">
+                                <canvas id="myChart"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+</body>
+
+</html>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    const ctx2 = document.getElementById('linha')
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Peito', 'Costas', 'Lombar', 'Trapezio', 'Biceps', 'Triceps',
+                'Ombro', 'Antebraço', 'Abdominal', 'Abdutor', 'Adutor', 'Quadriceps',
+                'Posterior', 'Panturrilha', 'Gluteo', 'Tibia'],
+            datasets: [{
+                label: '# of Votes',
+                data: [11, 5, 3, 5, 2, 3, 2, 4, 2, 3, 4, 5, 6, 0, 2, 1],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+
+    new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+            datasets: [{
+                label: '# of Votes',
+                data: [11, 5, 3, 5, 2, 3, 2, 4, 2, 3, 4, 5, 6, 0, 2, 1],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

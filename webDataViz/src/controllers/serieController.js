@@ -5,9 +5,9 @@ var serieModel = require("../models/serieModel");
 
 function cadastrar(req, res) {
     var idExercicio = req.body.idExercicio;
-    var tempoDescanso = req.body.tempoDescanso;
-    var repeticoes = req.body.repeticoes;
-    var cargaRealizada = req.body.cargaRealizada;
+    var tempoDescanso = req.body.tempoServer;
+    var repeticoes = req.body.repeticoesServer;
+    var cargaRealizada = req.body.cargaServer;
 
 
 
