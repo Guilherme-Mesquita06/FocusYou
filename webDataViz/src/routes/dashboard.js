@@ -16,7 +16,10 @@ router.get('/buscar/series/mes/:idFicha', function (req, res) {
 })
 router.get('/buscar/frequencia/mes/:idFicha', function (req, res) {
         dashboardController.diasTreinados(req, res);
+})
 
+router.get('/buscar/frequencia/semana/:idFicha', function (req, res) {
+        dashboardController.diasTreinadosSemana(req, res);
 })
 
 module.exports = router;

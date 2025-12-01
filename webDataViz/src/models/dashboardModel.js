@@ -72,10 +72,27 @@ SELECT
   return database.executar(instrucaoSql);
 }
 
+
+function frequenciaSemana(idFicha) {
+  console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function frequenciaSemana(): ", idFicha);
+
+  var instrucaoSql = `
+     
+SELECT 
+	 COUNT(DISTINCT DAY(serieRealizada)) AS treinosDia
+      FROM serie AS s
+		  WHERE serieRealizada BETWEEN '2025/02/01' AND '2025/02/07' AND (SELECT id FROM ficha WHERE id = ${idFicha});
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
 
   cargaMes,
   fichaAtiva,
   seriesMes,
-  frequenciaMes
+  frequenciaMes,
+  frequenciaSemana
 }

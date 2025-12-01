@@ -14,8 +14,6 @@ function fichaAtiva (req,res){
   dashboardModel.fichaAtiva(idUsuario).then((resultado) => {
     res.status(200).json(resultado);
   });
-
-
 }
 
 function seriesMes (req,res){
@@ -35,10 +33,20 @@ function seriesMes (req,res){
   });
 }
 
+  function diasTreinadosSemana (req,res){
+    var idFicha = req.params.idFicha;
+
+  
+  dashboardModel.frequenciaSemana(idFicha).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 
 module.exports = {
 cargaLevantada,
 fichaAtiva,
 seriesMes,
-diasTreinados
+diasTreinados,
+diasTreinadosSemana
 }
