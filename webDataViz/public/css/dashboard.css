@@ -27,89 +27,125 @@ main {
     flex: 1;
     display: flex;
 }
-.tituloSection{
+
+.tituloSection {
     width: 100%;
     height: 10%;
     justify-content: center;
     display: flex;
 }
-.titulo{
+
+.titulo {
     color: #f5f5f5;
     font-weight: 800;
     font-size: xx-large;
 }
-.indicadoresMensais{
+
+.indicadoresMensais {
     width: 70%;
     height: 80%;
     border: var(--border);
     border-radius: 20px;
 }
-.mensaisContent{
+
+.mensaisContent {
     width: 100%;
     height: 94%;
     display: flex;
 }
 
-.indicadores{
+.indicadores {
     align-self: start;
     margin-top: 5%;
     margin-left: 3%;
     width: 95%;
     height: 18%;
+    flex-direction: row;
 }
-.indicadoresContent{
+
+.indicadoresContent {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    width:100%;
+    height: 90%;
+    width: 100%;
 
 }
-.indicador{
+
+.tituloIndicadores {
+    flex-direction: row;
+    height: 30%;
+    width: 100%;
+    font-size: x-large;
+    color: #f5f5f5;
+    display: flex;
+    justify-content:space-between;
+    font-weight: 900;
+
+}
+.tituloIndicador{
+    width: 20%;
+    height: 100%;
+    
+}
+
+.indicador {
     height: 90%;
     width: 20%;
     background-color: #3C3D37;
     border-radius: 14px;
     align-items: center;
-    justify-content: center;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #f5f5f5;
+    font-weight: 800;
+    font-size: xx-large;
 }
-.conquistasMensais{
+
+.conquistasMensais {
     width: 100%;
     height: 400%;
 }
-.conquistasContent{
+
+.conquistasContent {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
-    
+
 }
-.grafico1{
+
+.grafico1 {
     width: 45%;
     height: 80%;
 }
-.grafico2{
-     width: 55%;
-    height: 80%; 
+
+.grafico2 {
+    width: 55%;
+    height: 80%;
 }
-.indicadoresSemanais{
+
+.indicadoresSemanais {
     width: 27%;
     height: 80%;
     margin-left: 1%;
-    border:var(--border);
+    border: var(--border);
     border-radius: 20px;
-    
+
 }
-.semanaisContent{
+
+.semanaisContent {
     width: 100%;
     flex-direction: column;
     height: 90%;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
 }
- .indicadorSemanal{
+
+.indicadorSemanal {
     width: 80%;
     height: 25%;
     border-radius: 20px;

@@ -1,8 +1,8 @@
 var database = require("../database/config");
 
-function cargaMes(idFicha){
-        console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cargaMes(): ", idFicha);
- var instrucaoSql = `
+function cargaMes(idFicha) {
+  console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cargaMes(): ", idFicha);
+  var instrucaoSql = `
 	SELECT
 		SUM(cargaRealizada) AS pesoLevantado
           FROM serie  AS s
@@ -16,12 +16,12 @@ function cargaMes(idFicha){
         ON f.fkUsuario = u.id
 			WHERE serieRealizada BETWEEN '2025/02/01' AND '2025/03/01' AND f.id = ${idFicha};
  `;
-     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-     return database.executar(instrucaoSql);
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
 }
 
-function fichaAtiva (idUsuario){
-        console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function fichaAtiva(): ", idUsuario);
+function fichaAtiva(idUsuario) {
+  console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function fichaAtiva(): ", idUsuario);
 
   var instrucaoSql = `
   
@@ -32,12 +32,50 @@ function fichaAtiva (idUsuario){
 	       ON f.fkUsuario = u.id
             WHERE  f.status  = 1 AND u.id = ${idUsuario};
   `;
-     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-     return database.executar(instrucaoSql);
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function seriesMes(idFicha) {
+  console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function seriesMes(): ", idFicha);
+
+  var instrucaoSql = `
+  
+ SELECT 
+    COUNT(s.id) AS serieRealizada
+		FROM serie  AS s
+        JOIN exercicio AS e
+        ON s.fkExercicio = e.id
+        JOIN treino AS t
+        ON e.fkTreino = t.id
+        JOIN ficha AS f
+        ON t.fkFicha = f.id
+          JOIN usuario AS u
+        ON f.fkUsuario = u.id
+		WHERE s.serieRealizada BETWEEN '2025/02/01' AND '2025/03/01' AND f.id = ${idFicha};
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function frequenciaMes(idFicha) {
+  console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function frequenciaMes(): ", idFicha);
+
+  var instrucaoSql = `
+     
+SELECT 
+	 COUNT(DISTINCT DAY(serieRealizada)) AS treinosDia
+      FROM serie AS s
+		  WHERE serieRealizada BETWEEN '2025/02/01' AND '2025/03/01' AND (SELECT id FROM ficha WHERE id = ${idFicha});
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
 }
 
 module.exports = {
 
-cargaMes,
-fichaAtiva
+  cargaMes,
+  fichaAtiva,
+  seriesMes,
+  frequenciaMes
 }

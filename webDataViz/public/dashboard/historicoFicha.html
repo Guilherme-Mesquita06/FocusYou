@@ -55,9 +55,10 @@
 <script>
 
 
-
+let statusFicha = 0;
     function exibirFichas() {
         var idUsuario = sessionStorage.ID_USUARIO;
+
         fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(fichas => {
             console.log(fichas)
             // Fonte: https://www.alura.com.br/artigos/formatar-datas-horas-moedas-javascript?utm_term=&campaign_id=11384329873_164240702375_703935132410&hsa_kw=&hsa_mt=&gad_campaignid=11384329873
@@ -107,11 +108,11 @@
             headers: {
                 "Content-Type": "application/json"
             }
-        })
-            .then(resposta => {
-                console.log(resposta)
-                console.log("A ficha está ativa para o treino!");
+        }).then(resposta => resposta.json())
+          .then(status => {
 
+            console.log(status)
+    
                 document.getElementById("ativo").style.backgroundColor = "#5CE65C";
 
             })

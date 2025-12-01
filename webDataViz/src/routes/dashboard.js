@@ -10,6 +10,13 @@ router.get("/buscar/carga/:idFicha", function (req, res) {
 router.get("/buscar/fichaAtiva/:idUsuario", function (req, res) {
     dashboardController.fichaAtiva(req, res);
 })
+router.get('/buscar/series/mes/:idFicha', function (req, res) {
+        dashboardController.seriesMes(req, res);
 
+})
+router.get('/buscar/frequencia/mes/:idFicha', function (req, res) {
+        dashboardController.diasTreinados(req, res);
+
+})
 
 module.exports = router;

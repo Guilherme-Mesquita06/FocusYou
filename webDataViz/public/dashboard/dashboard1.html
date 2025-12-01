@@ -7,10 +7,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../css/dashboard.css" />
     <link rel="stylesheet" href="../css/nav.css" />
-    <title>Aretê Dashboard</title>
+    <title>FocusYou Dashboard</title>
 </head>
 
-<body onload="fichaAtiva(idUsuario), cargaLevantada(idFicha)">
+<body onload="fichaAtiva(idUsuario), 
+              cargaLevantada(idFicha), 
+              seriesMes(idFicha),
+              frequenciaMes(idFicha)">
     <div class="header">
         <div class="container">
             <div class="logoTitulo">
@@ -44,12 +47,28 @@
             </div>
             <div class="mensaisContent">
                 <div class="indicadores">
+                    <div class="tituloIndicadores">
+                        <div class="tituloIndicador">
+                            <label>Peso Total</label>
+                        </div>
+                        <div class="tituloIndicador">
+                            <label>Dias que treinou</label>
+                        </div>
+                        <div class="tituloIndicador">
+                            <label>Series</label>
+                        </div>
+
+                    </div>
                     <div class="indicadoresContent">
                         <div class="indicador">
-                           <div id="carga"></div>
+                            <div id="carga"></div>
                         </div>
-                        <div class="indicador"></div>
-                        <div class="indicador"></div>
+                        <div class="indicador">
+                                <div id="treinosMes"></div>
+                        </div>
+                        <div class="indicador">
+                            <div id="seriesRealizadas"></div>
+                        </div>
                     </div>
                     <div class="conquistasMensais">
                         <div class="conquistasContent">
@@ -73,9 +92,9 @@
                 <p class="titulo">Indicadores Semanais</p>
             </div>
             <div class="semanaisContent">
-                    <div class="indicadorSemanal"></div>
-                    <div class="indicadorSemanal"></div>
-                    <div class="indicadorSemanal"></div>
+                <div class="indicadorSemanal"></div>
+                <div class="indicadorSemanal"></div>
+                <div class="indicadorSemanal"></div>
 
 
             </div>
@@ -90,7 +109,9 @@
 </html>
 
 <script>
-   let idFicha = sessionStorage.ID_FICHA;
+    let idFicha = sessionStorage.ID_FICHA;
+    let seriesMensais = 0
+    let treinos = 0;
 
     const ctx = document.getElementById('myChart');
     const ctx2 = document.getElementById('linha')
@@ -139,26 +160,55 @@
 
     let idUsuario = sessionStorage.ID_USUARIO;
 
-    function cargaLevantada(idFicha){
+    function cargaLevantada(idFicha) {
         fetch(`/dashboard/buscar/carga/${idFicha}`)
-        .then(resposta => resposta.json())
-        .then(ficha => {
-            console.log(ficha);
-            let cargaMensal = ficha[0].pesoLevantado;
+            .then(resposta => resposta.json())
+            .then(ficha => {
+                console.log(ficha);
+                let cargaMensal = ficha[0].pesoLevantado;
 
-          document.getElementById('carga').innerHTML =`${cargaMensal} Kg`;
-        })
+                document.getElementById('carga').innerHTML = `${cargaMensal} Kg`;
+            })
     }
 
-    function fichaAtiva (idUsuario){
-             fetch(`/dashboard/buscar/fichaAtiva/${idUsuario}`)
-        .then(resposta => resposta.json())
-        .then(fichaAtiva => {
-            console.log(fichaAtiva);
-         sessionStorage.ID_FICHA = fichaAtiva[0].idFicha;
+    function fichaAtiva(idUsuario) {
+        fetch(`/dashboard/buscar/fichaAtiva/${idUsuario}`)
+            .then(resposta => resposta.json())
+            .then(fichaAtiva => {
+                console.log(fichaAtiva);
+                sessionStorage.ID_FICHA = fichaAtiva[0].idFicha;
 
 
-        })
+            })
+    }
+
+
+    function seriesMes(idFicha) {
+        fetch(`/dashboard/buscar/series/mes/${idFicha}`)
+            .then(resposta => resposta.json())
+            .then(seriesMes => {
+                console.log(seriesMes);
+                seriesMensais = seriesMes[0].serieRealizada;
+                console.log(seriesMensais)
+
+                document.getElementById('seriesRealizadas').innerHTML = `${seriesMensais}`;
+
+            })
+    }
+
+
+
+    function frequenciaMes(idFicha) {
+        fetch(`/dashboard/buscar/frequencia/mes/${idFicha}`)
+            .then(resposta => resposta.json())
+            .then(treinosMes => {
+                console.log(treinosMes);
+                treinos = treinosMes[0].treinosDia;
+                console.log(treinos)
+
+                document.getElementById('treinosMes').innerHTML = `${treinos}`;
+
+            })
     }
 
 </script>

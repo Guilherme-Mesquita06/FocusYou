@@ -18,8 +18,27 @@ function fichaAtiva (req,res){
 
 }
 
+function seriesMes (req,res){
+    var idFicha = req.params.idFicha;
+
+  
+  dashboardModel.seriesMes(idFicha).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+  function diasTreinados (req,res){
+    var idFicha = req.params.idFicha;
+
+  
+  dashboardModel.frequenciaMes(idFicha).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 
 module.exports = {
 cargaLevantada,
-fichaAtiva
-};
+fichaAtiva,
+seriesMes,
+diasTreinados
+}
