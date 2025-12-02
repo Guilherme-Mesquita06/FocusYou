@@ -114,17 +114,20 @@ main {
     height: 100%;
     display: flex;
     align-items: center;
-
+    justify-content: center;
 }
 
-.grafico1 {
-    width: 45%;
-    height: 80%;
-}
+
 
 .grafico2 {
     width: 55%;
     height: 80%;
+    margin-bottom: 6%;
+}
+#myChart{
+    display:flex; 
+    width: 600px;
+    height: 20vh;
 }
 
 .indicadoresSemanais {
@@ -149,5 +152,6 @@ main {
     width: 80%;
     height: 25%;
     border-radius: 20px;
-    background-color: #a90820;
+    border: var(--border);
+    
 }

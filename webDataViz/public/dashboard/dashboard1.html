@@ -13,7 +13,9 @@
 <body onload="fichaAtiva(idUsuario), 
               cargaLevantada(idFicha), 
               seriesMes(idFicha),
-              frequenciaMes(idFicha)">
+              frequenciaMes(idFicha),
+              frequenciaSemana(idFicha),
+              variacaoCarga(idFicha)">
     <div class="header">
         <div class="container">
             <div class="logoTitulo">
@@ -64,7 +66,7 @@
                             <div id="carga"></div>
                         </div>
                         <div class="indicador">
-                                <div id="treinosMes"></div>
+                            <div id="treinosMes"></div>
                         </div>
                         <div class="indicador">
                             <div id="seriesRealizadas"></div>
@@ -73,10 +75,7 @@
                     <div class="conquistasMensais">
                         <div class="conquistasContent">
 
-                            <div class="grafico1">
-                                <canvas id="linha"></canvas>
 
-                            </div>
                             <div class="grafico2">
                                 <canvas id="myChart"></canvas>
 
@@ -91,10 +90,15 @@
             <div class="tituloSection">
                 <p class="titulo">Indicadores Semanais</p>
             </div>
+
             <div class="semanaisContent">
-                <div class="indicadorSemanal"></div>
-                <div class="indicadorSemanal"></div>
-                <div class="indicadorSemanal"></div>
+                <div class="indicadorSemanal indicador">
+                    <div id="treinosSemana"></div>
+                </div>
+                <div class="indicadorSemanal indicador">
+                    <div id="evolucao"></div>
+                </div>
+                <div class="indicadorSemanal indicador"></div>
 
 
             </div>
@@ -109,12 +113,15 @@
 </html>
 
 <script>
+    let cargaMensal = 0
     let idFicha = sessionStorage.ID_FICHA;
     let seriesMensais = 0
     let treinos = 0;
+    let semanaAtual = 0
+    let semanaPassada = 0
+    let porcEvolucao = 0;
 
     const ctx = document.getElementById('myChart');
-    const ctx2 = document.getElementById('linha')
 
     new Chart(ctx, {
         type: 'bar',
@@ -139,24 +146,7 @@
 
 
 
-    new Chart(ctx2, {
-        type: 'line',
-        data: {
-            labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
-            datasets: [{
-                label: '# of Votes',
-                data: [11, 5, 3, 5, 2, 3, 2, 4, 2, 3, 4, 5, 6, 0, 2, 1],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+
 
     let idUsuario = sessionStorage.ID_USUARIO;
 
@@ -165,7 +155,7 @@
             .then(resposta => resposta.json())
             .then(ficha => {
                 console.log(ficha);
-                let cargaMensal = ficha[0].pesoLevantado;
+                cargaMensal = ficha[0].pesoLevantado;
 
                 document.getElementById('carga').innerHTML = `${cargaMensal} Kg`;
             })
@@ -202,12 +192,66 @@
         fetch(`/dashboard/buscar/frequencia/mes/${idFicha}`)
             .then(resposta => resposta.json())
             .then(treinosMes => {
-                console.log(treinosMes);
+                console.log('MENSAL', treinosMes);
                 treinos = treinosMes[0].treinosDia;
                 console.log(treinos)
 
                 document.getElementById('treinosMes').innerHTML = `${treinos}`;
 
+            })
+    }
+
+
+    function frequenciaSemana(idFicha) {
+        fetch(`/dashboard/buscar/frequencia/semana/${idFicha}`)
+            .then(resposta => resposta.json())
+            .then(treinosSemana => {
+                console.log('semana', treinosSemana);
+                treinosSemanais = treinosSemana[0].treinosDia;
+                frequencia = treinosSemana[0].frequencia;
+
+
+                document.getElementById('treinosSemana').innerHTML = `${treinosSemanais}`;
+
+
+
+            })
+    }
+
+
+    function variacaoCarga(idFicha) {
+        fetch(`/dashboard/buscar/variacao/semana/${idFicha}`)
+            .then(resposta => resposta.json())
+            .then(variacaoCarga => {
+                let aumento = 0
+
+                console.log(variacaoCarga);
+                semanaAtual = variacaoCarga[1].cargaSemanal;
+                semanaPassada = variacaoCarga[0].cargaSemanal;
+
+                if (semanaPassada > semanaAtual) {
+                    porcEvolucao = (semanaAtual / semanaPassada) * 100;
+
+                    aumento = 100 - porcEvolucao;
+
+                    document.getElementById('evolucao').style.color = '#FF0000'
+                    document.getElementById('evolucao').innerHTML = `${aumento.toFixed(2)}%`;
+
+
+                } else {
+
+                    porcEvolucao = (semanaPassada / semanaAtual) * 100;
+
+                    aumento = 100 - porcEvolucao;
+                    document.getElementById('evolucao').style.color = '#00FF00'
+
+                    document.getElementById('evolucao').innerHTML = `${aumento.toFixed(2)}%`;
+
+                }
+
+                console.log(aumento.toFixed(2))
+
+                console.log('SEMANA ATUAL', semanaAtual, 'SEMANA PASSADA: ', semanaPassada)
             })
     }
 

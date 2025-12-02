@@ -42,11 +42,32 @@ function seriesMes (req,res){
   });
 }
 
+  function variacaoCarga (req,res){
+    var idFicha = req.params.idFicha;
+
+  
+  dashboardModel.variacaoCarga(idFicha).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
+
+  function seriesporGrupo (req,res){
+    var idFicha = req.params.idFicha;
+
+  
+  dashboardModel.seriesporGrupo(idFicha).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 
 module.exports = {
 cargaLevantada,
 fichaAtiva,
 seriesMes,
 diasTreinados,
-diasTreinadosSemana
+diasTreinadosSemana,
+variacaoCarga,
+seriesporGrupo
 }
