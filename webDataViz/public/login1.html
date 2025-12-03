@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 
-<body >
+<body>
 
 
     <div class="header">
@@ -20,7 +20,7 @@
 
             <nav class="navbar">
                 <div class="links">
-        
+
                     <div>
                         <a href="./login1.html">Login</a>
                     </div>
@@ -61,11 +61,11 @@
                         <div class="btn">
                             <button onclick="entrar()">Entrar</button>
                         </div>
+                        <div id="mensagem_erro"></div>
 
                         <div id="div_aguardar" class="loading-div">
                             <img src="./assets/circle-loading.gif" id="loading-gif">
                         </div>
-                        <div id="div_erros_login"></div>
 
                     </div>
                 </div>
@@ -87,8 +87,8 @@
         var senhaVar = iptSenha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = `<p style="color:#fc0500; font-weight: bold;">Preencha todos os campos</p>`;
+
             finalizarAguardar();
             return false;
         }
@@ -110,7 +110,7 @@
                 senhaServer: senhaVar,
             }),
         })
-        // Mesma coisa q a arrow function =>
+            // Mesma coisa q a arrow function =>
             .then(function (resposta) {
                 console.log("resposta: ", resposta);
 
@@ -118,7 +118,7 @@
 
                 if (resposta.ok) {
                     console.log(resposta);
-                    console.log('DESGRAAAÇAAA?')
+                    console.log('UUUUIAAAA A RESPOSTA ESTÁ OK')
 
                     resposta.json().then(json => {
                         console.log(json);
@@ -128,7 +128,7 @@
                         sessionStorage.ID_USUARIO = json.idUsuario;
 
 
-                         setTimeout(function () {
+                        setTimeout(function () {
                             buscarFicha()
                         }, 1000); // apenas para exibir o loading
 
@@ -155,26 +155,34 @@
         cardErro.style.display = "none"
     }
 
-    function buscarFicha(){
+    function buscarFicha() {
         var idUsuario = sessionStorage.ID_USUARIO;
- // THEN = ENTAO
- // buscar ficha entao voce transforma h
+        // THEN = ENTAO
+        // buscar ficha entao voce transforma h
         fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(resposta => {
             console.log(resposta)
-            if(resposta.length == 0){
+            if (resposta.length == 0) {
+                console.log('entrou aqui')
+                mensagem_erro.innerHTML = `<p style="color:#70F000; font-weight: bold;">Cadastro realizado com sucesso! Redirecionando para tela de Login...</p>`;
 
-                window.location = './dashboard/addTreino.html'
+                setTimeout(() => {
+                    window.location = './dashboard/addTreino.html'
+                }, "2000");
 
-            }else{
-                window.location = './dashboard/historicoFicha.html'
+            } else {
+                mensagem_erro.innerHTML = `<p style="color:#70F000; font-weight: bold;">Cadastro realizado com sucesso! Redirecionando para tela de Login...</p>`;
+
+                setTimeout(() => {
+                    window.location = './dashboard/historicoFicha.html'
+                }, "2000");
             }
 
         }))
 
-        
+
     }
 
- 
+
 
 </script>
 

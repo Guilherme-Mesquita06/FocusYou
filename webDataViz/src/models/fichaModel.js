@@ -79,7 +79,8 @@ function lista(idUsuario) {
 		f.dataFinal,
         f.frequencia,
         f.descricao,
-		f.fkUsuario AS idUsuario
+		f.fkUsuario AS idUsuario,
+        f.status 
         FROM usuario AS u
         JOIN ficha AS f
         ON f.fkUsuario = u.id

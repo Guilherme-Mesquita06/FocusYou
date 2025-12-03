@@ -41,6 +41,7 @@
 
         <section class="content">
 
+            <div id="boasVindas"></div>
             <section class="fichas">
                 <div id="contentFicha">
                 </div>
@@ -55,19 +56,34 @@
 <script>
 
 
-let statusFicha = 0;
+    let statusFicha = 0;
     function exibirFichas() {
         var idUsuario = sessionStorage.ID_USUARIO;
+        const nomeUsuario = sessionStorage.NOME_USUARIO;
+        const divBoasVindas = document.getElementById("boasVindas");
+
+        divBoasVindas.innerHTML = `
+    Olá, <span>${nomeUsuario}</span> 
+`;
+
 
         fetch(`/fichas/buscar/${idUsuario}`).then(resposta => resposta.json().then(fichas => {
             console.log(fichas)
             // Fonte: https://www.alura.com.br/artigos/formatar-datas-horas-moedas-javascript?utm_term=&campaign_id=11384329873_164240702375_703935132410&hsa_kw=&hsa_mt=&gad_campaignid=11384329873
 
+
+
+
+
             fichas.forEach(ficha => {
+
+
                 document.getElementById('contentFicha').innerHTML += `
              <div class="fichaCard">
-                                    <div id="ativo"></div>
-
+                <div class="statusContent">
+                <p class="circulo">Status Ficha</p>
+                <div id="ativo"></div>
+</div>
                             <p class="titulo">${ficha.titulo}</p>
                         <div class="campo">
                             <p>Objetivo: Hipertrofia</p>
@@ -90,6 +106,11 @@ let statusFicha = 0;
 
 
                     </div>`;
+
+                if (ficha.status == 1) {
+                    document.getElementById("ativo").style.backgroundColor = "#5CE65C";
+
+                }
             });
         }))
 
@@ -100,7 +121,7 @@ let statusFicha = 0;
 
 
     function ativarFicha(idFicha) {
-        
+
         console.log(status)
 
         fetch(`/fichas/editar/${idFicha}`, {
@@ -109,12 +130,8 @@ let statusFicha = 0;
                 "Content-Type": "application/json"
             }
         }).then(resposta => resposta.json())
-          .then(status => {
-
-            console.log(status)
-    
-                document.getElementById("ativo").style.backgroundColor = "#5CE65C";
-
+            .then(status => {
+                console.log(status)
             })
             .catch(erro => {
                 console.log(`#Erro: ${erro}`);
