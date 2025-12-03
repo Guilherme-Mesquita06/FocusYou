@@ -14,7 +14,7 @@ main {
 }
 
 .cadastroSection {
-    height: 65%;
+    height: 70%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -51,6 +51,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .titulo {

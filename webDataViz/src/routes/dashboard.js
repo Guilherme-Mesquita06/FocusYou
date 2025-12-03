@@ -26,7 +26,7 @@ router.get('/buscar/variacao/semana/:idFicha', function (req, res) {
         dashboardController.variacaoCarga(req, res);
 })
 
-router.get('/buscar/sereisGrupo/mes/:idFicha', function (req, res) {
+router.get('/buscar/seriesGrupo/mes/:idFicha', function (req, res) {
         dashboardController.seriesporGrupo(req, res);
 })
 

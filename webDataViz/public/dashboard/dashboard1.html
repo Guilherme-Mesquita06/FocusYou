@@ -15,7 +15,8 @@
               seriesMes(idFicha),
               frequenciaMes(idFicha),
               frequenciaSemana(idFicha),
-              variacaoCarga(idFicha)">
+              variacaoCarga(idFicha),
+              chartData(idFicha)">
     <div class="header">
         <div class="container">
             <div class="logoTitulo">
@@ -113,6 +114,11 @@
 </html>
 
 <script>
+    let labels = [];
+    let data = [];
+
+    let musculoMaisTreinado
+
     let cargaMensal = 0
     let idFicha = sessionStorage.ID_FICHA;
     let seriesMensais = 0
@@ -121,17 +127,24 @@
     let semanaPassada = 0
     let porcEvolucao = 0;
 
+    let musculoMaisUsado= ''
+
+    
+
+ 
+
+    console.log(data)
+    console.log(labels)
+
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Peito', 'Costas', 'Lombar', 'Trapezio', 'Biceps', 'Triceps',
-                'Ombro', 'Antebraço', 'Abdominal', 'Abdutor', 'Adutor', 'Quadriceps',
-                'Posterior', 'Panturrilha', 'Gluteo', 'Tibia'],
+            labels: labels,
             datasets: [{
                 label: '# of Votes',
-                data: [11, 5, 3, 5, 2, 3, 2, 4, 2, 3, 4, 5, 6, 0, 2, 1],
+                data: data,
                 borderWidth: 1
             }]
         },
@@ -144,6 +157,8 @@
         }
     });
 
+
+    let musculo = ''
 
 
 
@@ -202,6 +217,7 @@
     }
 
 
+
     function frequenciaSemana(idFicha) {
         fetch(`/dashboard/buscar/frequencia/semana/${idFicha}`)
             .then(resposta => resposta.json())
@@ -254,5 +270,33 @@
                 console.log('SEMANA ATUAL', semanaAtual, 'SEMANA PASSADA: ', semanaPassada)
             })
     }
+    function chartData(idFicha) {
 
+        fetch(`/dashboard/buscar/seriesGrupo/mes/${idFicha}`)
+            .then(resposta => resposta.json())
+            .then(seriesPorGrupo => {
+                console.log(seriesPorGrupo);
+                
+
+                seriesPorGrupo.forEach(d => {
+
+
+                    data.push(d.totalSeries);
+                    labels.push(d.musculo)
+
+                    
+
+            
+
+                });
+
+
+                for(var i = 0 ; i < resposta.length; i++){
+                    var series = resposta[i]
+                }
+            }).catch(err => {
+                console.log('Não sou o maioral', err)
+            })
+
+    }
 </script>
