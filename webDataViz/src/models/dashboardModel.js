@@ -23,7 +23,8 @@ function fichaAtiva(idUsuario) {
 
   var instrucaoSql = `
     SELECT 
-		   	f.id AS idFicha
+		   	f.id AS idFicha,
+        f.titulo AS titulo
          FROM usuario AS u
 		     JOIN ficha AS f
 	       ON f.fkUsuario = u.id

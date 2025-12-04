@@ -1,4 +1,8 @@
+CREATE DATABASE focusYou;
+
 USE focusYou;
+
+
 
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -7,7 +11,7 @@ CREATE TABLE usuario (
     senha VARCHAR(100) NOT NULL,
     peso DECIMAL(4,2) NOT NULL,
     dataTreino DATE NOT NULL,
-    CONSTRAINT chk_email CHECK (email LIKE '%@%' AND email LIKE '%.com')
+    CONSTRAINT chkEmail CHECK (email LIKE '%@%' AND email LIKE '%.com')
 );
 
 CREATE TABLE ficha (
@@ -19,11 +23,11 @@ CREATE TABLE ficha (
     fkUsuario INT NOT NULL,
     titulo VARCHAR(45) NOT NULL,
     descricao VARCHAR(255),
-    status TINYINT NOT NULL,
+    status TINYINT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT chk_objetivo CHECK (objetivo IN ('Hipertrofia','Emagrecimento','Recuperacao','Forca')),
-    CONSTRAINT fk_ficha_usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(id)
+    CONSTRAINT chkobjetivo CHECK (objetivo IN ('Hipertrofia','Emagrecimento','Recuperacao','Forca')),
+    CONSTRAINT fichaUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(id)
 );
 
 CREATE TABLE treino (
@@ -31,27 +35,37 @@ CREATE TABLE treino (
     titulo VARCHAR(45) NOT NULL,
     observacao VARCHAR(255),
     fkFicha INT NOT NULL,
-    CONSTRAINT fk_treino_ficha FOREIGN KEY (fkFicha) REFERENCES ficha(id)
+    CONSTRAINT treinoFicha FOREIGN KEY (fkFicha) REFERENCES ficha(id)
 );
 
 CREATE TABLE exercicio (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
+	dificuldade VARCHAR(45),
     descricao VARCHAR(255),
-    dificuldade VARCHAR(45),
-    agrupamentoMuscular VARCHAR(45) NOT NULL,
+    agrupamento VARCHAR(45) NOT NULL,
     fkTreino INT NOT NULL,
     equipamento VARCHAR(75),
 
-    CONSTRAINT chk_dificuldade CHECK (dificuldade IN ('Facil','Medio','Dificil')),
-    CONSTRAINT chk_musculo CHECK (
-        agrupamentoMuscular IN ('Peito','Costas','Lombar','Trapezio','Biceps','Triceps',
+    CONSTRAINT chkDificuldade CHECK (dificuldade IN ('Facil','Medio','Dificil')),
+    CONSTRAINT chkMusculo CHECK (
+        agrupamento IN ('Peito','Costas','Lombar','Trapezio','Biceps','Triceps',
                                 'Ombro','Antebraço','Abdominal','Abdutor','Adutor','Quadriceps',
                                 'Posterior','Panturrilha','Gluteo','Tibia')
     ),
-    CONSTRAINT chk_equipamento CHECK (equipamento IN ('Halteres','Maquina','Barra','Rolinho','Colchonete')),
-    CONSTRAINT fk_exercicio_treino FOREIGN KEY (fkTreino) REFERENCES treino(id)
+    CONSTRAINT chkEquipamento CHECK (equipamento IN ('Halteres','Maquina','Barra','Rolinho','Colchonete', 'Elastico', '')),
+    CONSTRAINT fkExercicioTreino FOREIGN KEY (fkTreino) REFERENCES treino(id)
 );
+
+
+ALTER TABLE exercicio 
+ADD CONSTRAINT chk_musculo CHECK (
+    agrupamento IN (
+        'Peito','Costas','Lombar','Trapezio','Biceps','Triceps',
+        'Ombro','Antebraço','Abdominal','Abdutor','Adutor','Quadriceps',
+        'Posterior','Panturrilha','Gluteo','Tibia')
+        );
+
 
 CREATE TABLE serie (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -61,176 +75,175 @@ CREATE TABLE serie (
     serieRealizada TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fkExercicio INT NOT NULL,
 
-    CONSTRAINT fk_serie_exercicio FOREIGN KEY (fkExercicio) REFERENCES exercicio(id)
+    CONSTRAINT fkSerieExercicio FOREIGN KEY (fkExercicio) REFERENCES exercicio(id)
 );
-
 
 -- --------------------------------------------------------------------------------
 
 
-INSERT INTO usuario (nome, email, senha, peso, dataTreino) VALUES
-('Guilherme', 'gui@gmail.com', '123', 78.5, '2025-01-10'),
-('Ana', 'ana@gmail.com', '123', 62.3, '2025-01-11'),
-('Carlos', 'carlos@gmail.com', '123', 85.0, '2025-01-12');
+-- INSERT INTO usuario (nome, email, senha, peso, dataTreino) VALUES
+-- ('Guilherme', 'gui@gmail.com', '123', 78.5, '2025-01-10'),
+-- ('Ana', 'ana@gmail.com', '123', 62.3, '2025-01-11'),
+-- ('Carlos', 'carlos@gmail.com', '123', 85.0, '2025-01-12');
 
 
 
 
-      INSERT INTO ficha (dataFinal, dataInicio, frequencia, objetivo, fkUsuario, titulo, descricao, status)
-VALUES
-(NULL, '2025-02-15', 5, 'Hipertrofia', 1, 'Hipertrofia A', 'Bloco de peito e braço', 1),
-(NULL, '2025-02-20', 4, 'Hipertrofia', 2, 'Hipertrofia B', 'Treino de costas e bíceps', 1),
-(NULL, '2025-02-25', 3, 'Hipertrofia', 3, 'Hipertrofia C', 'Treino de perna completo', 1);
+--       INSERT INTO ficha (dataFinal, dataInicio, frequencia, objetivo, fkUsuario, titulo, descricao, status)
+-- VALUES
+-- (NULL, '2025-02-15', 5, 'Hipertrofia', 1, 'Hipertrofia A', 'Bloco de peito e braço', 1),
+-- (NULL, '2025-02-20', 4, 'Hipertrofia', 2, 'Hipertrofia B', 'Treino de costas e bíceps', 1),
+-- (NULL, '2025-02-25', 3, 'Hipertrofia', 3, 'Hipertrofia C', 'Treino de perna completo', 1);
 
 	
       
 
--- Ficha 1
-INSERT INTO treino (titulo, observacao, fkFicha) VALUES
-('Peito e Tríceps', 'Carga moderada', 1),
-('Costas e Bíceps', 'Foco em execução', 1),
-('Perna', 'Intenso', 1);
+-- -- Ficha 1
+-- INSERT INTO treino (titulo, observacao, fkFicha) VALUES
+-- ('Peito e Tríceps', 'Carga moderada', 1),
+-- ('Costas e Bíceps', 'Foco em execução', 1),
+-- ('Perna', 'Intenso', 1);
 
--- Ficha 2
-INSERT INTO treino (titulo, observacao, fkFicha) VALUES
-('Costas e Bíceps', 'Volume alto', 2),
-('Peito e Ombro', 'Alongamento antes', 2),
-('Perna', 'Desafio', 2);
+-- -- Ficha 2
+-- INSERT INTO treino (titulo, observacao, fkFicha) VALUES
+-- ('Costas e Bíceps', 'Volume alto', 2),
+-- ('Peito e Ombro', 'Alongamento antes', 2),
+-- ('Perna', 'Desafio', 2);
 
--- Ficha 3
-INSERT INTO treino (titulo, observacao, fkFicha) VALUES
-('Perna Completa', 'Foco em quadríceps', 3),
-('Posterior e Glúteo', 'Amplitude total', 3),
-('Panturrilha + Abdômen', 'Alta repetição', 3);
-
-
+-- -- Ficha 3
+-- INSERT INTO treino (titulo, observacao, fkFicha) VALUES
+-- ('Perna Completa', 'Foco em quadríceps', 3),
+-- ('Posterior e Glúteo', 'Amplitude total', 3),
+-- ('Panturrilha + Abdômen', 'Alta repetição', 3);
 
 
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Supino Reto', 'Dificil', 'Peito',  1, 'Barra'),
-('Crucifixo', 'Medio', 'Peito',  1, 'Halteres'),
-('Tríceps Corda', 'Medio', 'Triceps',  1, 'Maquina'),
-('Tríceps Testa', 'Medio', 'Triceps',  1, 'Barra');
 
--- Treino 2
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Puxada Aberta', 'Medio', 'Costas',  2, 'Maquina'),
-('Remada Baixa', 'Dificil', 'Costas',  2, 'Maquina'),
-('Rosca Direta', 'Medio', 'Biceps',  2, 'Barra'),
-('Rosca Alternada', 'Facil', 'Biceps',  2, 'Halteres');
 
--- Treino 3
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Agachamento Livre','Dificil','Quadriceps',3,'Barra'),
-('Leg Press','Medio','Quadriceps',3,'Maquina'),
-('Mesa Flexora','Medio','Posterior',3,'Maquina'),
-('Panturrilha Sentado','Facil','Panturrilha',3,'Maquina');
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Supino Reto', 'Dificil', 'Peito',  1, 'Barra'),
+-- ('Crucifixo', 'Medio', 'Peito',  1, 'Halteres'),
+-- ('Tríceps Corda', 'Medio', 'Triceps',  1, 'Maquina'),
+-- ('Tríceps Testa', 'Medio', 'Triceps',  1, 'Barra');
 
--- Treino 4
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Barra Fixa','Dificil','Costas',4,'Barra'),
-('Serrote','Medio','Costas',4,'Halteres'),
-('Rosca Martelo','Medio','Biceps',4,'Halteres'),
-('Rosca Scott','Medio','Biceps',4,'Maquina');
+-- -- Treino 2
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Puxada Aberta', 'Medio', 'Costas',  2, 'Maquina'),
+-- ('Remada Baixa', 'Dificil', 'Costas',  2, 'Maquina'),
+-- ('Rosca Direta', 'Medio', 'Biceps',  2, 'Barra'),
+-- ('Rosca Alternada', 'Facil', 'Biceps',  2, 'Halteres');
 
--- Treino 5
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Supino Inclinado','Medio','Peito',5,'Barra'),
-('Voador','Facil','Peito',5,'Maquina'),
-('Elevação Lateral','Medio','Ombro',5,'Halteres'),
-('Desenvolvimento','Dificil','Ombro',5,'Barra');
+-- -- Treino 3
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Agachamento Livre','Dificil','Quadriceps',3,'Barra'),
+-- ('Leg Press','Medio','Quadriceps',3,'Maquina'),
+-- ('Mesa Flexora','Medio','Posterior',3,'Maquina'),
+-- ('Panturrilha Sentado','Facil','Panturrilha',3,'Maquina');
 
--- Treino 6
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Agachamento Hack','Medio','Quadriceps',6,'Maquina'),
-('Cadeira Extensora','Facil','Quadriceps',6,'Maquina'),
-('Stiff','Dificil','Posterior',6,'Barra'),
-('Panturrilha em Pé','Facil','Panturrilha',6,'Maquina');
+-- -- Treino 4
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Barra Fixa','Dificil','Costas',4,'Barra'),
+-- ('Serrote','Medio','Costas',4,'Halteres'),
+-- ('Rosca Martelo','Medio','Biceps',4,'Halteres'),
+-- ('Rosca Scott','Medio','Biceps',4,'Maquina');
 
--- Treino 7
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Agachamento Livre','Dificil','Quadriceps',7,'Barra'),
-('Avanço','Medio','Quadriceps',7,'Halteres'),
-('Mesa Flexora','Medio','Posterior',7,'Maquina'),
-('Extensora','Facil','Quadriceps',7,'Maquina');
+-- -- Treino 5
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Supino Inclinado','Medio','Peito',5,'Barra'),
+-- ('Voador','Facil','Peito',5,'Maquina'),
+-- ('Elevação Lateral','Medio','Ombro',5,'Halteres'),
+-- ('Desenvolvimento','Dificil','Ombro',5,'Barra');
 
--- Treino 8
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular, fkTreino, equipamento)
-VALUES
-('Stiff','Dificil','Posterior',8,'Barra'),
-('Glúteo Máquina','Medio','Gluteo',8,'Maquina'),
-('Abdutora','Facil','Abdutor',8,'Maquina'),
-('Abdutora Invertida','Facil','Adutor',8,'Maquina');
+-- -- Treino 6
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Agachamento Hack','Medio','Quadriceps',6,'Maquina'),
+-- ('Cadeira Extensora','Facil','Quadriceps',6,'Maquina'),
+-- ('Stiff','Dificil','Posterior',6,'Barra'),
+-- ('Panturrilha em Pé','Facil','Panturrilha',6,'Maquina');
 
--- Treino 9
-INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
-VALUES
-('Panturrilha Sentado','Facil','Panturrilha',9,'Maquina'),
-('Panturrilha em Pé','Facil','Panturrilha',9,'Maquina'),
-('Abdominal Infra','Facil','Abdominal',9,'Colchonete'),
-('Prancha','Medio','Abdominal',9,'Colchonete');
+-- -- Treino 7
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Agachamento Livre','Dificil','Quadriceps',7,'Barra'),
+-- ('Avanço','Medio','Quadriceps',7,'Halteres'),
+-- ('Mesa Flexora','Medio','Posterior',7,'Maquina'),
+-- ('Extensora','Facil','Quadriceps',7,'Maquina');
+
+-- -- Treino 8
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular, fkTreino, equipamento)
+-- VALUES
+-- ('Stiff','Dificil','Posterior',8,'Barra'),
+-- ('Glúteo Máquina','Medio','Gluteo',8,'Maquina'),
+-- ('Abdutora','Facil','Abdutor',8,'Maquina'),
+-- ('Abdutora Invertida','Facil','Adutor',8,'Maquina');
+
+-- -- Treino 9
+-- INSERT INTO exercicio (nome, dificuldade, agrupamentoMuscular,  fkTreino, equipamento)
+-- VALUES
+-- ('Panturrilha Sentado','Facil','Panturrilha',9,'Maquina'),
+-- ('Panturrilha em Pé','Facil','Panturrilha',9,'Maquina'),
+-- ('Abdominal Infra','Facil','Abdominal',9,'Colchonete'),
+-- ('Prancha','Medio','Abdominal',9,'Colchonete');
 
 	
   
-      INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
-SELECT id, '00:01:00', 12, 40.0 FROM exercicio;
+--       INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
+-- SELECT id, '00:01:00', 12, 40.0 FROM exercicio;
 
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
-SELECT id, '00:01:20', 10, 45.0 FROM exercicio;
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
+-- SELECT id, '00:01:20', 10, 45.0 FROM exercicio;
 
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
-SELECT id, '00:01:30', 8, 50.0 FROM exercicio;
-
-
-
-
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:00', 12, 30.0, '2025-01-05 10:00:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:00', 10, 35.0, '2025-01-05 10:05:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:00', 8, 40.0, '2025-01-05 10:10:00'
-FROM exercicio;
-
-
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:10', 12, 32.5, '2025-01-12 10:00:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:10', 10, 37.5, '2025-01-12 10:05:00'
-FROM exercicio;
-
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:10', 8, 42.5, '2025-01-12 10:10:00'
-FROM exercicio;
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada)
+-- SELECT id, '00:01:30', 8, 50.0 FROM exercicio;
 
 
 
 
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:20', 12, 35.0, '2025-01-19 10:00:00'
-FROM exercicio;
 
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:20', 10, 40.0, '2025-01-19 10:05:00'
-FROM exercicio;
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:00', 12, 30.0, '2025-01-05 10:00:00'
+-- FROM exercicio;
 
-INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
-SELECT id, '00:01:20', 8, 45.0, '2025-01-19 10:10:00';
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:00', 10, 35.0, '2025-01-05 10:05:00'
+-- FROM exercicio;
+
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:00', 8, 40.0, '2025-01-05 10:10:00'
+-- FROM exercicio;
+
+
+
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:10', 12, 32.5, '2025-01-12 10:00:00'
+-- FROM exercicio;
+
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:10', 10, 37.5, '2025-01-12 10:05:00'
+-- FROM exercicio;
+
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:10', 8, 42.5, '2025-01-12 10:10:00'
+-- FROM exercicio;
+
+
+
+
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:20', 12, 35.0, '2025-01-19 10:00:00'
+-- FROM exercicio;
+
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:20', 10, 40.0, '2025-01-19 10:05:00'
+-- FROM exercicio;
+
+-- INSERT INTO serie (fkExercicio, tempoDescanso, repeticoes, cargaRealizada, serieRealizada)
+-- SELECT id, '00:01:20', 8, 45.0, '2025-01-19 10:10:00';
 
 
 -- -----------------------------------------------------------------------------------------------------------------------------------

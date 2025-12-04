@@ -43,11 +43,12 @@
             </nav>
         </div>
     </div>
+            <div id="tituloFicha"></div>
+
     <main>
-
-
         <section class="indicadoresMensais">
             <div class="tituloSection">
+
                 <p class="titulo" style="margin-left:39%;">Indicadores do mês</p>
                 <p class="subTitulo">01/12 á 01/01</p>
             </div>
@@ -55,7 +56,7 @@
                 <div class="indicadores">
                     <div class="tituloIndicadores">
                         <div class="tituloIndicador">
-                            <label>Peso Total</label>
+                            <label>Total Levantado</label>
                         </div>
                         <div class="tituloIndicador">
                             <label>Dias que treinou</label>
@@ -105,7 +106,7 @@
 
                 <div class="indicadorSemanal1">
 
-                    <p>Comparação de peso total</p>
+                    <p>Comparação de peso total Levantado</p>
                     <div class="indicadorSemanal indicador">
                         <div id="evolucao"></div>
                     </div>
@@ -139,7 +140,7 @@
 
     let musculoMaisUsado = ''
 
-
+let titulo;
 
 
 
@@ -169,8 +170,13 @@
         fetch(`/dashboard/buscar/fichaAtiva/${idUsuario}`)
             .then(resposta => resposta.json())
             .then(fichaAtiva => {
-                console.log(fichaAtiva);
+                console.log('aaaaaa', fichaAtiva);
                 sessionStorage.ID_FICHA = fichaAtiva[0].idFicha;
+                titulo = fichaAtiva[0].titulo;
+
+        const  tituloFicha = document.getElementById('tituloFicha');
+
+        tituloFicha.innerHTML = `<p class="titulo">Ficha: ${titulo} </p>`;
 
 
             })
