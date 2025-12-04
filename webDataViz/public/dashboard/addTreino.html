@@ -15,15 +15,17 @@
         <div class="container">
             <div class="logoTitulo">
                 <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="">
+                <p class="navTitulo">Aretê</p>
+
             </div>
 
             <nav class="navbar">
                 <div class="links">
                     <div>
-                        <a href="./addSerie.html">Home</a>
+                        <a href="./addSerie.html">Treinar</a>
                     </div>
-                    <div>
-                        <a>Ficha</a>
+                    <div style="background-color: brown;">
+                        <a>Nova Ficha</a>
                     </div>
                     <div>
                         <a href="./dashboard1.html">Dashboard</a>
@@ -94,6 +96,8 @@
                     <div class="btn">
                         <button onclick="cadastrarFicha()">Cadastrar ficha</button>
                     </div>
+                    <div id="msgFicha"></div>
+
 
                 </div>
             </div>
@@ -132,6 +136,7 @@
                 </div>
             </section>
 
+
             <section id="addExercicio">
 
                 <div class="contentAddExercicio">
@@ -151,18 +156,17 @@
 
                             <select id="iptEquipEx">
                                 <option value="#" disabled selected>Selecione o equipamento a ser utilizado</option>
-                                <option value="Halteres">❚█══█❚ Halteres</option>
-                                <option value="Barra"> 🏋🏼‍♂️ Barra</option>
-                                <option value="Maquina">⚙️🦾 Máquina</option>
-                                <option value="Colchonete">⬛ Colchonete</option>
-                                <option value="Elastico">➰ Elástico</option>
-                                <option value="Rolinho"> 🌀 Rolinho</option>
+                                <option value="Halteres">Halteres</option>
+                                <option value="Barra"> Barra</option>
+                                <option value="Maquina"> Máquina</option>
+                                <option value="Colchonete">Colchonete</option>
+                                <option value="Elastico">Elástico</option>
+                                <option value="Rolinho"> Rolinho</option>
 
 
                             </select>
                         </div>
                     </div>
-
 
 
                     <div class="camposExercicio">
@@ -287,36 +291,47 @@
             objetivoVar == ""
         ) {
             console.log('Preencha todos os campos')
-        }else{
+        } else {
 
-        fetch("/fichas/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                idUsuario: idUsuario,
-                tituloVar: tituloVar,
-                dataInicioVar: dataInicioVar,
-                frequenciaVar: frequenciaVar,
-                objetivoVar: objetivoVar,
-                observacaoVar: observacaoVar
-            }),
 
-        }).then(resposta => resposta.json())
-            .then(ficha => {
-                console.log('Ronaldo:', ficha);
-                sessionStorage.ID_FICHA = ficha.insertId;
-                console.log(sessionStorage.ID_FICHA)
+            fetch("/fichas/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idUsuario: idUsuario,
+                    tituloVar: tituloVar,
+                    dataInicioVar: dataInicioVar,
+                    frequenciaVar: frequenciaVar,
+                    objetivoVar: objetivoVar,
+                    observacaoVar: observacaoVar
+                }),
 
-            });
+            }).then(resposta => resposta.json())
+                .then(ficha => {
+                    console.log('Ronaldo:', ficha);
+                    sessionStorage.ID_FICHA = ficha.insertId;
+                    console.log(sessionStorage.ID_FICHA);
 
-        document.getElementById("objetivoVar").value = "";
-        document.getElementById("iptTitulo").value = "";
-        document.getElementById("dataInicioVar").value = "";
-        document.getElementById("frequenciaVar").value = "";
+
+                    iptTitulo.value = ''
+                    iptDtInicio.value = ''
+                    iptFrequencia.value = ''
+                    objSelect.value = ''
+
+                    msgFicha.innerHTML = `<p  style="     
+    color: #00FF00;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 10px 0 20px 10px;">Ficha cadastrada com sucesso! </p>`;
+
+
+
+                });
+
+        }
     }
-}
 
     function listarTreinos() {
         const idFicha = sessionStorage.ID_FICHA;
@@ -333,7 +348,7 @@
             })
     }
 
-    
+
     function carregarTreinosSelect(treinos) {
 
         const select = document.getElementById("selectTreino");
@@ -359,10 +374,8 @@
         var idFichaVar = sessionStorage.ID_FICHA;
 
         if (iptTreinoTitulo.value == "") {
-            document.getElementById("alertaTreino1").style.display = "flex";
 
         } else {
-            document.getElementById("alertaTreino1").style.display = "block";
 
 
             fetch("/treinos/cadastrar", {

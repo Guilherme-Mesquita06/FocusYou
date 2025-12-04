@@ -57,6 +57,31 @@ main {
     justify-content: center;
 }
 
+#boasVindas {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    animation: fadeIn 1s ease forwards;
+    
+}
+
+#boasVindas span {
+    color: #e61911; /* cor de destaque para o nome */
+    font-weight: 900;
+}
+
+@keyframes fadeIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-10px);
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+
 .exerciciosSeries {
     flex-direction: row;
     display: flex;

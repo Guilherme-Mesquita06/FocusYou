@@ -138,7 +138,7 @@ function seriesporGrupo(idFicha) {
  JOIN exercicio AS e ON s.fkExercicio = e.id
  JOIN treino AS t ON e.fkTreino = t.id
  JOIN ficha AS f ON t.fkFicha = f.id
- WHERE f.id = ${idFicha}
+ WHERE f.id = ${idFicha} AND  s.serieRealizada BETWEEN '2025/12/01' AND '2026/01/01'
  GROUP BY e.agrupamento
  ORDER BY musculo;
 

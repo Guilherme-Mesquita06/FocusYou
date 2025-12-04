@@ -14,21 +14,22 @@
         <div class="container">
             <div class="logoTitulo">
                 <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="" />
+                  <p class="navTitulo">Aretê</p>
             </div>
 
             <nav class="navbar">
                 <div class="links">
-                    <div>
-                        <a href="">Inicial</a>
+                    <div style="background-color: brown;">
+                        <a href="">Treinar</a>
                     </div>
                     <div>
-                        <a href="./addTreino.html">Ficha</a>
+                        <a href="./addTreino.html">Nova Ficha</a>
                     </div>
                     <div>
                         <a href="./dashboard1.html">Dashboard</a>
                     </div>
                     <div>
-                        <a href="">Historico</a>
+                        <a href="./historicoFicha.html">Historico</a>
                     </div>
                 </div>
             </nav>
@@ -36,10 +37,12 @@
     </div>
 
     <main>
+        <div id="boasVindas" style="margin-left: 3%; margin-top: 3%;"></div>
         <div id="titulo">
 
         </div>
         <section class="content">
+
             <div class="containerTreino">
                 <section class="treinos secDiv">
                     <h2>Treinos da ficha ativa</h2>
@@ -75,6 +78,13 @@
 
     //  JSON.parse(sessionStorage.AQUARIOS) vai no lucar do treinos 
     function exibirTreinos(idUsuario) {
+        const nomeUsuario = sessionStorage.NOME_USUARIO;
+        const divBoasVindas = document.getElementById("boasVindas");
+
+        divBoasVindas.innerHTML = `
+    Olá, <span>${nomeUsuario}</span> vamos treinar?
+`;
+
 
         console.log(idUsuario)
 
@@ -110,9 +120,9 @@
 
     function exibirExercicios(idTreino) {
 
-            document.getElementById("exercicios").style.width = '40%';
+        document.getElementById("exercicios").style.width = '40%';
         document.getElementById("listaExerciciosTreino").style.width = '98%';
-        document.getElementById("serie").style.display='none';
+        document.getElementById("serie").style.display = 'none';
 
         fetch(`/exercicios/buscar/${idTreino}`)
             .then(resposta => resposta.json())
@@ -157,7 +167,7 @@
         /*ListaExercicios 60% */
         document.getElementById("exercicios").style.width = '90%';
         document.getElementById("listaExerciciosTreino").style.width = '93%';
-        document.getElementById("serie").style.display='flex';
+        document.getElementById("serie").style.display = 'flex';
 
         document.getElementById("serie").innerHTML = `
                 <div class="form">
@@ -186,44 +196,49 @@
         `;
     }
 
-function cadastrarSerie(idExercicio){
+    function cadastrarSerie(idExercicio) {
 
-    let repeticoesVar = Number(iptRepeticoes.value)
-    let tempoVar = iptTempo.value
-    let cargaVar = Number(iptCarga.value)
+        let repeticoesVar = Number(iptRepeticoes.value)
+        let tempoVar = iptTempo.value
+        let cargaVar = Number(iptCarga.value)
 
-    if(
-        iptRepeticoes.value == "" ||
-        iptTempo.value == "" || 
-        iptCarga.value == "" 
+        if (
+            iptRepeticoes.value == "" ||
+            iptTempo.value == "" ||
+            iptCarga.value == ""
 
-    ){
-   console.log('Preencha todos os campos')
+        ) {
+            console.log('Preencha todos os campos')
 
-}else{
+        } else {
 
-    fetch(`/series/cadastrar` , {
-    method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-       body: JSON.stringify({
-        idExercicio: idExercicio,
-        tempoServer:tempoVar,
-        repeticoesServer:repeticoesVar,
-        cargaServer:cargaVar,
+            fetch(`/series/cadastrar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idExercicio: idExercicio,
+                    tempoServer: tempoVar,
+                    repeticoesServer: repeticoesVar,
+                    cargaServer: cargaVar,
 
-       }),
-       
-       }).then(resposta => resposta.json())
-         .then(serie => {
-        console.log('UUUUIAAAAA' , serie)
-    }).catch(err => {
-        console.log('Não sou o maioral', err)
-    })
-}
+                }),
 
-}
+            }).then(resposta => resposta.json())
+                .then(serie => {
+                    console.log('UUUUIAAAAA', serie)
+
+                    iptRepeticoes.value = ''
+                    iptTempo.value = ''
+                    iptCarga.value = ''
+
+                }).catch(err => {
+                    console.log('Não sou o maioral', err)
+                })
+        }
+
+    }
 
 </script>
 

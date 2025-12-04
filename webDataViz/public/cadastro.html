@@ -16,6 +16,8 @@
     <div class="container">
       <div class="logoTitulo">
         <img src="./assets/icon/LogoFocus.svg" width="90vw" alt="">
+        <p class="navTitulo">Aretê</p>
+
       </div>
 
       <nav class="navbar">
@@ -24,8 +26,8 @@
           <div>
             <a href="./login1.html">Login</a>
           </div>
-          <div>
-            <a href="./cadastro.html">Cadastro</a>
+          <div style="background-color: brown;">
+            <a href="#">Cadastro</a>
           </div>
         </div>
       </nav>
@@ -137,7 +139,7 @@
 
           if (resposta.ok) {
 
-            mensagem_erro.innerHTML =`<p style="color:#70F000; font-weight: bold;">Cadastro realizado com sucesso! Redirecionando para tela de Login...</p>`;
+            mensagem_erro.innerHTML = `<p style="color:#70F000; font-weight: bold;">Cadastro realizado com sucesso! Redirecionando para tela de Login...</p>`;
 
             setTimeout(() => {
               window.location = "login1.html";

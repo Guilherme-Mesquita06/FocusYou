@@ -10,29 +10,31 @@
     <title>FocusYou Dashboard</title>
 </head>
 
-<body onload="fichaAtiva(idUsuario), 
+<body onload="fichaAtiva(idUsuario),
+              chartData(idFicha) , 
               cargaLevantada(idFicha), 
               seriesMes(idFicha),
               frequenciaMes(idFicha),
               frequenciaSemana(idFicha),
-              variacaoCarga(idFicha),
-              chartData(idFicha)">
+              variacaoCarga(idFicha)">
     <div class="header">
         <div class="container">
             <div class="logoTitulo">
                 <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="" />
+                <p class="navTitulo">Aretê</p>
+
             </div>
 
             <nav class="navbar">
                 <div class="links">
                     <div>
-                        <a href="">Inicial</a>
+                        <a href="./addSerie.html">Treinar</a>
                     </div>
                     <div>
-                        <a href="./addTreino.html">Ficha</a>
+                        <a href="./addTreino.html">Nova Ficha</a>
                     </div>
-                    <div>
-                        <a href="./dashboard1.html">Dashboard</a>
+                    <div style="background-color: brown;">
+                        <a href="#">Dashboard</a>
                     </div>
                     <div>
                         <a href="./historicoFicha.html">Historico</a>
@@ -46,7 +48,8 @@
 
         <section class="indicadoresMensais">
             <div class="tituloSection">
-                <p class="titulo">Indicadores Mensais</p>
+                <p class="titulo" style="margin-left:39%;">Indicadores do mês</p>
+                <p class="subTitulo">01/12 á 01/01</p>
             </div>
             <div class="mensaisContent">
                 <div class="indicadores">
@@ -89,17 +92,24 @@
         </section>
         <section class="indicadoresSemanais">
             <div class="tituloSection">
-                <p class="titulo">Indicadores Semanais</p>
+                <p class="titulo">Indicadores da Semana</p>
             </div>
 
             <div class="semanaisContent">
-                <div class="indicadorSemanal indicador">
-                    <div id="treinosSemana"></div>
+                <div class="indicadorSemanal1">
+                    <p>Frequencia</p>
+                    <div class="indicadorSemanal indicador">
+                        <div id="treinosSemana"></div>
+                    </div>
                 </div>
-                <div class="indicadorSemanal indicador">
-                    <div id="evolucao"></div>
+
+                <div class="indicadorSemanal1">
+
+                    <p>Comparação de peso total</p>
+                    <div class="indicadorSemanal indicador">
+                        <div id="evolucao"></div>
+                    </div>
                 </div>
-                <div class="indicadorSemanal indicador"></div>
 
 
             </div>
@@ -114,48 +124,27 @@
 </html>
 
 <script>
+    let idFicha = sessionStorage.ID_FICHA;
     let labels = [];
     let data = [];
 
     let musculoMaisTreinado
 
     let cargaMensal = 0
-    let idFicha = sessionStorage.ID_FICHA;
     let seriesMensais = 0
     let treinos = 0;
     let semanaAtual = 0
     let semanaPassada = 0
     let porcEvolucao = 0;
 
-    let musculoMaisUsado= ''
+    let musculoMaisUsado = ''
 
-    
 
- 
+
+
 
     console.log(data)
     console.log(labels)
-
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: '# of Votes',
-                data: data,
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 
 
     let musculo = ''
@@ -276,7 +265,7 @@
             .then(resposta => resposta.json())
             .then(seriesPorGrupo => {
                 console.log(seriesPorGrupo);
-                
+
 
                 seriesPorGrupo.forEach(d => {
 
@@ -284,14 +273,14 @@
                     data.push(d.totalSeries);
                     labels.push(d.musculo)
 
-                    
 
-            
+
+
 
                 });
 
 
-                for(var i = 0 ; i < resposta.length; i++){
+                for (var i = 0; i < resposta.length; i++) {
                     var series = resposta[i]
                 }
             }).catch(err => {
@@ -299,4 +288,74 @@
             })
 
     }
+
+
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+
+            labels: labels,
+            datasets: [{
+                label: 'Series Realizadas no mês',
+                data: data,
+                borderWidth: 1,
+                borderColor: '#DC0000',
+                backgroundColor: '#DC0000',
+                weight: 'bold'
+            }],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Series realizadas por agrupamento muscular',
+                    position: 'top',
+                    align: 'start',
+                    color: '#fff',
+                    font: {
+                        weight: 'bold',
+                        size: 20,
+
+
+                    },
+                },
+
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Agrupamentos Musculares',
+                        color: '#DEDED1',
+                        font: {
+                            size: 15,
+                            weight: 'bold',
+                        },
+                    },
+                },
+
+                y: {
+                    min: 0,
+                    max: 80,
+
+
+                    title: {
+                        display: true,
+                        text: 'Quantidade de series',
+                        color: '#DEDED1',
+                        font: {
+                            weight: 'bold',
+                            size: 15
+                        },
+                    },
+
+
+                },
+            }
+        }
+    });
+
+
 </script>

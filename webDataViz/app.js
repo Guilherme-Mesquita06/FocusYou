@@ -16,11 +16,11 @@ var HOST_APP = process.env.APP_HOST;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
+
+
+
+
 var usuarioRouter = require("./src/routes/usuarios");
-var avisosRouter = require("./src/routes/avisos");
-var aquariosRouter = require("./src/routes/aquarios");
-
-
 var fichaRouter = require("./src/routes/fichas");
 var treinoRouter = require ("./src/routes/treinos")
 var exercicioRouter = require ("./src/routes/exercicios")
@@ -36,8 +36,7 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/avisos", avisosRouter);
-app.use("/aquarios", aquariosRouter);
+
 
 app.use("/fichas", fichaRouter);
 app.use("/treinos", treinoRouter)

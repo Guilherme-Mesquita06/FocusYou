@@ -15,21 +15,23 @@
         <div class="container">
             <div class="logoTitulo">
                 <img src="../assets/icon/LogoFocus.svg" width="90vw" alt="">
+                <p class="navTitulo">Aretê</p>
+
             </div>
 
             <nav class="navbar">
                 <div class="links">
                     <div>
-                        <a href="./addSerie.html">Home</a>
+                        <a href="./addSerie.html">Treinar</a>
                     </div>
                     <div>
-                        <a href="./addTreino.html">Ficha</a>
+                        <a href="./addTreino.html">Nova Ficha</a>
                     </div>
                     <div>
                         <a href="./dashboard1.html">Dashboard</a>
                     </div>
-                    <div>
-                        <a href="">Historico</a>
+                    <div style="background-color: brown;">
+                        <a href="#">Historico</a>
                     </div>
                 </div>
             </nav>
@@ -39,10 +41,15 @@
 
     <main>
 
+
         <section class="content">
 
             <div id="boasVindas"></div>
+            <div id="titulo">
+                <p>Suas Fichas</p>
+            </div>
             <section class="fichas">
+
                 <div id="contentFicha">
                 </div>
                 <div id="contentFicha"></div>
@@ -99,7 +106,7 @@
                         <div class="acoes">
                             <div class="check">
                             <label for="AtivarFicha">Ativar ficha</label>
-                            <input type="checkbox" id="iptCheck" onchange="desativarFichas(${idUsuario}, ${ficha.idFicha}), ativarFicha(${ficha.idFicha}) ">
+                            <input type="radio" id="iptCheck" onchange="desativarFichas(${idUsuario}, ${ficha.idFicha}), ativarFicha(${ficha.idFicha}) ">
                             </div>
                             <button onclick="treinar()">Treinar</button>
                         </div>
@@ -118,6 +125,37 @@
 
     // ,editarStatus(${ficha.idFicha})   desativarFicha(${idUsuario}, ${ficha.idFicha})
 
+
+
+
+
+
+
+    function desativarFichas(idUsuario, idFicha) {
+
+        const radio = document.getElementById('iptCheck');
+
+        if (radio.checked) {
+            fetch(`/fichas/editar/${idFicha}/${idUsuario}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(resposta => {
+                    console.log("Todas as fichas estão desativadas para uso");
+                    ativarFicha(idFicha, status);
+                })
+                .catch(erro => {
+                    console.log(`#Erro: ${erro}`);
+                });
+
+
+
+        } else {
+            console.log('Nao ta mais ativa')
+        }
+    }
 
 
     function ativarFicha(idFicha) {
@@ -139,35 +177,6 @@
     }
 
 
-
-
-
-    function desativarFichas(idUsuario, idFicha) {
-
-        const check = document.getElementById('iptCheck');
-
-        if (check.checked) {
-            fetch(`/fichas/editar/${idFicha}/${idUsuario}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(resposta => {
-                    console.log("Todas as fichas estão desativadas para uso");
-                    ativarFicha(idFicha, status);
-                })
-                .catch(erro => {
-                    console.log(`#Erro: ${erro}`);
-                });
-
-
-
-        } else {
-            fieldCount
-            console.log('Nao ta mais ativa')
-        }
-    }
 
     function treinar() {
         let qtdFicha;

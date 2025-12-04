@@ -42,9 +42,9 @@ main {
     color: #fff;
     font-size: 28px;
     font-weight: 700;
-    margin: 20px 0 10px 20px;
-    letter-spacing: 1px;
     animation: fadeIn 1s ease forwards;
+    margin-top: 3%;
+    margin-left: 5%;
 }
 
 #boasVindas span {
@@ -61,6 +61,19 @@ main {
         opacity: 1; 
         transform: translateY(0);
     }
+}
+
+#titulo {
+    display: flex;
+    justify-content: center;
+    color: #F5F5F5;
+    text-align: end;
+
+}
+
+#titulo p {
+    font-size: x-large;
+    font-weight: 700;
 }
 
 
